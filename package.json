@@ -71,12 +71,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mathurkunal/react-redux-starter-kit.git"
+    "url": "git+https://github.com/Rinu-Zachariah/React-Redux-Trial.git"
   },
-  "author": "Kunal Mathur",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mathurkunal/react-redux-starter-kit/issues"
-  },
-  "homepage": "https://github.com/mathurkunal/react-redux-starter-kit#readme"
+  
 }
