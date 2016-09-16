@@ -1,30 +1,42 @@
 import React, {Component} from 'react';
 import {Link, IndexLink} from 'react-router';
 
-class componentName extends Component{
+class ComponentName extends Component{
   render(){
+    //    {"  |  "}
     return(
       <div className="container-fluid">
-      <nav>
-        <IndexLink to="/">Home</IndexLink>
-        {"  |  "}
-        <Link to="/events">Events</Link>
-        {"  |  "}
-        <Link to="/polls">Poll</Link>
-        {"  |  "}
-        <Link to="/odchistory">ODC History</Link>
-        {"  |  "}
-        <Link to="/induction">Induction</Link>
-        {"  |  "}
-        <Link to="/gallery">Gallery</Link>
-        {"  |  "}
-        <Link to="/trainings">Trainings</Link>
-        {"  |  "}
-        <Link to="/contributors">Contributors</Link>
-      </nav>
+        <nav>
+          <ul style={{listStyleType: "none"}}>
+            <li>
+              <IndexLink to="/">Home</IndexLink>
+            </li>
+            <li>
+              <Link to="/events">Events</Link>
+            </li>
+            <li>
+              <Link to="/polls">Poll</Link>
+            </li>
+            <li>
+              <Link to="/odchistory">ODC History</Link>
+            </li>
+            <li>
+              <Link to="/induction">Induction</Link>
+            </li>
+            <li>
+              <Link to="/gallery">Gallery</Link>
+            </li>
+            <li>
+              <Link to="/trainings">Trainings</Link>
+            </li>
+            <li>
+              <Link to="/contributors">Contributors</Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     );
   }
 }
 
-export default componentName;
+export default ComponentName;

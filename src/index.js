@@ -1,16 +1,19 @@
-import ReactDOM from 'react-dom';
+import 'babel-polyfill';
 import React from 'react';
+import ReactDOM from 'react-dom';
+import {Router, browserHistory} from 'react-router';
+import routes from './routes';
+
+import {Provider} from 'react-redux';
 import $ from 'jquery';
-import App from './components/app'
-var result = $.ajax({
-				url: 'http://api.openaura.com/v1/search/artists?q=taylor&api_key=ae8bbaabb8e2a9f0ba172c0414cf99389beabc11',
+import App from './components/app';
+
+let result = $.ajax({
+				url: 'http://localhost:4000/customerQuotes',
+				//'http://dev-sandbox-lx61.amdc.mckinsey.com:4000/customerQuotes',
 				data: null,
 				type: 'GET',
-				datatype: 'JSONP',
-				// headers: {"Access-Control-Allow-Origin": "http://localhost:4000",
-				// 			"Access-Control-Allow-Credentials": true},
-
-				//'Access-Control-Allow-Origin': 'http://localhost:4000',
+				datatype: 'JSON',
 				success: function(data){
 					console.log(data);
 				},
@@ -19,10 +22,8 @@ var result = $.ajax({
 				}
 			});
 
-// React.createClass({
-// 	render :
-// 		(
 
-// 		)
-// })
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <Router history={browserHistory} routes={routes} />,
+  document.getElementById('app')
+);
