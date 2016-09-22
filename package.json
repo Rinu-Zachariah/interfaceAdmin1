@@ -19,8 +19,13 @@
   },
   "dependencies": {
     "babel-polyfill": "6.13.0",
+    "body-parser": "^1.15.2",
     "bootstrap": "3.3.7",
+    "history": "^4.2.0",
     "jquery": "3.1.0",
+    "mongoose": "^4.6.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "react": "15.3.0",
     "react-dom": "15.3.0",
     "react-redux": "4.4.5",
@@ -28,7 +33,10 @@
     "react-router-redux": "4.0.5",
     "redux": "3.5.2",
     "redux-thunk": "2.1.0",
-    "toastr": "2.1.2"
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8",
+    "toastr": "2.1.2",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "babel-cli": "6.11.4",
@@ -75,5 +83,4 @@
   },
   "author": "",
   "license": "ISC"
-
 }
