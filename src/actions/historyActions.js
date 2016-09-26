@@ -1,3 +1,3 @@
-export function createHistory(odchistory){
-  return {type: 'CREATE_HISTORY', odchistory};
+export function createHistory(history){
+  return {type: 'CREATE_HISTORY',history};
 }

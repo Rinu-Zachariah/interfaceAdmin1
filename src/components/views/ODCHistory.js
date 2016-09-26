@@ -23,7 +23,7 @@ class ODCHistory extends Component{
   }
 
   historyRow(history, index){
-    return <div key={index}> {history.contenthtml} </div>;
+    return <div key={index}> {history.contentyear} </div>;
   }
 
   render(){
@@ -41,8 +41,10 @@ class ODCHistory extends Component{
 }
 
 function mapStateToProps(state, ownProps){
+  console.log(state.histories);
   return{
     histories: state.histories
   };
+
 }
 export default connect(mapStateToProps)(ODCHistory);
