@@ -6,6 +6,10 @@ import routes from './routes';
 import configureStore from './store/configureStore';
 import histories from './reducer/historyReducer';
 import events from './reducer/eventsReducer';
+import gallery from './reducer/galleryReducer';
+import poll from './reducer/pollReducer';
+import quicklinks from './reducer/quicklinksReducer';
+import mandatorytrainings from './reducer/mandatorytrainingsReducer';
 // import mongoose from 'mongoose';
 // import ODCHistory from './server/models/history.model.server';
 
@@ -52,7 +56,7 @@ $.when(
 		  histories: interfaceObjects.odchistory,
 			events: interfaceObjects.events,
       poll: interfaceObjects.poll,
-      quicklinks: interfaceObjects.quicklinks,
+      quicklinks: interfaceObjects.inductionMaterial,
       mandatorytrainings: interfaceObjects.mandatorytrainings,
       gallery: interfaceObjects.gallery
 		};

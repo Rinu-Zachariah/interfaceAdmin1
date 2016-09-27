@@ -6,7 +6,6 @@ import quicklinks from './quicklinksReducer';
 import gallery from './galleryReducer';
 import mandatorytrainings from './mandatorytrainingsReducer';
 
-
 const rootReducer = combineReducers({
     histories , events, poll, quicklinks, gallery, mandatorytrainings
   });
