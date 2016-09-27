@@ -28,6 +28,7 @@ class ODCHistory extends Component{
 
   render(){
     return (
+
       <div>
         <h1>ODC History</h1>
         {this.props.histories.map(this.historyRow)}
@@ -41,7 +42,6 @@ class ODCHistory extends Component{
 }
 
 function mapStateToProps(state, ownProps){
-  console.log(state.histories);
   return{
     histories: state.histories
   };

@@ -3,5 +3,6 @@ import rootReducer from '../reducer/index';
 
 
 export default function configureStore(initialState){
+  console.log(initialState);
   return createStore(rootReducer, initialState);
 }
