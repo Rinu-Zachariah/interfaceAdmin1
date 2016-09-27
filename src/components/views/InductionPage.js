@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import * as quicklinksActions from '../../actions/quicklinksActions';
 
 class InductionPage extends Component{
   render(){
@@ -10,4 +12,12 @@ class InductionPage extends Component{
   }
 }
 
-export default InductionPage;
+function mapStateToProps(state,ownProps){
+  console.log("inside induction");
+  console.log(state.quicklinks);
+  return {
+    quicklinks: state.quicklinks
+  };
+}
+
+export default connect(mapStateToProps)(InductionPage);

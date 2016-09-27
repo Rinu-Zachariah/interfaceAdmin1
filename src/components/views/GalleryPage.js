@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import * as galleryActions from '../../actions/galleryActions';
+
 
 class GalleryPage extends Component{
   render(){
@@ -10,4 +13,12 @@ class GalleryPage extends Component{
   }
 }
 
-export default GalleryPage;
+function mapStateToProps(state,ownProps){
+  console.log("Inside gallery")
+  console.log(state.gallery)
+  return {
+    gallery: state.gallery
+  };
+}
+
+export default connect(mapStateToProps)(GalleryPage);

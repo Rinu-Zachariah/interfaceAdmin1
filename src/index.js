@@ -51,7 +51,10 @@ $.when(
 		const initialState = {
 		  histories: interfaceObjects.odchistory,
 			events: interfaceObjects.events,
-      poll: interfaceObjects.poll
+      poll: interfaceObjects.poll,
+      quicklinks: interfaceObjects.quicklinks,
+      mandatorytrainings: interfaceObjects.mandatorytrainings,
+      gallery: interfaceObjects.gallery
 		};
 
 		const store=configureStore(initialState);
