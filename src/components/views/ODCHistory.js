@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as historyActions from '../../actions/historyActions';
+import Example from './TableView.js'
 
 class ODCHistory extends Component{
   constructor(props, context) {
@@ -32,6 +33,8 @@ class ODCHistory extends Component{
       <div>
         <h1>ODC History</h1>
         {this.props.histories.map(this.historyRow)}
+          // <div id="table"> </div>
+          <Example />
 
         <h2>Add history</h2>
         <input type="text" onChange={this.onTitleChange} value={this.state.history.contentyear}/>
