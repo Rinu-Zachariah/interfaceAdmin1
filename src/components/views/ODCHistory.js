@@ -9,13 +9,13 @@ class ODCHistory extends Component{
     this.onTitleChange=this.onTitleChange.bind(this);
     this.onClickSave = this.onClickSave.bind(this);
     this.state = {
-      history: {contentyear: ''}
+      history: {contenthtml: ''}
     };
   }
 
   onTitleChange(event){
     const history = this.state.history;
-    history.contentyear = event.target.value;
+    history.contenthtml = event.target.value;
     this.setState({history: history});
   }
 
@@ -24,7 +24,7 @@ class ODCHistory extends Component{
   }
 
   historyRow(history, index){
-    return <div key={index}> {history.contentyear} </div>;
+    return <div key={index}><p dangerouslySetInnerHTML={{__html: history.contenthtml}} /><hr /></div>;
   }
 
   render(){
@@ -37,7 +37,7 @@ class ODCHistory extends Component{
           <Example />
 
         <h2>Add history</h2>
-        <input type="text" onChange={this.onTitleChange} value={this.state.history.contentyear}/>
+        <input type="text" onChange={this.onTitleChange} value={this.state.history.contenthtml}/>
         <input type="submit" onClick={this.onClickSave} value="save" />
       </div>
     );

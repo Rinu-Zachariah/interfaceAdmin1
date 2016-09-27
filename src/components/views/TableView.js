@@ -1,22 +1,14 @@
 import React, {Component} from 'react';
 import ReactDataGrid from 'react-data-grid';
 
-function randomDate(start, end) {
-  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toLocaleDateString();
-}
-
 //helper to create a fixed number of rows
 function createRows(numberOfRows){
   var _rows = [];
   for (var i = 1; i < numberOfRows; i++) {
     _rows.push({
       id: i,
-      task: 'Task ' + i,
-      complete: Math.min(100, Math.round(Math.random() * 110)),
-      priority : ['Critical', 'High', 'Medium', 'Low'][Math.floor((Math.random() * 3) + 1)],
-      issueType : ['Bug', 'Improvement', 'Epic', 'Story'][Math.floor((Math.random() * 3) + 1)],
-      startDate: randomDate(new Date(2015, 3, 1), new Date()),
-      completeDate: randomDate(new Date(), new Date(2016, 0, 1))
+      contentyear: [1992, 2002, 2004, 2006, 2008, 2009, 2010, 2012, 2015],
+      contenthtml : ""
     });
   }
   return _rows;
@@ -35,33 +27,13 @@ var columns = [
   width: 80
 },
 {
-  key: 'task',
-  name: 'Title',
+  key: 'contentyear',
+  name: 'Year',
   editable : true
 },
 {
-  key: 'priority',
-  name: 'Priority',
-  editable : true
-},
-{
-  key: 'issueType',
-  name: 'Issue Type',
-  editable : true
-},
-{
-  key: 'complete',
-  name: '% Complete',
-  editable : true
-},
-{
-  key: 'startDate',
-  name: 'Start Date',
-  editable : true
-},
-{
-  key: 'completeDate',
-  name: 'Expected Complete',
+  key: 'contenthtml',
+  name: 'Content',
   editable : true
 }
 ]
@@ -70,7 +42,7 @@ var columns = [
 var Example = React.createClass({
 
   getInitialState : function(){
-    return {rows : createRows(5)}
+    return {rows : createRows(10)}
   },
 
   rowGetter : function(rowIdx){
