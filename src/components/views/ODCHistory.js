@@ -23,7 +23,7 @@ class ODCHistory extends Component{
   }
 
   historyRow(history, index){
-    return <div key={index}> {history.contentyear} </div>;
+    return <div key={index}> {history.contenthtml} </div>;
   }
 
   render(){
