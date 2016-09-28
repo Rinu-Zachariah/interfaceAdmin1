@@ -6,6 +6,7 @@ class App extends Component{
   render() {
     return(
       <div>
+
         <header>
             <span className="head head-first">inter</span>
             <span className="head head-one">F</span>
@@ -14,13 +15,16 @@ class App extends Component{
             <span className="head head-four">E</span>
             &nbsp; ADMIN
         </header>
+
         <div className="leftNav">
 
           <Menu />
 
         </div>
         <div className="mainContainer">
-          {this.props.children}
+          <div className="hoverScroll">
+            {this.props.children}
+          </div>
         </div>
       </div>
     );

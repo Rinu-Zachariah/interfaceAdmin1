@@ -10,7 +10,6 @@ $base-color-nine:#EA7A30;	/*Crusta Orange*/
 $base-color-ten:#D24D57; 	/*Chestnut Rose Red*/
 
 header{
-
 	  color:$base-color-five;
     font-size: 3em;
   	letter-spacing: -3px;
@@ -47,7 +46,7 @@ header{
 .leftNav{
   float: left;
   background: #2b343f;
-  text-align: center;
+  text-align: left;
   -webkit-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
   -moz-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
   box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
@@ -78,7 +77,7 @@ header{
     }
 
 		.glyphicon{
-			padding: 2px;
+			padding-right:10px;
 		}
    }
 
@@ -89,10 +88,37 @@ header{
   color:blue;
 }
 .mainContainer{
-  //  text-align: center;
+
    margin: 4% 0 0 15%;
-  //  border: lightgray 1px solid;
-  //  height: 400px;
-   width: 1000px;
-  //  box-shadow: 5px 5px 5px 5px #c7c7c7;
+ 	 height: 800px;
+   width: 1040px;
+
+	 .hoverScroll{
+		 height: 800px;
+		  overflow-y: hidden;
+		  overflow-x: hidden;
+		  text-align: left;
+		}
+
+		.hoverScroll::-webkit-scrollbar{
+		    width: 10px;
+		    border-radius: 10px;
+		}
+		.hoverScroll::-webkit-scrollbar-track {
+		    background-color: #eaeaea;
+		    border-left: 1px solid #ccc;
+		    border-radius: 10px;
+		}
+		.hoverScroll::-webkit-scrollbar-thumb{
+		    background-color: #ccc;
+		    border-radius: 10px;
+		}
+		.hoverScroll::-webkit-scrollbar-thumb:hover{
+		    background-color: #aaa;
+		    border-radius: 10px;
+		}
+
+		.hoverScroll:hover{
+		  overflow-y: auto
+		}
 }
