@@ -13,6 +13,7 @@ class ODCHistory extends Component{
   }
 
   onTitleChange(event){
+    console.log(event.target.value);
     const history = this.state.history;
     history.contenthtml = event.target.value;
     this.setState({history: history});
@@ -28,11 +29,9 @@ class ODCHistory extends Component{
 
   render(){
     return (
-
       <div>
         <h1>ODC History</h1>
         {this.props.histories.map(this.historyRow)}
-
         <h2>Add history</h2>
         <input type="text" onChange={this.onTitleChange} value={this.state.history.contenthtml}/>
         <input type="submit" onClick={this.onClickSave} value="save" />
@@ -42,6 +41,7 @@ class ODCHistory extends Component{
 }
 
 function mapStateToProps(state, ownProps){
+  console.log(state.histories);
   return{
     histories: state.histories
   };
