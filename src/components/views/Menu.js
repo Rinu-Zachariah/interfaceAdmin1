@@ -9,28 +9,28 @@ class ComponentName extends Component{
         <nav>
           <ul style={{listStyleType: "none"}}>
             <li>
-              <IndexLink to="/">Home</IndexLink>
+              <IndexLink to="/"><span className="glyphicon glyphicon-home" />Home</IndexLink>
             </li>
             <li>
-              <Link to="/events">Events</Link>
+              <Link to="/events"><span className="glyphicon glyphicon-list-alt" />Events</Link>
             </li>
             <li>
-              <Link to="/polls">Poll</Link>
+              <Link to="/polls"><span className="glyphicon glyphicon-edit" />Poll</Link>
             </li>
             <li>
-              <Link to="/odchistory">ODC History</Link>
+              <Link to="/odchistory"><span className="glyphicon glyphicon-fast-backward" />ODC History</Link>
             </li>
             <li>
-              <Link to="/induction">Induction</Link>
+              <Link to="/induction"><span className="glyphicon glyphicon-inbox" />Induction</Link>
             </li>
             <li>
-              <Link to="/gallery">Gallery</Link>
+              <Link to="/gallery"><span className="glyphicon glyphicon-th" />Gallery</Link>
             </li>
             <li>
-              <Link to="/trainings">Trainings</Link>
+              <Link to="/trainings"><span className="glyphicon glyphicon-th-list" />Trainings</Link>
             </li>
             <li>
-              <Link to="/contributors">Contributors</Link>
+              <Link to="/contributors"><span className="glyphicon glyphicon-user" />Contributors</Link>
             </li>
           </ul>
         </nav>
