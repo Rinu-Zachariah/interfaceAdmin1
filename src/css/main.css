@@ -1,6 +1,64 @@
+/*McKinsey BLue*/
+/*Madison Grey*/
+/*Global Blue*/
+/*Cyan*/
+/*Teal*/
+/*Turquoise*/
+/*Blue Gray*/
+/*Purple*/
+/*Crusta Orange*/
+/*Chestnut Rose Red*/
+header {
+  color: #006983;
+  font-size: 3em;
+  letter-spacing: -3px;
+  margin-left: 0px;
+  padding-right: 30px;
+  border-bottom: 2px solid black; }
+  header .head {
+    font-weight: bold;
+    font-size: 1.2em; }
+  header .head-first {
+    font-size: 1.1em;
+    letter-spacing: 0px; }
+  header .head-one {
+    color: #D24D57; }
+  header .head-two {
+    color: #EA7A30; }
+  header .head-three {
+    color: #0065BD; }
+  header .head-four {
+    color: #67317E; }
+
 .leftNav {
   float: left;
-  height: 100%; }
+  background: #2b343f;
+  text-align: center;
+  -webkit-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
+  box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  z-index: 100000;
+  position: fixed;
+  height: 100%;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s; }
+  .leftNav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .leftNav ul li a {
+      display: block;
+      text-decoration: none !important;
+      height: 60px;
+      line-height: 60px;
+      font-size: 17px;
+      color: #fff; }
+      .leftNav ul li a:hover {
+        background: #4EFFFF;
+        color: #000; }
+      .leftNav ul li a .glyphicon {
+        padding: 2px; }
 
 .blue {
   color: blue; }
@@ -8,9 +66,5 @@
 .mainContainer {
   margin: 4% 0 0 15%;
   width: 1000px; }
-
-.mainMenu {
-  float: left;
-  margin-top: 100px; }
 
 /*# sourceMappingURL=main.css.map */
