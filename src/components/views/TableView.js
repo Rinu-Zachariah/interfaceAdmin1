@@ -7,7 +7,7 @@ function createRows(numberOfRows){
   for (var i = 1; i < numberOfRows; i++) {
     _rows.push({
       id: i,
-      contentyear: [1992, 2002, 2004, 2006, 2008, 2009, 2010, 2012, 2015],
+      contentyear: [1992,2001],
       contenthtml : ""
     });
   }
@@ -46,6 +46,7 @@ var Example = React.createClass({
   },
 
   rowGetter : function(rowIdx){
+    console.log(this.state);
     return this.state.rows[rowIdx]
   },
 
