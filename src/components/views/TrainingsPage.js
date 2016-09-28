@@ -30,9 +30,29 @@ class TrainingsPage extends Component{
   render(){
     return (
       <div>
-        <h1>Trainings</h1>
-        {this.props.mandatorytrainings.map(this.mandatorytrainingsRow)}
-      </div>
+      <h2>TRAININGS</h2>
+      <p className="blue">Add Delete or Edit Polls</p>
+      <table style={{textAlign:"left"}}className="table">
+        <thead>
+          <tr>
+            <th>Created at</th>
+            <th>Link</th>
+            <th>Name</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input className="form-control"/></td>
+            <td><input className="form-control"/></td>
+            <td><input className="form-control"/></td>
+            <td><input className="form-control"/></td>
+            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
+          </tr>
+          {this.props.mandatorytrainings.map(this.mandatorytrainingsRow)}
+        </tbody>
+      </table>
+    </div>
     );
   }
 }

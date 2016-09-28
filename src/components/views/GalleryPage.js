@@ -39,8 +39,28 @@ class GalleryPage extends Component{
   render(){
     return (
       <div>
-        <h1>Induction</h1>
-        {this.props.gallery.map(this.galleryRow)}
+      <h2>GALLERY</h2>
+      <p className="blue">Add Delete or Edit Polls</p>
+      <table style={{textAlign:"left"}}className="table">
+        <thead>
+          <tr>
+            <th>Album Description</th>
+            <th>Album Name</th>
+            <th>Created At</th>
+            <th>Photos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input className="form-control"/></td>
+            <td><input className="form-control"/></td>
+            <td><input className="form-control"/></td>
+            <td><input className="form-control"/></td>
+            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
+          </tr>
+          {this.props.gallery.map(this.galleryRow)}
+        </tbody>
+      </table>
       </div>
     );
   }
