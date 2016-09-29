@@ -5,6 +5,7 @@ import $ from 'jquery';
 
 
 class EventPage extends Component{
+
   constructor(props, context) {
     super(props, context);
     this.onStartDateChange = this.onStartDateChange.bind(this);
@@ -12,6 +13,9 @@ class EventPage extends Component{
     this.onTypeChange = this.onTypeChange.bind(this);
     this.onEventTextChange = this.onEventTextChange.bind(this);
     this.onClickSave = this.onClickSave.bind(this);
+    this.onDeleteEvent = this.onDeleteEvent.bind(this);
+    this.eventRow = this.eventRow.bind(this);
+
     this.state = {
       events: {eventText: '',
       startDate: '' ,
@@ -46,15 +50,14 @@ class EventPage extends Component{
 
 
   onClickSave(){
-    console.log(this.state.events);
-    const temp = this.props;
+    const propObject = this.props;
     $.ajax({
       type: "POST",
       url: 'http://localhost:4000/events',
       data: this.state.events,
       success: function(data){
         console.log(data);
-        temp.dispatch(eventsActions.createEvents(data));
+        propObject.dispatch(eventsActions.createEvents(data));
       },
       error: function(data){
         alert('error');
@@ -62,15 +65,30 @@ class EventPage extends Component{
     });
 
   }
+  onDeleteEvent(eventObject){
+    console.log(eventObject);
+    $.ajax({
+    url: 'http://localhost:4000/events',
+    type: "DELETE",
+    data: eventObject,
+    success: function(data){
+      console.log(data);
+    }
+  });
+    this.props.dispatch(eventsActions.deleteEvents(eventObject))
+  }
+
 
   eventRow(event,index){
+    console.log("inside event Row");
+
     return(
       <tr key={index}>
         <td>{event.startDate.split("T")[0]}</td>
         <td>{event.endDate.split("T")[0]}</td>
         <td>{event.type}</td>
         <td>{event.eventText}</td>
-        <td><button className="btn btn-danger">Remove</button></td>
+        <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
         <td><button className="btn btn-warning">Edit</button></td>
       </tr>
     )

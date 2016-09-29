@@ -5,6 +5,9 @@ import * as PollActions from '../../actions/PollActions';
 class PollPage extends Component{
   constructor(props, context) {
     super(props, context);
+    this.pollRow=this.pollRow.bind(this);
+    this.choicesRow=this.choicesRow.bind(this);
+
     this.state = {
       poll: {choice: {},
       isActive: '',
@@ -13,10 +16,16 @@ class PollPage extends Component{
     };
   }
 
+  choicesRow(choice, index){
+    return(
+      <tr>{choice.option_text}</tr>
+    )
+  }
+
   pollRow(event,index){
     return(
       <tr key={index}>
-        <td>{event.choice}</td>
+        <td>{event.choices.map(this.choicesRow)}</td>
         <td>{event.isActive}</td>
         <td>{event.question}</td>
         <td><button className="btn btn-danger">Remove</button></td>
@@ -47,7 +56,7 @@ class PollPage extends Component{
           </tr>
           {this.props.poll.map(this.pollRow)}
         </tbody>
-      </table>        
+      </table>
       </div>
     );
   }
