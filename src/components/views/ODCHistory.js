@@ -44,12 +44,23 @@ class ODCHistory extends Component{
   render(){
     return (
       <div>
-        <h1>ODC History</h1>
-        {this.props.histories.map(this.historyRow)}
-
-        <h2>Add history</h2>
-        <input type="text" onChange={this.onTitleChange} value={this.state.history.contenthtml}/>
-        <input type="submit" onClick={this.onClickSave} value="save" />
+      <h2>ODC History</h2>
+      <table style={{textAlign:"left"}}className="table">
+        <thead>
+          <tr>
+            <th>Content</th>
+            <th>Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input className="form-control" onChange={this.onTitleChange} value={this.state.history.contenthtml}/></td>
+            <td><input className="form-control"/></td>
+            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
+          </tr>
+          {this.props.histories.map(this.historyRow)}
+        </tbody>
+      </table>
       </div>
     );
   }

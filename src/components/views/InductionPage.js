@@ -29,7 +29,6 @@ class InductionPage extends Component{
     return (
       <div>
       <h2>INDUCTION</h2>
-      <p className="blue">Add Delete or Edit Induction Material</p>
       <table style={{textAlign:"left"}}className="table">
         <thead>
           <tr>

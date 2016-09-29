@@ -98,7 +98,6 @@ class EventPage extends Component{
     return (
         <div>
           <h2>EVENTS</h2>
-          <p className="blue">Add Delete or Edit Events</p>
           <table>
             <thead>
               <tr>
