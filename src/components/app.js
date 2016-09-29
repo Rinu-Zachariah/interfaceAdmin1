@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Menu from './views/Menu';
 import styles from '../css/main.css';
+import $ from 'jquery';
 
 class App extends Component{
   render() {
@@ -17,14 +18,10 @@ class App extends Component{
         </header>
 
         <div className="leftNav">
-
           <Menu />
-
         </div>
         <div className="mainContainer">
-          <div className="hoverScroll">
             {this.props.children}
-          </div>
         </div>
       </div>
     );

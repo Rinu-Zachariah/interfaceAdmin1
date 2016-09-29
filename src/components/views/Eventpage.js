@@ -81,7 +81,7 @@ class EventPage extends Component{
         <div>
           <h2>EVENTS</h2>
           <p className="blue">Add Delete or Edit Events</p>
-          <table style={{textAlign:"left"}}className="table">
+          <table>
             <thead>
               <tr>
                 <th>Start Date</th>

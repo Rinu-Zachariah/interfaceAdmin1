@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as historyActions from '../../actions/historyActions';
-import Example from './TableView.js'
+import Example from './TableView.js';
+import Accordion from './Accordion.js';
 
 class ODCHistory extends Component{
   constructor(props, context) {
@@ -26,9 +27,18 @@ class ODCHistory extends Component{
   }
 
   historyRow(history, index){
-    return <div key={index}>
-    <p dangerouslySetInnerHTML={{__html: history.contenthtml}} />
-    <p>{history.contentyear}</p><hr /></div>;
+    return (
+      <div key={index}>
+      <Accordion summary={history.contenthtml} year={history.contentyear} />
+      </div>
+      //   <p dangerouslySetInnerHTML={{__html: history.contenthtml}} />
+      //   <p>{history.contentyear}</p>
+      // </Accordion>
+      // <div key={index}>
+      // <p dangerouslySetInnerHTML={{__html: history.contenthtml}} />
+      // <p>{history.contentyear}</p><hr /></div>
+);
+
   }
 
   render(){

@@ -11,10 +11,15 @@ $base-color-ten:#D24D57; 	/*Chestnut Rose Red*/
 
 header{
 	  color:$base-color-five;
-    font-size: 3em;
+    font-size: 2.8em;
   	letter-spacing: -3px;
-  	margin-left:0px;
+  	margin-left:1%;
   	padding-right:30px;
+		position: fixed;
+		background-color: white;
+		top:0px;
+		height: 55px;
+		width:100%;
 		border-bottom:2px solid black;
   	.head {
   		font-weight: bold;
@@ -51,7 +56,7 @@ header{
   -moz-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
   box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
   overflow-y: auto;
-  z-index: 100000;
+  z-index: 9999;
   position: fixed;
   height: 100%;
   -webkit-transition: all 0.25s;
@@ -90,36 +95,43 @@ header{
 .mainContainer{
 
    margin: 4% 0 0 14%;
- 	 height: 800px;
-   width: 1040px;
+ 	 height: 100%;
+   width: 80%;
 
-	 .hoverScroll{
-		 height: 800px;
-		  overflow-y: hidden;
-		  overflow-x: hidden;
-		  text-align: left;
-		}
-
-		.hoverScroll::-webkit-scrollbar{
-		    width: 10px;
-		    border-radius: 10px;
-		}
-		.hoverScroll::-webkit-scrollbar-track {
-		    background-color: #eaeaea;
-		    border-left: 1px solid #ccc;
-		    border-radius: 10px;
-		}
-		.hoverScroll::-webkit-scrollbar-thumb{
-		    background-color: #ccc;
-		    border-radius: 10px;
-		}
-		.hoverScroll::-webkit-scrollbar-thumb:hover{
-		    background-color: #aaa;
-		    border-radius: 10px;
-		}
-
-		.hoverScroll:hover{
-		  overflow-y: auto
-		}
-
+	 div{
+		 padding-top: 1%;
+	 }
 }
+
+table{
+	text-align: left;
+	
+}
+	//  .hoverScroll{
+	// 	 height: 800px;
+	// 	  overflow-y: hidden;
+	// 	  overflow-x: hidden;
+	// 	  text-align: left;
+	// 	}
+	 //
+	// 	.hoverScroll::-webkit-scrollbar{
+	// 	    width: 10px;
+	// 	    border-radius: 10px;
+	// 	}
+	// 	.hoverScroll::-webkit-scrollbar-track {
+	// 	    background-color: #eaeaea;
+	// 	    border-left: 1px solid #ccc;
+	// 	    border-radius: 10px;
+	// 	}
+	// 	.hoverScroll::-webkit-scrollbar-thumb{
+	// 	    background-color: #ccc;
+	// 	    border-radius: 10px;
+	// 	}
+	// 	.hoverScroll::-webkit-scrollbar-thumb:hover{
+	// 	    background-color: #aaa;
+	// 	    border-radius: 10px;
+	// 	}
+	 //
+	// 	.hoverScroll:hover{
+	// 	  overflow-y: auto
+	// 	}
