@@ -1,0 +1,125 @@
+$base-color-one:#002960;	/*McKinsey BLue*/
+$base-color-two:#2c3e50; 	/*Madison Grey*/
+$base-color-three:#0065BD;	/*Global Blue*/
+$base-color-four:#00ADEF;	/*Cyan*/
+$base-color-five:#006983;	/*Teal*/
+$base-color-six:#009AA6;	/*Turquoise*/
+$base-color-seven:#7D9AAA;	/*Blue Gray*/
+$base-color-eight:#67317E;	/*Purple*/
+$base-color-nine:#EA7A30;	/*Crusta Orange*/
+$base-color-ten:#D24D57; 	/*Chestnut Rose Red*/
+
+header{
+	  color:$base-color-five;
+    font-size: 3em;
+  	letter-spacing: -3px;
+  	margin-left:0px;
+  	padding-right:30px;
+		border-bottom:2px solid black;
+  	.head {
+  		font-weight: bold;
+  		font-size:1.2em;
+  	}
+
+  	.head-first{
+  	  font-size: 1.1em;
+  	  letter-spacing: 0px;
+  	}
+
+  	.head-one{
+  	   color:$base-color-ten;
+  	}
+
+  	.head-two{
+  	   color:$base-color-nine;
+  	}
+
+  	.head-three{
+  	   color:$base-color-three;
+  	}
+
+  	.head-four{
+  	   color:$base-color-eight;
+  	}
+
+}
+.leftNav{
+  float: left;
+  background: #2b343f;
+  text-align: left;
+  -webkit-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
+  box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  z-index: 100000;
+  position: fixed;
+  height: 100%;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+
+
+  ul {
+   margin: 0;
+   padding: 0;
+   list-style: none;
+
+   li a {
+    display: block;
+    text-decoration: none !important;
+    height: 60px;
+    line-height: 60px;
+    font-size: 17px;
+    color: #fff;
+
+    &:hover {
+     background: #4EFFFF;
+     color: #000;
+    }
+
+		.glyphicon{
+			padding-right:10px;
+		}
+   }
+
+  }
+
+}
+.blue{
+  color:blue;
+}
+.mainContainer{
+
+   margin: 4% 0 0 14%;
+ 	 height: 800px;
+   width: 1040px;
+
+	 .hoverScroll{
+		 height: 800px;
+		  overflow-y: hidden;
+		  overflow-x: hidden;
+		  text-align: left;
+		}
+
+		.hoverScroll::-webkit-scrollbar{
+		    width: 10px;
+		    border-radius: 10px;
+		}
+		.hoverScroll::-webkit-scrollbar-track {
+		    background-color: #eaeaea;
+		    border-left: 1px solid #ccc;
+		    border-radius: 10px;
+		}
+		.hoverScroll::-webkit-scrollbar-thumb{
+		    background-color: #ccc;
+		    border-radius: 10px;
+		}
+		.hoverScroll::-webkit-scrollbar-thumb:hover{
+		    background-color: #aaa;
+		    border-radius: 10px;
+		}
+
+		.hoverScroll:hover{
+		  overflow-y: auto
+		}
+
+}

@@ -3,10 +3,51 @@ import {connect} from 'react-redux';
 import * as quicklinksActions from '../../actions/quicklinksActions';
 
 class InductionPage extends Component{
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      quicklinks: {docpath: '',
+      label: '' ,
+      section_header: ''
+      }
+    };
+  }
+
+  inductionRow(event,index){
+    return(
+      <tr key={index}>
+        <td>{event.docpath}</td>
+        <td>{event.label}</td>
+        <td>{event.section_header}</td>
+        <td><button className="btn btn-danger">Remove</button></td>
+        <td><button className="btn btn-warning">Edit</button></td>
+      </tr>
+    )
+  }
+
   render(){
     return (
       <div>
-        <h1>Induction</h1>
+      <h2>INDUCTION</h2>
+      <p className="blue">Add Delete or Edit Induction Material</p>
+      <table style={{textAlign:"left"}}className="table">
+        <thead>
+          <tr>
+            <th>DocPath</th>
+            <th>Label</th>
+            <th>Section Header</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input className="form-control"/></td>
+            <td><input className="form-control"/></td>
+            <td><input className="form-control"/></td>
+            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
+          </tr>
+          {this.props.quicklinks.map(this.inductionRow)}
+        </tbody>
+      </table>
       </div>
     );
   }
