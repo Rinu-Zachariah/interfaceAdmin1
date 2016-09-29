@@ -53,7 +53,7 @@ class EventPage extends Component{
     const propObject = this.props;
     $.ajax({
       type: "POST",
-      url: 'http://localhost:4000/events',
+      url: 'http://dev-sandbox-lx61.amdc.mckinsey.com:4000/events',
       data: this.state.events,
       success: function(data){
         console.log(data);
@@ -68,7 +68,7 @@ class EventPage extends Component{
   onDeleteEvent(eventObject){
     console.log(eventObject);
     $.ajax({
-    url: 'http://localhost:4000/events',
+    url: 'http://dev-sandbox-lx61.amdc.mckinsey.com:4000/events',
     type: "DELETE",
     data: eventObject,
     success: function(data){
