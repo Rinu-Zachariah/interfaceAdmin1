@@ -40,7 +40,6 @@ class GalleryPage extends Component{
     return (
       <div>
       <h2>GALLERY</h2>
-      <p className="blue">Add Delete or Edit Polls</p>
       <table style={{textAlign:"left"}}className="table">
         <thead>
           <tr>

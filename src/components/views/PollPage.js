@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as PollActions from '../../actions/PollActions';
+import Accordion from './Accordion.js'
 
 class PollPage extends Component{
   constructor(props, context) {
@@ -24,13 +25,9 @@ class PollPage extends Component{
 
   pollRow(event,index){
     return(
-      <tr key={index}>
-        <td>{event.choices.map(this.choicesRow)}</td>
-        <td>{event.isActive}</td>
-        <td>{event.question}</td>
-        <td><button className="btn btn-danger">Remove</button></td>
-        <td><button className="btn btn-warning">Edit</button></td>
-      </tr>
+      <div key={index}>
+      <Accordion data={event.choices.map(this.choicesRow)} year={event.question} />
+      </div>
     )
   }
 
@@ -38,7 +35,6 @@ class PollPage extends Component{
     return (
       <div>
       <h2>POLLS</h2>
-      <p className="blue">Add Delete or Edit Polls</p>
       <table style={{textAlign:"left"}}className="table">
         <thead>
           <tr>
