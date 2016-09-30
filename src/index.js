@@ -31,7 +31,7 @@ $.when(
   }),
 
 	// Get events
-  $.get("http://localhost:4000/events", function(events) {
+  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/allevents", function(events) {
     interfaceObjects.events = events;
   }),
 
