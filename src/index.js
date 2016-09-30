@@ -21,7 +21,6 @@ const interfaceObjects = {};
 $.when(
   // Get ODC History
   $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/odchistory", function(odchistory) {
-		console.log(odchistory);
     interfaceObjects.odchistory = odchistory;
   }),
 
@@ -51,10 +50,9 @@ $.when(
   }),
 
 ).then(function() {
-		console.log(interfaceObjects);
 		const initialState = {
 		  histories: interfaceObjects.odchistory,
-			events: interfaceObjects.events,
+			events: interfaceObjects.events.reverse(),
       poll: interfaceObjects.poll,
       quicklinks: interfaceObjects.inductionMaterial,
       mandatorytrainings: interfaceObjects.mandatorytrainings,
@@ -71,42 +69,3 @@ $.when(
 
 
 });
-
-
-//
-//
-// let result = $.ajax({
-// 				url: 'http://localhost:4000/odchistory',
-// 				//'http://dev-sandbox-lx61.amdc.mckinsey.com:4000/customerQuotes',
-// 				data: null,
-// 				type: 'GET',
-// 				datatype: 'JSON',
-// 				success: function(data){
-// 						storeCreation(data);
-// 				},
-// 				error: function(data){
-// 					alert('error');
-// 				}
-// 			});
-//
-// // let initialState1= histories: result;
-// // console.log(histories);
-//
-// function storeCreation(data){
-// 	const initialState = {
-// 	  histories: data
-// 	};
-//
-// 	// const initialState = {
-// 	//   histories: [{id:123, text:'hello', completed: false}]
-// 	//
-// 	// };
-//
-// 	const store=configureStore(initialState);
-//
-// 	ReactDOM.render(
-// 		<Provider store={store}>
-// 	  	<Router history={browserHistory} routes={routes} />
-// 		</Provider>, document.getElementById('app'));
-//
-// };

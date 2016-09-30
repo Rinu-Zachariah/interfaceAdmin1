@@ -105,33 +105,16 @@ header{
 
 table{
 	text-align: left;
-	
+
+	td{
+		padding: 4px;
+	}
+
 }
-	//  .hoverScroll{
-	// 	 height: 800px;
-	// 	  overflow-y: hidden;
-	// 	  overflow-x: hidden;
-	// 	  text-align: left;
-	// 	}
-	 //
-	// 	.hoverScroll::-webkit-scrollbar{
-	// 	    width: 10px;
-	// 	    border-radius: 10px;
-	// 	}
-	// 	.hoverScroll::-webkit-scrollbar-track {
-	// 	    background-color: #eaeaea;
-	// 	    border-left: 1px solid #ccc;
-	// 	    border-radius: 10px;
-	// 	}
-	// 	.hoverScroll::-webkit-scrollbar-thumb{
-	// 	    background-color: #ccc;
-	// 	    border-radius: 10px;
-	// 	}
-	// 	.hoverScroll::-webkit-scrollbar-thumb:hover{
-	// 	    background-color: #aaa;
-	// 	    border-radius: 10px;
-	// 	}
-	 //
-	// 	.hoverScroll:hover{
-	// 	  overflow-y: auto
-	// 	}
+.form-control{
+	width: 155px;
+}
+
+.eventHead{
+	width: 340px !important;
+}

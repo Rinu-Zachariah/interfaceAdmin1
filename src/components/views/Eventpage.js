@@ -80,8 +80,6 @@ class EventPage extends Component{
 
 
   eventRow(event,index){
-    console.log("inside event Row");
-
     return(
       <tr key={index}>
         <td>{event.startDate.split("T")[0]}</td>
@@ -109,10 +107,18 @@ class EventPage extends Component{
             </thead>
             <tbody>
               <tr>
-                <td><input type="date" className="form-control"  onChange={this.onStartDateChange} value={this.state.events.startDate} /></td>
-                <td><input type="date" className="form-control" onChange={this.onEndDateChange} value={this.state.events.endDate}/></td>
-                <td><input className="form-control" onChange={this.onTypeChange} value={this.state.events.type}/></td>
-                <td><input className="form-control" onChange={this.onEventTextChange} value={this.state.events.eventText}/></td>
+                <td><input type="date" className="form-control"  onChange={this.onStartDateChange} value={this.state.events.startDate} required /></td>
+                <td><input type="date" className="form-control" onChange={this.onEndDateChange} value={this.state.events.endDate} required /></td>
+                <td>
+                <select className="form-control" onChange={this.onTypeChange} value={this.state.events.type}>
+                  <option hidden>Please select</option>
+                  <option>Birthday</option>
+                  <option>Certification</option>
+                  <option>Event</option>
+                  <option>Others</option>
+                </select>
+                </td>
+                <td><input className="form-control eventHead" onChange={this.onEventTextChange} value={this.state.events.eventText}/></td>
                 <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
               </tr>
               {this.props.events.map(this.eventRow)}
