@@ -48,7 +48,6 @@ $.when(
   $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/gallery", function(gallery) {
     interfaceObjects.gallery = gallery;
   }),
-
 ).then(function() {
 		const initialState = {
 		  histories: interfaceObjects.odchistory,
@@ -65,7 +64,5 @@ $.when(
 			<Provider store={store}>
 		  	<Router history={browserHistory} routes={routes} />
 			</Provider>, document.getElementById('app'));
-
-
 
 });

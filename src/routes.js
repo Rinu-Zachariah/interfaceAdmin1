@@ -3,7 +3,7 @@ import {Route,IndexRoute} from 'react-router';
 
 import App from './components/app';
 import HomePage from './components/views/HomePage';
-import EventPage from './components/views/EventPage';
+import EventPage from './components/views/Eventpage';
 import PollPage from './components/views/PollPage';
 import ODCHistory from './components/views/ODCHistory';
 import InductionPage from './components/views/InductionPage';

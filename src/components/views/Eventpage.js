@@ -24,6 +24,18 @@ class EventPage extends Component{
       }
     };
   }
+
+  getInitialState() {
+    return {
+      invalidData: true,
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    nextState.invalidData = !(nextState.events.startDate && nextState.events.endDate);
+  }
+
+
   onStartDateChange(event){
     const events = this.state.events;
     events.startDate = event.target.value;
@@ -107,8 +119,8 @@ class EventPage extends Component{
             </thead>
             <tbody>
               <tr>
-                <td><input type="date" className="form-control"  onChange={this.onStartDateChange} value={this.state.events.startDate} required /></td>
-                <td><input type="date" className="form-control" onChange={this.onEndDateChange} value={this.state.events.endDate} required /></td>
+                <td><input type="date" className="form-control"  onChange={this.onStartDateChange} value={this.state.events.startDate}/></td>
+                <td><input type="date" className="form-control" onChange={this.onEndDateChange} value={this.state.events.endDate}/></td>
                 <td>
                 <select className="form-control" onChange={this.onTypeChange} value={this.state.events.type}>
                   <option hidden>Please select</option>
@@ -119,7 +131,7 @@ class EventPage extends Component{
                 </select>
                 </td>
                 <td><input className="form-control eventHead" onChange={this.onEventTextChange} value={this.state.events.eventText}/></td>
-                <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
+                <td><button className="btn btn-primary" onClick={this.onClickSave} id="save" value="save" disabled={this.state.invalidData}>Add Event</button></td>
               </tr>
               {this.props.events.map(this.eventRow)}
             </tbody>

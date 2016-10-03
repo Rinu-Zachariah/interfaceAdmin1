@@ -26,6 +26,11 @@
     "no-console": 1,
     "no-debugger": 1,
     "no-var": 1,
+    "import/namespace": 2,
+    "import/named": 2,
+    "import/no-unresolved": [2, {commonjs: true, amd: true}],
+    "import/default": 2,
+    "import/export": 2,
     "semi": [1, "always"],
     "no-trailing-spaces": 0,
     "eol-last": 0,
@@ -66,4 +71,5 @@
     "react/sort-comp": 1,
     "react/wrap-multilines": 1
   }
+
 }

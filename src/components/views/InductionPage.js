@@ -13,6 +13,23 @@ class InductionPage extends Component{
     };
   }
 
+  onClickSave(){
+    const propObject = this.props;
+    $.ajax({
+      type: "POST",
+      url: 'http://dev-sandbox-lx61.amdc.mckinsey.com:4000/quicklinks',
+      data: this.state.events,
+      success: function(data){
+        console.log(data);
+        propObject.dispatch(quicklinksActions.createQuicklinks(data));
+      },
+      error: function(data){
+        alert('error');
+      }
+    });
+
+  }
+
   inductionRow(event,index){
     return(
       <tr key={index}>
