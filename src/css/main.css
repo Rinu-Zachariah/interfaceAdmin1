@@ -86,4 +86,35 @@ table {
 .eventHead {
   width: 340px !important; }
 
+.accordionContainer {
+  max-width: 868px; }
+  .accordionContainer .heading {
+    background-color: #1A4489;
+    border-bottom: 1px solid #2c3e50; }
+    .accordionContainer .heading:hover {
+      background-color: #487CBF; }
+    .accordionContainer .heading a {
+      text-align: center;
+      font-weight: 700;
+      padding: 1em;
+      display: block;
+      text-decoration: none;
+      color: #fff;
+      -webkit-transition: background-color 0.5s ease-in-out; }
+  .accordionContainer .mainContent {
+    height: auto;
+    overflow: hidden;
+    max-height: 50em;
+    -moz-transition: max-height 1s;
+    -o-transition: max-height 1s;
+    -webkit-transition: max-height 1s;
+    transition: max-height 1s;
+    color: black;
+    font-size: 1em;
+    line-height: 1.5em; }
+    .accordionContainer .mainContent p {
+      padding: 1em 2em; }
+    .accordionContainer .mainContent .btn {
+      margin: 0px 5px; }
+
 /*# sourceMappingURL=main.css.map */

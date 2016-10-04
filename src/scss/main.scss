@@ -118,3 +118,45 @@ table{
 .eventHead{
 	width: 340px !important;
 }
+.accordionContainer{
+	
+	max-width: 868px;
+	.heading{
+		background-color: #1A4489;
+  	border-bottom: 1px solid #2c3e50;
+
+		&:hover{
+			background-color: #487CBF;
+		}
+
+		a{
+			text-align: center;
+		  font-weight: 700;
+		  padding: 1em;
+		  display: block;
+		  text-decoration: none;
+		  color: #fff;
+		  -webkit-transition: background-color 0.5s ease-in-out;
+		}
+
+	}
+	.mainContent{
+		height: auto;
+ 		overflow: hidden;
+		max-height: 50em;
+    -moz-transition: max-height 1s;
+    -o-transition: max-height 1s;
+    -webkit-transition: max-height 1s;
+    transition: max-height 1s;
+		color:black;
+		font-size: 1em;
+		line-height: 1.5em;
+
+		 p{
+			padding: 1em 2em;
+		 }
+		 .btn{
+			 margin:0px 5px;
+		 }
+	}
+}
