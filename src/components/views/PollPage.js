@@ -50,9 +50,10 @@ class PollPage extends Component{
             <td><input className="form-control"/></td>
             <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
           </tr>
-          {this.props.poll.map(this.pollRow)}
+
         </tbody>
       </table>
+      {this.props.poll.map(this.pollRow)}
       </div>
     );
   }

@@ -28,18 +28,19 @@ class Accordion extends React.Component {
   render(){
   const stateStyle = this.state.active ? styles.active : styles.inactive;
   return (
-      <section className="accordionContainer">
-      <div className="heading">
-        <a onClick={this.toggle}>
-        {this.props.year}
-      </a>
-      </div>
-      <div style={stateStyle} className="mainContent">
-        <p  dangerouslySetInnerHTML={{__html: this.props.summary}} />
-        <button className="btn btn-danger pull-right">Remove</button>
-        <button className="btn btn-warning pull-right">Edit</button>
+        <section className="accordionContainer">
+        <div className="heading">
+          <a onClick={this.toggle}>
+          {this.props.year}
+        </a>
         </div>
-      </section>
+        <div style={stateStyle} className="mainContent">
+          <p dangerouslySetInnerHTML={{__html: this.props.summary}} />
+          <p>{this.props.data}</p>
+          <button className="btn btn-danger pull-right">Remove</button>
+          <button className="btn btn-warning pull-right">Edit</button>
+          </div>
+        </section>
       );
   }
 
