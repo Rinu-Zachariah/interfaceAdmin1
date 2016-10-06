@@ -20,32 +20,32 @@ const interfaceObjects = {};
 
 $.when(
   // Get ODC History
-  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/odchistory", function(odchistory) {
+  $.get("", function(odchistory) {
     interfaceObjects.odchistory = odchistory;
   }),
 
   // Get polls
-  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/poll", function(poll) {
+  $.get("", function(poll) {
     interfaceObjects.poll = poll;
   }),
 
 	// Get events
-  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/allevents", function(events) {
+  $.get("", function(events) {
     interfaceObjects.events = events;
   }),
 
 	// Get inductionmaterial
-  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/quicklinks", function(quicklinks) {
+  $.get("", function(quicklinks) {
     interfaceObjects.inductionMaterial = quicklinks;
   }),
 
 	// Get mandatory trainings
-  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/mandatorytrainings", function(mandatorytrainings) {
+  $.get("", function(mandatorytrainings) {
     interfaceObjects.mandatoryTrainings = mandatorytrainings;
   }),
 
 	// Get gallery images
-  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/gallery", function(gallery) {
+  $.get("", function(gallery) {
     interfaceObjects.gallery = gallery;
   }),
 ).then(function() {
