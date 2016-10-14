@@ -41,7 +41,7 @@ $.when(
 
 	// Get mandatory trainings
   $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/mandatorytrainings", function(mandatorytrainings) {
-    interfaceObjects.mandatoryTrainings = mandatorytrainings;
+    interfaceObjects.mandatorytrainings = mandatorytrainings;
   }),
 
 	// Get gallery images
