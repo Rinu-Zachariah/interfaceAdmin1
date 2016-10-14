@@ -17,7 +17,7 @@ class InductionPage extends Component{
     const propObject = this.props;
     $.ajax({
       type: "POST",
-      url: 'http://dev-sandbox-lx61.amdc.mckinsey.com:4000/quicklinks',
+      url: '',
       data: this.state.events,
       success: function(data){
         console.log(data);
