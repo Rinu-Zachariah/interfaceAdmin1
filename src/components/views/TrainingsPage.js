@@ -24,7 +24,7 @@ class TrainingsPage extends Component{
         <td><button className="btn btn-danger">Remove</button></td>
         <td><button className="btn btn-warning">Edit</button></td>
       </tr>
-    )
+    );
   }
 
   render(){

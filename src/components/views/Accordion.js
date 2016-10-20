@@ -1,4 +1,6 @@
 import React from 'react';
+import $ from 'jquery';
+import * as PollActions from '../../actions/PollActions';
 
 const styles = {
   active: {
@@ -7,7 +9,7 @@ const styles = {
   inactive:{
     display: 'none'
   }
-}
+};
 
 class Accordion extends React.Component {
 
@@ -25,6 +27,19 @@ class Accordion extends React.Component {
       });
     }
 
+    onDelete(menuObject){
+      console.log(menuObject);
+      $.ajax({
+        url: 'http://localhost:4000/poll',
+        type: 'DELETE',
+        data: menuObject,
+        success: function(data){
+          console.log(data);
+        }
+      });
+      this.props.dispatch(PollActions.deletePolls(menuObject));
+    }
+
   render(){
   const stateStyle = this.state.active ? styles.active : styles.inactive;
   return (
@@ -36,8 +51,8 @@ class Accordion extends React.Component {
         </div>
         <div style={stateStyle} className="mainContent">
           <p dangerouslySetInnerHTML={{__html: this.props.summary}} />
-          <p>{this.props.data}</p>
-          <button className="btn btn-danger pull-right">Remove</button>
+          <ul>{this.props.data}</ul>
+          <button className="btn btn-danger pull-right" onClick={()=>{this.onDelete(this.props.event1);}} value="delete">Remove</button>
           <button className="btn btn-warning pull-right">Edit</button>
           </div>
         </section>
@@ -47,9 +62,10 @@ class Accordion extends React.Component {
 }
 
 Accordion.propTypes ={
-  summary: React.PropTypes.string.isRequired,
-  year: React.PropTypes.string.isRequired,
-  data: React.PropTypes.string.isRequired
+  summary: React.PropTypes.string,
+  year: React.PropTypes.string,
+  data: React.PropTypes.array,
+  event1:React.PropTypes.object
 };
 
 export default Accordion;

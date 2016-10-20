@@ -33,7 +33,7 @@ class GalleryPage extends Component{
         <td><button className="btn btn-danger">Remove</button></td>
         <td><button className="btn btn-warning">Edit</button></td>
       </tr>
-    )
+    );
   }
 
   render(){
@@ -66,8 +66,8 @@ class GalleryPage extends Component{
 }
 
 function mapStateToProps(state,ownProps){
-  console.log("Inside gallery")
-  console.log(state.gallery)
+  console.log("Inside gallery");
+  console.log(state.gallery);
   return {
     gallery: state.gallery
   };

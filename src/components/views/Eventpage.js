@@ -28,7 +28,7 @@ class EventPage extends Component{
   getInitialState() {
     return {
       invalidData: true,
-    }
+    };
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -65,7 +65,7 @@ class EventPage extends Component{
     const propObject = this.props;
     $.ajax({
       type: "POST",
-      url: '',
+      url: 'http://localhost:4000/events',
       data: this.state.events,
       success: function(data){
         console.log(data);
@@ -80,14 +80,14 @@ class EventPage extends Component{
   onDeleteEvent(eventObject){
     console.log(eventObject);
     $.ajax({
-    url: '',
+    url: 'http://localhost:4000/events',
     type: "DELETE",
     data: eventObject,
     success: function(data){
       console.log(data);
     }
   });
-    this.props.dispatch(eventsActions.deleteEvents(eventObject))
+    this.props.dispatch(eventsActions.deleteEvents(eventObject));
   }
 
 
@@ -98,10 +98,10 @@ class EventPage extends Component{
         <td>{event.endDate.split("T")[0]}</td>
         <td>{event.type}</td>
         <td>{event.eventText}</td>
-        <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
+        <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event);}} value="delete">Remove</button></td>
         <td><button className="btn btn-warning">Edit</button></td>
       </tr>
-    )
+    );
   }
 
   render(){
