@@ -45,7 +45,7 @@ class ODCHistory extends Component{
     return (
       <div>
       <h2>ODC History</h2>
-      
+
       {this.props.histories.map(this.historyRow)}
       </div>
     );
