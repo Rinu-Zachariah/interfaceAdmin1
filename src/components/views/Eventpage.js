@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+        import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as eventsActions from '../../actions/eventsActions';
 import $ from 'jquery';
-
+import _ from 'underscore';
+let singleFieldEdit = true;
 
 class EventPage extends Component{
 
@@ -67,7 +68,7 @@ class EventPage extends Component{
     const propObject = this.props;
     $.ajax({
       type: "POST",
-      url: 'http://dev-sandbox-lx61.amdc.mckinsey.com:4000/events',
+      url: 'http://localhost:4000/events',
       data: this.state.events,
       success: function(data){
         console.log(data);
@@ -81,7 +82,7 @@ class EventPage extends Component{
   onDeleteEvent(eventObject){
     console.log(eventObject);
     $.ajax({
-    url: 'http://dev-sandbox-lx61.amdc.mckinsey.com:4000/events',
+    url: 'http://localhost:4000/events',
     type: "DELETE",
     data: eventObject,
     success: function(data){
@@ -92,38 +93,46 @@ class EventPage extends Component{
   }
 
   onEditEvent(eventObject){
-    console.log(eventObject);
-    console.log("events before editing")
-    console.log(this.state.events);
-    const events = this.state.events;
-    events.type = eventObject.type;
-    events.startDate = eventObject.startDate.split("T")[0];
-    events.endDate = eventObject.endDate.split("T")[0];
-    events.eventText = eventObject.eventText;
-    console.log("events after editing")
-    console.log(events);
+    if (singleFieldEdit){
+      const events = this.state.events;
+      events.type = eventObject.type;
+      events.startDate = eventObject.startDate.split("T")[0];
+      events.endDate = eventObject.endDate.split("T")[0];
+      events.eventText = eventObject.eventText;
 
-    this.setState({events: events});
-    this.props.dispatch(eventsActions.isEditingEvents(eventObject));
+      this.setState({events: events});
+      singleFieldEdit = false;
+      this.props.dispatch(eventsActions.isEditingEvents(eventObject));
+    }
+    else {
+      alert('Please Finish Editing One Module');
+    }
+
   }
 
   onClickEditSave(index){
-    console.log(index);
-    //this.setState({events: });
-    // const propObject = this.props;
-    // $.ajax({
-    //   type: "POST",
-    //   url: 'http://dev-sandbox-lx61.amdc.mckinsey.com:4000/events',
-    //   data: this.state.events,
-    //   success: function(data){
-    //     console.log(data);
-    //     propObject.dispatch(eventsActions.createEvents(data));
-    //   },
-    //   error: function(data){
-    //     alert('error');
-    //   }
-    // });
-    this.props.dispatch(eventsActions.editEvents(this.state.events,index));
+    const event = this.state.events;
+    event._id = index;
+    const events = {eventText: '',
+    startDate: '' ,
+    endDate: '',
+    type: ''
+    }
+    this.setState({events: events});
+    const propObject = this.props;
+    singleFieldEdit = true;
+    $.ajax({
+      type: "PUT",
+      url: 'http://localhost:4000/events',
+      data: event,
+      success: function(data){
+        propObject.dispatch(eventsActions.editEvents(data));
+      },
+      error: function(data){
+        alert('error');
+      }
+    });
+
   }
 
   eventRow(event,index){

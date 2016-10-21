@@ -18,16 +18,13 @@ export default function eventsReducer(state =[], action){
       const newState = Object.assign([], state);
       const indexOfEventToDelete = state.findIndex(event => {return event._id == action.event._id});
       newState[indexOfEventToDelete].isEditing = true;
-      //newState.splice(indexOfEventToDelete, 1);
-      console.log(newState[indexOfEventToDelete]);
       return newState;
     }
 
     case 'EDIT_EVENTS': {
       const newState = Object.assign([], state);
-      const indexOfEventToEdit = state.findIndex(event => {return event._id == action.index});
+      const indexOfEventToEdit = state.findIndex(event => {return event._id == action.event._id});
       newState[indexOfEventToEdit] = action.event;
-      console.log(newState);
       return newState;
     }
 

@@ -7,6 +7,6 @@ export function deleteEvents(event){
 export function isEditingEvents(event){
   return {type: 'IS_EDITING_EVENTS',event};
 }
-export function editEvents(event,index){
-  return {type: 'EDIT_EVENTS',event,index};
+export function editEvents(event){
+  return {type: 'EDIT_EVENTS',event};
 }
