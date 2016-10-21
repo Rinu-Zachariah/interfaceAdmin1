@@ -31,7 +31,7 @@ class EventPage extends Component{
   getInitialState() {
     return {
       invalidData: true,
-    }
+    };
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -89,7 +89,7 @@ class EventPage extends Component{
       console.log(data);
     }
   });
-    this.props.dispatch(eventsActions.deleteEvents(eventObject))
+    this.props.dispatch(eventsActions.deleteEvents(eventObject));
   }
 
   onEditEvent(eventObject){
@@ -165,8 +165,7 @@ class EventPage extends Component{
         <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
         <td><button className="btn btn-warning" onClick={()=>{this.onEditEvent(event)}} >Edit</button></td>
       </tr>
-    )
-
+    );
   }
 
   render(){

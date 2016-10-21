@@ -87,7 +87,7 @@ class TrainingsPage extends Component{
         <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
         <td><button className="btn btn-warning">Edit</button></td>
       </tr>
-    )
+    );
   }
 
   render(){
