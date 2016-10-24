@@ -48,7 +48,8 @@ $.when(
   $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/gallery", function(gallery) {
     interfaceObjects.gallery = gallery;
   }),
-).then(function() {
+)
+.then(function() {
 		const initialState = {
 		  histories: interfaceObjects.odchistory,
 			events: interfaceObjects.events.reverse(),
