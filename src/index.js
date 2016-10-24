@@ -10,6 +10,8 @@ import gallery from './reducer/galleryReducer';
 import poll from './reducer/pollReducer';
 import quicklinks from './reducer/quicklinksReducer';
 import mandatorytrainings from './reducer/mandatorytrainingsReducer';
+import init from '../tools/init';
+
 // import mongoose from 'mongoose';
 // import ODCHistory from './server/models/history.model.server';
 
@@ -17,35 +19,66 @@ import {Provider} from 'react-redux';
 import $ from 'jquery';
 import App from './components/app';
 const interfaceObjects = {};
+let History, Polls, Events, Quicklinks, Mandatorytrainings, Gallery = "";
+
+if(init.env().toString() == "development")
+{
+  History = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/odchistory";
+  Polls = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/poll";
+  Events = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/allevents";
+  Quicklinks = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/quicklinks" ;
+  Mandatorytrainings = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/mandatorytrainings";
+  Gallery = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/gallery";
+
+}
+else if(init.env().toString() == "production")
+{
+  History = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/odchistory";
+  Polls = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/poll";
+  Events = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/allevents";
+  Quicklinks = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/quicklinks" ;
+  Mandatorytrainings = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/mandatorytrainings";
+  Gallery = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/gallery";
+
+}
+else{
+  History = "http://localhost:4000/odchistory";
+  Polls = "http://localhost:4000/poll";
+  Events = "http://localhost:/allevents";
+  Quicklinks = "http://localhost:4000/quicklinks" ;
+  Mandatorytrainings = "http://localhost:4000/mandatorytrainings";
+  Gallery = "http://localhost:4000/gallery";
+
+}
 
 $.when(
   // Get ODC History
-  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/odchistory", function(odchistory) {
+  $.get(History, function(odchistory) {
     interfaceObjects.odchistory = odchistory;
   }),
 
   // Get polls
-  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/poll", function(poll) {
+  $.get(Polls, function(poll) {
     interfaceObjects.poll = poll;
   }),
 
 	// Get events
-  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/allevents", function(events) {
+  $.get(Events, function(events) {
     interfaceObjects.events = events;
   }),
 
 	// Get inductionmaterial
-  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/quicklinks", function(quicklinks) {
+  $.get(Quicklinks, function(quicklinks) {
     interfaceObjects.inductionMaterial = quicklinks;
   }),
 
 	// Get mandatory trainings
-  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/mandatorytrainings", function(mandatorytrainings) {
+  $.get(Mandatorytrainings, function(mandatorytrainings) {
     interfaceObjects.mandatoryTrainings = mandatorytrainings;
   }),
 
 	// Get gallery images
-  $.get("http://dev-sandbox-lx61.amdc.mckinsey.com:4000/gallery", function(gallery) {
+  $.get(Gallery, function(gallery) {
     interfaceObjects.gallery = gallery;
   }),
 ).then(function() {
