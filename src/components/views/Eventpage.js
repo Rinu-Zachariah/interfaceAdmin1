@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+        import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as eventsActions from '../../actions/eventsActions';
 import $ from 'jquery';
-
+import _ from 'underscore';
+let singleFieldEdit = true;
 
 class EventPage extends Component{
 
@@ -15,6 +16,8 @@ class EventPage extends Component{
     this.onClickSave = this.onClickSave.bind(this);
     this.onDeleteEvent = this.onDeleteEvent.bind(this);
     this.eventRow = this.eventRow.bind(this);
+    this.onEditEvent = this.onEditEvent.bind(this);
+    this.onClickEditSave = this.onClickEditSave.bind(this);
 
     this.state = {
       events: {eventText: '',
@@ -28,7 +31,7 @@ class EventPage extends Component{
   getInitialState() {
     return {
       invalidData: true,
-    }
+    };
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -66,6 +69,7 @@ class EventPage extends Component{
     $.ajax({
       type: "POST",
       url: 'http://dev-sandbox-lx61.amdc.mckinsey.com:4000/events',
+
       data: this.state.events,
       success: function(data){
         console.log(data);
@@ -75,23 +79,84 @@ class EventPage extends Component{
         alert('error');
       }
     });
-
   }
   onDeleteEvent(eventObject){
     console.log(eventObject);
     $.ajax({
-    url: '',
+    url: 'http://localhost:4000/events',
     type: "DELETE",
     data: eventObject,
     success: function(data){
       console.log(data);
     }
   });
-    this.props.dispatch(eventsActions.deleteEvents(eventObject))
+    this.props.dispatch(eventsActions.deleteEvents(eventObject));
   }
 
+  onEditEvent(eventObject){
+    if (singleFieldEdit){
+      const events = this.state.events;
+      events.type = eventObject.type;
+      events.startDate = eventObject.startDate.split("T")[0];
+      events.endDate = eventObject.endDate.split("T")[0];
+      events.eventText = eventObject.eventText;
+
+      this.setState({events: events});
+      singleFieldEdit = false;
+      this.props.dispatch(eventsActions.isEditingEvents(eventObject));
+    }
+    else {
+      alert('Please Finish Editing One Module');
+    }
+
+  }
+
+  onClickEditSave(index){
+    const event = this.state.events;
+    event._id = index;
+    const events = {eventText: '',
+    startDate: '' ,
+    endDate: '',
+    type: ''
+    }
+    this.setState({events: events});
+    const propObject = this.props;
+    singleFieldEdit = true;
+    $.ajax({
+      type: "PUT",
+      url: 'http://localhost:4000/events',
+      data: event,
+      success: function(data){
+        propObject.dispatch(eventsActions.editEvents(data));
+      },
+      error: function(data){
+        alert('error');
+      }
+    });
+
+  }
 
   eventRow(event,index){
+    if(event.isEditing)
+    {
+      return(
+        <tr key={index}>
+          <td><input type="date" className="form-control"  onChange={this.onStartDateChange} value={this.state.events.startDate}/></td>
+          <td><input type="date" className="form-control" onChange={this.onEndDateChange} value={this.state.events.endDate}/></td>
+          <td>
+          <select className="form-control" onChange={this.onTypeChange} value={this.state.events.type}>
+            <option hidden>Please select</option>
+            <option>Birthday</option>
+            <option>Certification</option>
+            <option>Event</option>
+            <option>Others</option>
+          </select>
+          </td>
+          <td><input className="form-control eventHead" onChange={this.onEventTextChange} value={this.state.events.eventText}/></td>
+          <td><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
+        </tr>
+      )
+    }
     return(
       <tr key={index}>
         <td>{event.startDate.split("T")[0]}</td>
@@ -99,9 +164,9 @@ class EventPage extends Component{
         <td>{event.type}</td>
         <td>{event.eventText}</td>
         <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
-        <td><button className="btn btn-warning">Edit</button></td>
+        <td><button className="btn btn-warning" onClick={()=>{this.onEditEvent(event)}} >Edit</button></td>
       </tr>
-    )
+    );
   }
 
   render(){
@@ -119,10 +184,10 @@ class EventPage extends Component{
             </thead>
             <tbody>
               <tr>
-                <td><input type="date" className="form-control"  onChange={this.onStartDateChange} value={this.state.events.startDate}/></td>
-                <td><input type="date" className="form-control" onChange={this.onEndDateChange} value={this.state.events.endDate}/></td>
+                <td><input type="date" className="form-control"  onChange={this.onStartDateChange} /></td>
+                <td><input type="date" className="form-control" onChange={this.onEndDateChange} /></td>
                 <td>
-                <select className="form-control" onChange={this.onTypeChange} value={this.state.events.type}>
+                <select className="form-control" onChange={this.onTypeChange}>
                   <option hidden>Please select</option>
                   <option>Birthday</option>
                   <option>Certification</option>
@@ -130,7 +195,7 @@ class EventPage extends Component{
                   <option>Others</option>
                 </select>
                 </td>
-                <td><input className="form-control eventHead" onChange={this.onEventTextChange} value={this.state.events.eventText}/></td>
+                <td><input className="form-control eventHead" onChange={this.onEventTextChange}/></td>
                 <td><button className="btn btn-primary" onClick={this.onClickSave} id="save" value="save" disabled={this.state.invalidData}>Add Event</button></td>
               </tr>
               {this.props.events.map(this.eventRow)}

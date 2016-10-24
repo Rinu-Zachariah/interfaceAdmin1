@@ -39,3 +39,5 @@ dist
 
 # Mac files
 .DS_Store
+#ignore init.js file (init file is used to detect environment)
+/tools/init.js

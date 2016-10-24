@@ -8,9 +8,9 @@ class ContributorsPage extends Component{
     super(props, context);
     this.state={
       contributors:{
-        
+
       }
-    }
+    };
   }
 
   render(){
