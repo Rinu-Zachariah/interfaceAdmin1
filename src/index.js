@@ -20,21 +20,25 @@ const interfaceObjects = {};
 
 $.when(
   // Get ODC History
+
   $.get(env[init.env()].history, function(odchistory) {
     interfaceObjects.odchistory = odchistory;
   }),
 
   // Get polls
+
   $.get(env[init.env()].polls, function(poll) {
     interfaceObjects.poll = poll;
   }),
 
 	// Get events
+
   $.get(env[init.env()].allevents, function(events) {
     interfaceObjects.events = events;
   }),
 
 	// Get inductionmaterial
+
   $.get(env[init.env()].quicklinks, function(quicklinks) {
     interfaceObjects.inductionMaterial = quicklinks;
   }),
@@ -48,13 +52,14 @@ $.when(
   $.get(env[init.env()].gallery, function(gallery) {
     interfaceObjects.gallery = gallery;
   }),
-).then(function() {
+)
+.then(function() {
 		const initialState = {
 		  histories: interfaceObjects.odchistory,
 			events: interfaceObjects.events.reverse(),
       poll: interfaceObjects.poll,
       quicklinks: interfaceObjects.inductionMaterial,
-      mandatorytrainings: interfaceObjects.mandatorytrainings,
+      mandatorytrainings: interfaceObjects.mandatoryTrainings,
       gallery: interfaceObjects.gallery
 		};
 

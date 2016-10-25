@@ -11,7 +11,7 @@ export default function mandatorytrainingsReducer(state =[], action){
 
       const newState = Object.assign([], state);
       //console.log(newState);
-      const indexOfEventToDelete = state.findIndex(mandatorytrainings => {return mandatorytrainings._id == action.mandatorytrainings._id});
+      const indexOfEventToDelete = state.findIndex(mandatorytrainings => {return mandatorytrainings._id == action.mandatorytrainings._id;});
       newState.splice(indexOfEventToDelete, 1);
       //browserHistory.push('/cats');
       return newState;
