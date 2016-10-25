@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as galleryActions from '../../actions/galleryActions';
-
+import env from '../../environment';
+import init from '../../../tools/init';
 
 class GalleryPage extends Component{
   constructor(props, context) {

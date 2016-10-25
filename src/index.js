@@ -10,75 +10,42 @@ import gallery from './reducer/galleryReducer';
 import poll from './reducer/pollReducer';
 import quicklinks from './reducer/quicklinksReducer';
 import mandatorytrainings from './reducer/mandatorytrainingsReducer';
+import env from './environment';
 import init from '../tools/init';
-
-// import mongoose from 'mongoose';
-// import ODCHistory from './server/models/history.model.server';
 
 import {Provider} from 'react-redux';
 import $ from 'jquery';
 import App from './components/app';
 const interfaceObjects = {};
-let History, Polls, Events, Quicklinks, Mandatorytrainings, Gallery = "";
-
-if(init.env().toString() == "development")
-{
-  History = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/odchistory";
-  Polls = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/poll";
-  Events = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/allevents";
-  Quicklinks = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/quicklinks" ;
-  Mandatorytrainings = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/mandatorytrainings";
-  Gallery = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/gallery";
-
-}
-else if(init.env().toString() == "production")
-{
-  History = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/odchistory";
-  Polls = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/poll";
-  Events = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/allevents";
-  Quicklinks = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/quicklinks" ;
-  Mandatorytrainings = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/mandatorytrainings";
-  Gallery = "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/gallery";
-
-}
-else{
-  History = "http://localhost:4000/odchistory";
-  Polls = "http://localhost:4000/poll";
-  Events = "http://localhost:/allevents";
-  Quicklinks = "http://localhost:4000/quicklinks" ;
-  Mandatorytrainings = "http://localhost:4000/mandatorytrainings";
-  Gallery = "http://localhost:4000/gallery";
-
-}
 
 $.when(
   // Get ODC History
-  $.get(History, function(odchistory) {
+  $.get(env[init.env()].history, function(odchistory) {
     interfaceObjects.odchistory = odchistory;
   }),
 
   // Get polls
-  $.get(Polls, function(poll) {
+  $.get(env[init.env()].polls, function(poll) {
     interfaceObjects.poll = poll;
   }),
 
 	// Get events
-  $.get(Events, function(events) {
+  $.get(env[init.env()].allevents, function(events) {
     interfaceObjects.events = events;
   }),
 
 	// Get inductionmaterial
-  $.get(Quicklinks, function(quicklinks) {
+  $.get(env[init.env()].quicklinks, function(quicklinks) {
     interfaceObjects.inductionMaterial = quicklinks;
   }),
 
 	// Get mandatory trainings
-  $.get(Mandatorytrainings, function(mandatorytrainings) {
+  $.get(env[init.env()].manadatorytrainings, function(mandatorytrainings) {
     interfaceObjects.mandatoryTrainings = mandatorytrainings;
   }),
 
 	// Get gallery images
-  $.get(Gallery, function(gallery) {
+  $.get(env[init.env()].gallery, function(gallery) {
     interfaceObjects.gallery = gallery;
   }),
 ).then(function() {

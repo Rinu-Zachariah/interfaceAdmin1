@@ -1,8 +1,10 @@
-        import React, {Component} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as eventsActions from '../../actions/eventsActions';
 import $ from 'jquery';
 import _ from 'underscore';
+import env from '../../environment';
+import init from '../../../tools/init';
 let singleFieldEdit = true;
 
 class EventPage extends Component{
@@ -68,7 +70,7 @@ class EventPage extends Component{
     const propObject = this.props;
     $.ajax({
       type: "POST",
-      url: 'http://localhost:4000/events',
+      url: env[init.env()].events,
       data: this.state.events,
       success: function(data){
         console.log(data);
@@ -82,7 +84,7 @@ class EventPage extends Component{
   onDeleteEvent(eventObject){
     console.log(eventObject);
     $.ajax({
-    url: 'http://localhost:4000/events',
+    url: env[init.env()].events,
     type: "DELETE",
     data: eventObject,
     success: function(data){
@@ -123,7 +125,7 @@ class EventPage extends Component{
     singleFieldEdit = true;
     $.ajax({
       type: "PUT",
-      url: 'http://localhost:4000/events',
+      url: env[init.env()].events,
       data: event,
       success: function(data){
         propObject.dispatch(eventsActions.editEvents(data));

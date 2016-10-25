@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 import * as PollActions from '../../actions/PollActions';
 import Accordion from './Accordion.js';
 import $ from 'jquery';
+import env from '../../environment';
+import init from '../../../tools/init';
+
 
 class PollPage extends Component{
   constructor(props, context) {
@@ -100,7 +103,7 @@ class PollPage extends Component{
     console.log(polls);
     $.ajax({
       type:'POST',
-      url: 'http://localhost:4000/poll',
+      url: env[init.env()].polls,
       data: polls,
       success: function(data){
         console.log(data);

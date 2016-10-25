@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as eventsActions from '../../actions/eventsActions';
 import $ from 'jquery';
+import env from '../../environment';
+import init from '../../../tools/init';
 
 class ContributorsPage extends Component{
   constructor(props, context){

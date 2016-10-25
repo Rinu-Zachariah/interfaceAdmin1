@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as mandatorytrainingActions from '../../actions/mandatorytrainingActions';
 import $ from 'jquery';
+import env from '../../environment';
+import init from '../../../tools/init';
 
 class TrainingsPage extends Component{
   constructor(props, context) {
@@ -50,7 +52,7 @@ class TrainingsPage extends Component{
     const propObject = this.props;
     $.ajax({
       type: "POST",
-      url: 'http://dev-sandbox-lx61.amdc.mckinsey.com:4000/mandatorytrainings',
+      url: env[init.env()].manadatorytrainings,
       data: this.state.mandatorytrainings,
       success: function(data){
         console.log(data);
@@ -66,7 +68,7 @@ class TrainingsPage extends Component{
   onDeleteEvent(mandatorytrainings){
     console.log(mandatorytrainings);
     $.ajax({
-      url: 'http://dev-sandbox-lx61.amdc.mckinsey.com:4000/mandatorytrainings',
+      url: env[init.env()].manadatorytrainings,
       type: "DELETE",
       data: mandatorytrainings,
       success: function(data){

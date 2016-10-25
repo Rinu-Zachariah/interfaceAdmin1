@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as quicklinksActions from '../../actions/quicklinksActions';
+import env from '../../environment';
+import init from '../../../tools/init';
 
 class InductionPage extends Component{
   constructor(props, context) {

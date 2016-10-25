@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import * as historyActions from '../../actions/historyActions';
 //import Example from './TableView.js';
 import Accordion from './Accordion.js';
+import env from '../../environment';
+import init from '../../../tools/init';
 
 class ODCHistory extends Component{
   constructor(props, context) {

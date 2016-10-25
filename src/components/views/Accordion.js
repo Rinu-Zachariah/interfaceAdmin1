@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import $ from 'jquery';
 import * as PollActions from '../../actions/PollActions';
+import env from '../../environment';
+import init from '../../../tools/init';
 
 const styles = {
   active: {
@@ -31,7 +33,7 @@ class Accordion extends React.Component {
     onDelete(menuObject){
       console.log(menuObject);
       $.ajax({
-        url: 'http://localhost:4000/poll',
+        url: env[init.env()].polls,
         type: 'DELETE',
         data: menuObject,
         success: function(data){
