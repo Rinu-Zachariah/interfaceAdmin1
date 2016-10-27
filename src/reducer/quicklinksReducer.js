@@ -17,6 +17,21 @@ export default function quicklinksReducer(state =[], action){
       return newState;
     }
 
+    case 'IS_EDITING_QUICKLINKS': {
+      const newState = Object.assign([], state);
+      const indexOfEventToDelete = state.findIndex(quicklinks => {return quicklinks._id == action.quicklinks._id});
+      newState[indexOfEventToDelete].isEditing = true;
+      return newState;
+    }
+
+    case 'EDIT_QUICKLINKS': {
+      const newState = Object.assign([], state);
+      const indexOfEventToEdit = state.findIndex(quicklinks => {return quicklinks._id == action.quicklinks._id});
+      newState[indexOfEventToEdit] = action.quicklinks;
+      return newState;
+    }
+
+
     default: return state;
   }
 }

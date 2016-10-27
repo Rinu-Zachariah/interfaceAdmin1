@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import DropzoneComponent from 'react-dropzone-component';
+import {connect} from 'react-redux';
 
-export default class DropZone extends Component{
+ export default class DropZone extends Component{
     constructor(props) {
         super(props);
 
@@ -30,12 +31,10 @@ export default class DropZone extends Component{
         // Simple callbacks work too, of course
         this.callback = (data) => {
           console.log(data);
-          console.log(this.props);
           //console.log("./public/modules/main/dlc/Induction_Material/"+data.lastModified+"-"+data.name);
 
           let url = "./public/modules/main/dlc/Induction_Material/"+data.lastModified+"-"+data.name;
           console.log(url);
-
           return url;
 
         }
@@ -50,7 +49,15 @@ export default class DropZone extends Component{
             drop: this.callbackArray,
             addedfile: this.callback,
         }
-        console.log(eventHandlers);
-        return <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig} />
+        //console.log(eventHandlers);
+        return <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}  />
     }
 }
+
+// function mapStateToProps(state,ownProps){
+//   console.log("inside dropzonejs page");
+//   return {
+//     quicklinks:state.quicklinks
+//   };
+// }
+// export default connect(mapStateToProps)(DropZone);

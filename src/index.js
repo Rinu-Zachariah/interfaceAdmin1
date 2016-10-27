@@ -44,7 +44,7 @@ $.when(
   }),
 
 	// Get mandatory trainings
-  $.get(env[init.env()].manadatorytrainings, function(mandatorytrainings) {
+  $.get(env[init.env()].mandatorytrainings, function(mandatorytrainings) {
     interfaceObjects.mandatoryTrainings = mandatorytrainings;
   }),
 

@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import DropZone from './DropZone.js';
+import _ from 'underscore';
 import * as quicklinksActions from '../../actions/quicklinksActions';
 import env from '../../environment';
 import init from '../../../tools/init';
+let singleFieldEdit = true;
 
 class InductionPage extends Component{
   constructor(props, context) {
@@ -14,6 +16,8 @@ class InductionPage extends Component{
     this.onClickSave = this.onClickSave.bind(this);
     this.onDeleteEvent = this.onDeleteEvent.bind(this);
     this.inductionRow = this.inductionRow.bind(this);
+    this.onEditEvent = this.onEditEvent.bind(this);
+    this.onClickEditSave = this.onClickEditSave.bind(this);
     this.state = {
       quicklinks: {docpath: '',
       label: '' ,
@@ -72,15 +76,66 @@ class InductionPage extends Component{
     this.props.dispatch(quicklinksActions.deleteQuicklinks(quicklinks))
   }
 
+  onEditEvent(eventObject){
+    if (singleFieldEdit){
+      const quicklinks = this.state.quicklinks;
+      quicklinks.docpath = eventObject.docpath;
+      quicklinks.label = eventObject.label;
+      quicklinks.section_header = eventObject.section_header;
+
+      this.setState({quicklinks: quicklinks});
+      singleFieldEdit = false;
+      this.props.dispatch(quicklinksActions.isEditingQuicklinks(eventObject));
+    }
+    else {
+      alert('Please Finish Editing One Module');
+    }
+
+  }
+
+  onClickEditSave(index){
+    const quicklink = this.state.quicklinks;
+    quicklink._id = index;
+    const quicklinks = {docpath: '',
+    label: '' ,
+    section_header: ''
+    }
+    this.setState({quicklinks: quicklinks});
+    const propObject = this.props;
+    singleFieldEdit = true;
+    $.ajax({
+      type: "PUT",
+      url: env[init.env()].quicklinks,
+      data: quicklink,
+      success: function(data){
+        propObject.dispatch(quicklinksActions.editQuicklinks(data));
+      },
+      error: function(data){
+        alert('error');
+      }
+    });
+
+  }
 
   inductionRow(event,index){
+    if(event.isEditing)
+    {
+      return(
+        <tr key={index}>
+          <td><input className="form-control" onChange={this.onDocPath} value={this.state.quicklinks.docpath}/></td>
+          <td><input className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
+          <td><input className="form-control" onChange={this.onSectionHeader} value={this.state.quicklinks.section_header}/></td>
+          <td><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
+        </tr>
+      )
+    }
     return(
       <tr key={index}>
         <td>{event.docpath}</td>
         <td>{event.label}</td>
         <td>{event.section_header}</td>
         <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
-        <td><button className="btn btn-warning">Edit</button></td>
+        <td><button className="btn btn-warning" onClick={()=>{this.onEditEvent(event)}}>Edit</button></td>
       </tr>
     );
   }
@@ -100,6 +155,7 @@ class InductionPage extends Component{
         <tbody>
           <tr>
             <td><DropZone /></td>
+            //<td>{this.props.eventHandlers}</td>
             <td><input className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
             <td><input className="form-control" onChange={this.onSectionHeader} value={this.state.quicklinks.section_header}/></td>
             <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
@@ -113,8 +169,6 @@ class InductionPage extends Component{
 }
 
 function mapStateToProps(state,ownProps){
-  console.log("inside induction");
-  console.log(state.quicklinks);
   return {
     quicklinks: state.quicklinks
   };
