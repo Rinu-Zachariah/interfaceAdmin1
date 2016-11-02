@@ -153,13 +153,7 @@ class InductionPage extends Component{
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><DropZone /></td>
-            //<td>{this.props.eventHandlers}</td>
-            <td><input className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
-            <td><input className="form-control" onChange={this.onSectionHeader} value={this.state.quicklinks.section_header}/></td>
-            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
-          </tr>
+          <DropZone/>
           {this.props.quicklinks.map(this.inductionRow)}
         </tbody>
       </table>
