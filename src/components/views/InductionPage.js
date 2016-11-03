@@ -49,7 +49,7 @@ class InductionPage extends Component{
     const propObject = this.props;
     $.ajax({
       type: "POST",
-      url: 'http://localhost:4000/quicklinks',
+      url: env[init.env()].quicklinks,
       data: this.state.quicklinks,
       success: function(data){
         console.log(data);
@@ -66,7 +66,7 @@ class InductionPage extends Component{
   onDeleteEvent(quicklinks){
     console.log(quicklinks);
     $.ajax({
-      url: 'http://localhost:4000/quicklinks',
+      url: env[init.env()].quicklinks,
       type: "DELETE",
       data: quicklinks,
       success: function(data){
