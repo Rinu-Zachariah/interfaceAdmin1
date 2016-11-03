@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import DropzoneComponent from 'react-dropzone-component';
 import {connect} from 'react-redux';
 import * as quicklinksActions from '../../actions/quicklinksActions';
+import env from '../../environment';
+import init from '../../../tools/init';
 
  class DropZone extends Component{
     constructor(props) {
@@ -25,7 +27,7 @@ import * as quicklinksActions from '../../actions/quicklinksActions';
         this.componentConfig = {
             iconFiletypes: ['.jpg', '.png', '.gif', '.pdf', '.zip'],
             showFiletypeIcon: true,
-            postUrl: 'http://localhost:4000/upload'
+            postUrl: env[init.env()].upload
         };
         // If you want to attach multiple callbacks, simply
         // create an array filled with all your callbacks.
@@ -67,7 +69,7 @@ import * as quicklinksActions from '../../actions/quicklinksActions';
       console.log(this.state.quicklinks);
       $.ajax({
         type: "POST",
-        url: 'http://localhost:4000/quicklinks',
+        url: env[init.env()].quicklinks,
         data: this.state.quicklinks,
         success: function(data){
           console.log(data);
