@@ -8,6 +8,7 @@ import init from '../../../tools/init';
 let singleFieldEdit = true;
 
 class TrainingsPage extends Component{
+
   constructor(props, context) {
     super(props, context);
     this.createdAtDate = this.createdAtDate.bind(this);
@@ -94,6 +95,7 @@ class TrainingsPage extends Component{
       this.setState({mandatorytrainings: mandatorytrainings});
       singleFieldEdit = false;
       this.props.dispatch(mandatorytrainingActions.isEditingMandatoryTrainings(eventObject));
+      console.log("Editing");
     }
     else {
       alert('Please Finish Editing One Module');
@@ -104,12 +106,12 @@ class TrainingsPage extends Component{
   onClickEditSave(index){
     const mandatorytraining = this.state.mandatorytrainings;
     mandatorytraining._id = index;
-    const mandatorytrainings = {created_at: '',
-    link: '' ,
-    name: '',
-    priority: ''
-    }
-    this.setState({mandatorytrainings: mandatorytrainings});
+    // const mandatorytrainings = {created_at: '',
+    // link: '' ,
+    // name: '',
+    // priority: ''
+    // }
+    // this.setState({mandatorytrainings: mandatorytrainings});
     const propObject = this.props;
     singleFieldEdit = true;
     $.ajax({
@@ -174,11 +176,11 @@ class TrainingsPage extends Component{
         </thead>
         <tbody>
           <tr>
-            <td><input type="date" className="form-control"  onChange={this.createdAtDate} value={this.state.mandatorytrainings.created_at}/></td>
-            <td><input className="form-control eventHead" onChange={this.onEventLinkChange} value={this.state.mandatorytrainings.link}/></td>
-            <td><input className="form-control eventHead" onChange={this.onEventNameChange} value={this.state.mandatorytrainings.name}/></td>
+            <td><input type="date" className="form-control"  onChange={this.createdAtDate} /></td>
+            <td><input className="form-control eventHead" onChange={this.onEventLinkChange} /></td>
+            <td><input className="form-control eventHead" onChange={this.onEventNameChange} /></td>
             <td>
-            <select className="form-control" onChange={this.onTypeChange} value={this.state.mandatorytrainings.priority}>
+            <select className="form-control" onChange={this.onTypeChange} >
               <option hidden>Please select</option>
               <option>high</option>
               <option>medium</option>
