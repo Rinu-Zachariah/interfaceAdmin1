@@ -3,6 +3,7 @@ export default function mandatorytrainingsReducer(state =[], action){
     case 'CREATE_MANDATORYTRAININGS':{
         const newState = Object.assign([], state.reverse());
         newState.push(action.mandatorytrainings);
+        console.log(newState);
         return newState.reverse();
     }
 

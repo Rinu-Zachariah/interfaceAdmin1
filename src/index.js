@@ -57,10 +57,10 @@ $.when(
 		const initialState = {
 		  histories: interfaceObjects.odchistory,
 			events: interfaceObjects.events.reverse(),
-      poll: interfaceObjects.poll,
-      quicklinks: interfaceObjects.inductionMaterial,
-      mandatorytrainings: interfaceObjects.mandatoryTrainings,
-      gallery: interfaceObjects.gallery
+      poll: interfaceObjects.poll.reverse(),
+      quicklinks: interfaceObjects.inductionMaterial.reverse(),
+      mandatorytrainings: interfaceObjects.mandatoryTrainings.reverse(),
+      gallery: interfaceObjects.gallery.reverse()
 		};
 
 		const store=configureStore(initialState);
