@@ -18,7 +18,7 @@ header {
 		position: fixed;
 		background-color: white;
 		top:0px;
-		height: 55px;
+		height: 60px;
 		width:100%;
 		border-bottom:2px solid black;
   	.head {
@@ -49,6 +49,7 @@ header {
 
 }
 .leftNav{
+	top:58px;
   float: left;
   background: #2b343f;
   text-align: left;
@@ -94,7 +95,7 @@ header {
 }
 .mainContainer{
 
-   margin: 4% 0 0 14%;
+   margin: 4% 0 0 13%;
  	 height: 100%;
    width: 80%;
 

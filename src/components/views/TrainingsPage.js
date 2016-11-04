@@ -136,7 +136,7 @@ class TrainingsPage extends Component{
         <tr key={index}>
           <td><input type="date" className="form-control"  onChange={this.createdAtDate} value={this.state.mandatorytrainings.created_at}/></td>
           <td><input className="form-control eventHead" onChange={this.onEventLinkChange} value={this.state.mandatorytrainings.link}/></td>
-          <td><input className="form-control eventHead" onChange={this.onEventNameChange} value={this.state.mandatorytrainings.name}/></td>
+          <td><input className="form-control" onChange={this.onEventNameChange} value={this.state.mandatorytrainings.name}/></td>
           <td>
           <select className="form-control" onChange={this.onTypeChange} value={this.state.mandatorytrainings.priority}>
             <option hidden>Please select</option>
@@ -178,7 +178,7 @@ class TrainingsPage extends Component{
           <tr>
             <td><input type="date" className="form-control"  onChange={this.createdAtDate} /></td>
             <td><input className="form-control eventHead" onChange={this.onEventLinkChange} /></td>
-            <td><input className="form-control eventHead" onChange={this.onEventNameChange} /></td>
+            <td><input className="form-control" onChange={this.onEventNameChange} /></td>
             <td>
             <select className="form-control" onChange={this.onTypeChange} >
               <option hidden>Please select</option>

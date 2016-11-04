@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import * as quicklinksActions from '../../actions/quicklinksActions';
 import env from '../../environment';
 import init from '../../../tools/init';
+import dropZoneStyles from '../../css/dropzone.css';
 
  class DropZone extends Component{
     constructor(props) {
@@ -15,7 +16,8 @@ import init from '../../../tools/init';
         // For a full list of possible configurations,
         // please consult http://www.dropzonejs.com/#configuration
         this.djsConfig = {
-            acceptedFiles: "image/jpeg,image/png,image/gif,application/pdf,application/zip",
+          //accepted files doen't work with zip folder. If u remove this it works perfectly; added new features for applications if restricted needs to b given
+            //acceptedFiles: "image/jpeg,image/png,image/gif,application/pdf,application/zip,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/excel,application/vnd.ms-excel,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.presentationml.slideshow, application/x-rar-compressed, application/x-rar, application/octet-stream,application/zip, compressed/rar,application/rar,application/x-compressed,multipart/x-zip,multipart/x-rar",
             addRemoveLinks: true,
             params: {
                 myParam: 'Hello from a parameter!',
@@ -25,7 +27,7 @@ import init from '../../../tools/init';
         };
 
         this.componentConfig = {
-            iconFiletypes: ['.jpg', '.png', '.gif', '.pdf', '.zip'],
+            iconFiletypes: ['.pdf', '.zip', '.ppt'],
             showFiletypeIcon: true,
             postUrl: env[init.env()].upload
         };
@@ -100,7 +102,14 @@ import init from '../../../tools/init';
           <tr>
           <td><DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}/> </td>
           <td><input className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
-          <td><input className="form-control" onChange={this.onSectionHeader} value={this.state.quicklinks.section_header}/></td>
+          <td>
+            <select className="form-control" onChange={this.onSectionHeader}  value={this.state.quicklinks.section_header}>
+              <option hidden>Please select</option>
+              <option>ODC INDUCTION</option>
+              <option>AGILE INDUCTION</option>
+              <option>DOMAIN COE</option>
+            </select>
+          </td>
           <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
           </tr>
         )

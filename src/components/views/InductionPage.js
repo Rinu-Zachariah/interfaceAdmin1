@@ -124,7 +124,14 @@ class InductionPage extends Component{
         <tr key={index}>
           <td><input className="form-control" onChange={this.onDocPath} value={this.state.quicklinks.docpath}/></td>
           <td><input className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
-          <td><input className="form-control" onChange={this.onSectionHeader} value={this.state.quicklinks.section_header}/></td>
+          <td>
+            <select className="form-control" onChange={this.onSectionHeader} value={this.state.quicklinks.section_header}>
+              <option hidden>Please select</option>
+              <option>ODC INDUCTION</option>
+              <option>AGILE INDUCTION</option>
+              <option>DOMAIN COE</option>
+            </select>
+          </td>
           <td><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
         </tr>
       )

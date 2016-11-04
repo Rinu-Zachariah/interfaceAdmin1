@@ -17,7 +17,7 @@ header {
   position: fixed;
   background-color: white;
   top: 0px;
-  height: 55px;
+  height: 60px;
   width: 100%;
   border-bottom: 2px solid black; }
   header .head {
@@ -36,6 +36,7 @@ header {
     color: #67317E; }
 
 .leftNav {
+  top: 58px;
   float: left;
   background: #2b343f;
   text-align: left;
@@ -69,7 +70,7 @@ header {
   color: blue; }
 
 .mainContainer {
-  margin: 4% 0 0 14%;
+  margin: 4% 0 0 13%;
   height: 100%;
   width: 80%; }
   .mainContainer div {
