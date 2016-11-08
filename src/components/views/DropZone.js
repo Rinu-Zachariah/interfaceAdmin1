@@ -100,7 +100,7 @@ import dropZoneStyles from '../../css/dropzone.css';
         //return <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}  />
         return (
           <tr>
-          <td><DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}/> </td>
+          <td className="dropHead"><DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}/> </td>
           <td><input className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
           <td>
             <select className="form-control" onChange={this.onSectionHeader}  value={this.state.quicklinks.section_header}>
