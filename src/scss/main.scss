@@ -111,6 +111,12 @@ table{
 		padding: 4px;
 	}
 
+	.longLink{
+		min-width: 32px;
+	  max-width: 32px;
+	  overflow: hidden;
+	}
+
 }
 .form-control{
 	width: 155px;

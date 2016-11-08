@@ -152,7 +152,7 @@ class TrainingsPage extends Component{
     return(
       <tr key={index}>
         <td>{event.created_at.split("T")[0]}</td>
-        <td>{event.link}</td>
+        <td className="longLink">{event.link}</td>
         <td>{event.name}</td>
         <td>{event.priority}</td>
         <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
