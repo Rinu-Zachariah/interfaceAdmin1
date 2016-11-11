@@ -122,7 +122,7 @@ class InductionPage extends Component{
     {
       return(
         <tr key={index}>
-          <td><input className="form-control" onChange={this.onDocPath} value={this.state.quicklinks.docpath}/></td>
+          <td><input className="form-control eventHead" onChange={this.onDocPath} value={this.state.quicklinks.docpath}/></td>
           <td><input className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
           <td>
             <select className="form-control" onChange={this.onSectionHeader} value={this.state.quicklinks.section_header}>
@@ -138,7 +138,7 @@ class InductionPage extends Component{
     }
     return(
       <tr key={index}>
-        <td>{event.docpath}</td>
+        <td className="docPath">{event.docpath}</td>
         <td>{event.label}</td>
         <td>{event.section_header}</td>
         <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>

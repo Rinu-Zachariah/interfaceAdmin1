@@ -111,6 +111,17 @@ table{
 		padding: 4px;
 	}
 
+	.longLink{
+		min-width: 32px;
+	  max-width: 32px;
+	  overflow: hidden;
+	}
+
+	.docPath{
+		min-width: 60px;
+		max-width: 60px;
+		overflow: hidden;
+	}
 }
 .form-control{
 	width: 155px;
@@ -118,6 +129,10 @@ table{
 
 .eventHead{
 	width: 340px !important;
+}
+
+.dropHead{
+	width: 545px !important;
 }
 .accordionContainer{
 	cursor: pointer;
