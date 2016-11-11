@@ -52,6 +52,11 @@ $.when(
   $.get(env[init.env()].gallery, function(gallery) {
     interfaceObjects.gallery = gallery;
   }),
+
+  // Get logs
+  $.get(env[init.env()].logs, function(logs) {
+    interfaceObjects.logs = logs;
+  }),
 )
 .then(function() {
 		const initialState = {
@@ -60,7 +65,8 @@ $.when(
       poll: interfaceObjects.poll.reverse(),
       quicklinks: interfaceObjects.inductionMaterial.reverse(),
       mandatorytrainings: interfaceObjects.mandatoryTrainings.reverse(),
-      gallery: interfaceObjects.gallery.reverse()
+      gallery: interfaceObjects.gallery.reverse(),
+      logs: interfaceObjects.logs.reverse()
 		};
 
 		const store=configureStore(initialState);

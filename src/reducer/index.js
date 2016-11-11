@@ -7,7 +7,7 @@ import gallery from './galleryReducer';
 import mandatorytrainings from './mandatorytrainingsReducer';
 
 const rootReducer = combineReducers({
-    histories , events, poll, quicklinks, gallery, mandatorytrainings
+    histories ,events, poll, quicklinks, gallery, mandatorytrainings
   });
 
 export default rootReducer;

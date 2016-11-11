@@ -72,8 +72,8 @@ Accordion.propTypes ={
 };
 
 function mapStateToProps(state,ownProps){
-  console.log("inside accordion page");
-  console.log(state.poll);
+  // console.log("inside accordion page");
+  // console.log(state.poll);
   return {
     poll:state.poll
   };

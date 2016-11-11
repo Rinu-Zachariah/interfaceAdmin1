@@ -115,19 +115,6 @@ class PollPage extends Component{
     });
   }
 
-  // onDeletePoll(pollObject){
-  //   console.log(pollObject);
-  //   $.ajax({
-  //     url: '',
-  //     type: 'DELETE',
-  //     data: pollObject,
-  //     success: function(data){
-  //       console.log(data);
-  //     }
-  //   });
-  //   this.props.dispatch(PollActions.deletePolls(pollObject));
-  // }
-
   choicesRow(choice, index){
     return(
       <li key={index}>{choice.option_text}</li>

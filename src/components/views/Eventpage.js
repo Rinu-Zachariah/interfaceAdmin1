@@ -115,13 +115,6 @@ class EventPage extends Component{
   onClickEditSave(index){
     const event = this.state.events;
     event._id = index;
-    // const events = {eventText: '',
-    // startDate: '' ,
-    // endDate: '',
-    // type: ''
-    // }
-    // this.setState({events: events});
-    // console.log(this.state.events);
     const propObject = this.props;
     singleFieldEdit = true;
     $.ajax({
