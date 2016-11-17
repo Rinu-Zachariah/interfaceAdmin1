@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as galleryActions from '../../actions/galleryActions';
 import env from '../../environment';
 import init from '../../../tools/init';
+import ComingSoonImg from '../../images/wip.png';
 
 class GalleryPage extends Component{
   constructor(props, context) {
@@ -41,26 +42,12 @@ class GalleryPage extends Component{
     return (
       <div>
       <h2>GALLERY</h2>
-      <table style={{textAlign:"left"}}className="table">
-        <thead>
-          <tr>
-            <th>Album Description</th>
-            <th>Album Name</th>
-            <th>Created At</th>
-            <th>Photos</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input className="form-control"/></td>
-            <td><input className="form-control"/></td>
-            <td><input className="form-control"/></td>
-            <td><input className="form-control"/></td>
-            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
-          </tr>
-          {this.props.gallery.map(this.galleryRow)}
-        </tbody>
-      </table>
+      <center>
+        <br/>
+        <img src={ComingSoonImg} />
+        <br/><br/>
+        <span className="sub-heading-small">Page coming soon! Stay Tuned!</span>
+      </center>
       </div>
     );
   }
@@ -68,7 +55,6 @@ class GalleryPage extends Component{
 
 function mapStateToProps(state,ownProps){
   console.log("Inside gallery");
-  console.log(state.gallery);
   return {
     gallery: state.gallery
   };

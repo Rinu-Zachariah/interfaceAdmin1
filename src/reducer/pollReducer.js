@@ -8,7 +8,6 @@ export default function pollReducer(state =[], action){
     case 'DELETE_POLLS': {
 
       const newState = Object.assign([], state);
-      //console.log(newState);
       const indexOfPollToDelete = state.findIndex(poll => {return poll._id == action.poll._id;});
       newState.splice(indexOfPollToDelete, 1);
       //browserHistory.push('/cats');

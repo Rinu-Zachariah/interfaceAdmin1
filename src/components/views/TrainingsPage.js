@@ -72,7 +72,6 @@ class TrainingsPage extends Component{
   }
 
   onDeleteEvent(mandatorytrainings){
-    console.log(mandatorytrainings);
     $.ajax({
       url: env[init.env()].mandatorytrainings,
       type: "DELETE",

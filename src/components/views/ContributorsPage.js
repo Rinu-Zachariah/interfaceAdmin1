@@ -4,6 +4,7 @@ import * as eventsActions from '../../actions/eventsActions';
 import $ from 'jquery';
 import env from '../../environment';
 import init from '../../../tools/init';
+import ComingSoonImg from '../../images/wip.png';
 
 class ContributorsPage extends Component{
   constructor(props, context){
@@ -19,6 +20,13 @@ class ContributorsPage extends Component{
     return (
       <div>
         <h1>Contributors</h1>
+        <center>
+        	<br/>
+        	<img src={ComingSoonImg} />
+        	<br/><br/>
+        	<span className="sub-heading-small">Page coming soon! Stay Tuned!</span>
+        </center>
+
       </div>
     );
   }

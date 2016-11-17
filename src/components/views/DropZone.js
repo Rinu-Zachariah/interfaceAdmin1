@@ -67,8 +67,6 @@ import dropZoneStyles from '../../css/dropzone.css';
 
     onClickSave(){
       const propObject = this.props;
-
-      console.log(this.state.quicklinks);
       $.ajax({
         type: "POST",
         url: env[init.env()].quicklinks,

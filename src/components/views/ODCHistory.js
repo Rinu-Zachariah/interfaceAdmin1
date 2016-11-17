@@ -26,7 +26,6 @@ class ODCHistory extends Component{
   }
 
   onYearChange(event){
-    console.log(this.state);
     const history = this.state.history;
     history.contentyear = event.target.value;
     this.setState({history: history});
@@ -87,7 +86,6 @@ class ODCHistory extends Component{
 }
 
 function mapStateToProps(state, ownProps){
-  console.log(state.histories);
   return{
     histories: state.histories
   };

@@ -10,7 +10,6 @@ export default function quicklinksReducer(state =[], action){
     case 'DELETE_QUICKLINKS': {
 
       const newState = Object.assign([], state);
-      //console.log(newState);
       const indexOfEventToDelete = state.findIndex(quicklinks => {return quicklinks._id == action.quicklinks._id;});
       newState.splice(indexOfEventToDelete, 1);
       //browserHistory.push('/cats');
