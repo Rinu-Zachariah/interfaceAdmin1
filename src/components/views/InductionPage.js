@@ -6,6 +6,9 @@ import * as quicklinksActions from '../../actions/quicklinksActions';
 import env from '../../environment';
 import init from '../../../tools/init';
 let singleFieldEdit = true;
+import pdf from '../../images/pdf.png';
+import ppt from '../../images/pptx.png';
+import zip from '../../images/zip.png';
 
 class InductionPage extends Component{
   constructor(props, context) {
@@ -26,11 +29,19 @@ class InductionPage extends Component{
     };
   }
 
+  // componentDidMount(){
+  //   let obj = document.getElementById('imagePath');
+  //   const quicklinks = this.state.quicklinks;
+  //
+  // }
+
+
   onDocPath(event){
     const quicklinks = this.state.quicklinks;
+    console.log(this.state.quicklinks.docpath);
     quicklinks.docpath = event.target.value;
+    console.log(quicklinks.docpath.split('.').pop());
     this.setState({quicklinks: quicklinks});
-    console.log(this.state.quicklinks);
   }
 
   onLabelChange(event){
@@ -93,6 +104,7 @@ class InductionPage extends Component{
 
   }
 
+
   onClickEditSave(index){
     const quicklink = this.state.quicklinks;
     quicklink._id = index;
@@ -118,6 +130,20 @@ class InductionPage extends Component{
   }
 
   inductionRow(event,index){
+    const obj={};
+    const extn = event.docpath.split('.').pop();
+    if(extn == "pdf"){
+      console.log("Are u in");
+      obj.src=pdf;
+    }
+    else if (extn == "ppt" || extn == "pptx") {
+      obj.src=ppt;
+    }
+    else if (extn == "zip") {
+      obj.src=zip;
+    }
+    console.log(obj);
+
     if(event.isEditing)
     {
       return(
@@ -138,7 +164,9 @@ class InductionPage extends Component{
     }
     return(
       <tr key={index}>
+
         <td className="docPath">{event.docpath}</td>
+        <td><img id="imagePath" ref="imagePath" src={obj.src} width="50px"/></td>
         <td>{event.label}</td>
         <td>{event.section_header}</td>
         <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>

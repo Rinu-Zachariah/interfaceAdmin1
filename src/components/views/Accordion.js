@@ -31,7 +31,6 @@ class Accordion extends React.Component {
     }
 
     onDelete(menuObject){
-      console.log(menuObject);
       $.ajax({
         url: env[init.env()].polls,
         type: 'DELETE',
@@ -72,8 +71,6 @@ Accordion.propTypes ={
 };
 
 function mapStateToProps(state,ownProps){
-  // console.log("inside accordion page");
-  // console.log(state.poll);
   return {
     poll:state.poll
   };

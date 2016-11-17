@@ -3,14 +3,12 @@ export default function mandatorytrainingsReducer(state =[], action){
     case 'CREATE_MANDATORYTRAININGS':{
         const newState = Object.assign([], state.reverse());
         newState.push(action.mandatorytrainings);
-        console.log(newState);
         return newState.reverse();
     }
 
     case 'DELETE_MANDATORYTRAININGS': {
 
       const newState = Object.assign([], state);
-      //console.log(newState);
       const indexOfEventToDelete = state.findIndex(mandatorytrainings => {return mandatorytrainings._id == action.mandatorytrainings._id;});
       newState.splice(indexOfEventToDelete, 1);
       //browserHistory.push('/cats');

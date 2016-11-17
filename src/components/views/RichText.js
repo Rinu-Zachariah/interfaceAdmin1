@@ -56,7 +56,6 @@ class RichEditor extends Component {
     const {editorState} = this.state;
     const contentState = editorState.getCurrentContent();
     let html = stateToHTML(contentState);
-    console.log(html);
     this.props.onTitleChange(html);
   }
 
