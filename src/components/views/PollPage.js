@@ -33,6 +33,16 @@ class PollPage extends Component{
     };
   }
 
+  getInitialState() {
+    return {
+      invalidData: true,
+    };
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    nextState.invalidData = !(nextState.poll.question && nextState.poll.choice1 && nextState.poll.choice2 && nextState.poll.choice3 && nextState.poll.choice4 && nextState.poll.isActive);
+  }
+
   onQuestionChange(event){
       const poll = this.state.poll;
       poll.question = event.target.value;
@@ -70,8 +80,13 @@ class PollPage extends Component{
 
   onClickSave(){
     const propObject = this.props;
-    console.log(this.state.poll);
-    console.log(this.props.poll);
+    const clearQues = this.refs.clearQues;
+    const clearC1 = this.refs.clearC1;
+    const clearC2 = this.refs.clearC2;
+    const clearC3 = this.refs.clearC3;
+    const clearC4 = this.refs.clearC4;
+    const clearSelect = this.refs.clearSelect;
+
     const option1 = {
       count: 0,
       option_text: this.state.poll.choice1
@@ -108,6 +123,12 @@ class PollPage extends Component{
       success: function(data){
         console.log(data);
         propObject.dispatch(PollActions.createPolls(data));
+        clearQues.value = "";
+        clearC1.value = "";
+        clearC2.value = "";
+        clearC3.value = "";
+        clearC4.value = "";
+        clearSelect.value = "";
       },
       error: function(data){
         alert('error');
@@ -146,17 +167,17 @@ class PollPage extends Component{
         </thead>
         <tbody>
           <tr>
-            <td><input className="form-control" onChange={this.onQuestionChange} value={this.state.poll.question}/></td>
-            <td><input className="form-control" onChange={this.onChoice1Change} value={this.state.poll.choice1}/></td>
-            <td><input className="form-control" onChange={this.onChoice2Change} value={this.state.poll.choice2}/></td>
-            <td><input className="form-control" onChange={this.onChoice3Change} value={this.state.poll.choice3}/></td>
-            <td><input className="form-control" onChange={this.onChoice4Change} value={this.state.poll.choice4}/></td>
-            <td><select className="form-control" onChange={this.onisActiveChange} value={this.state.poll.isActive}>
+            <td><input className="form-control" ref="clearQues" id="clearQues" onChange={this.onQuestionChange} value={this.state.poll.question}/></td>
+            <td><input className="form-control" ref="clearC1" id="clearC1" onChange={this.onChoice1Change} value={this.state.poll.choice1}/></td>
+            <td><input className="form-control" ref="clearC2" id="clearC2" onChange={this.onChoice2Change} value={this.state.poll.choice2}/></td>
+            <td><input className="form-control" ref="clearC3" id="clearC3" onChange={this.onChoice3Change} value={this.state.poll.choice3}/></td>
+            <td><input className="form-control" ref="clearC4" id="clearC4" onChange={this.onChoice4Change} value={this.state.poll.choice4}/></td>
+            <td><select className="form-control" ref="clearSelect" id="clearSelect" onChange={this.onisActiveChange} value={this.state.poll.isActive}>
               <option hidden>Please select</option>
               <option>true</option>
               <option>false</option>
             </select></td>
-            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
+            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add Event</button></td>
           </tr>
         </tbody>
       </table>

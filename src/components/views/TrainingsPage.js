@@ -29,6 +29,17 @@ class TrainingsPage extends Component{
     };
   }
 
+  getInitialState() {
+    return {
+      invalidData: true,
+    };
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log("going in");
+    nextState.invalidData = !(nextState.mandatorytrainings.created_at && nextState.mandatorytrainings.link && nextState.mandatorytrainings.name && nextState.mandatorytrainings.priority);
+    console.log(nextState);
+  }
 
   createdAtDate(event){
     const mandatorytrainings = this.state.mandatorytrainings;
@@ -56,6 +67,10 @@ class TrainingsPage extends Component{
 
   onClickSave(){
     const propObject = this.props;
+    const clearText = this.refs.clearText;
+    const clearStartDate = this.refs.clearStartDate;
+    const clearText1 = this.refs.clearText1;
+    const clearSelect = this.refs.clearSelect;
     $.ajax({
       type: "POST",
       url: env[init.env()].mandatorytrainings,
@@ -63,6 +78,10 @@ class TrainingsPage extends Component{
       success: function(data){
         console.log(data);
         propObject.dispatch(mandatorytrainingActions.createMandatoryTrainings(data));
+        clearText.value = "";
+        clearStartDate.value = "";
+        clearText1.value = "";
+        clearSelect.value = "";
       },
       error: function(data){
         alert('error');
@@ -175,18 +194,18 @@ class TrainingsPage extends Component{
         </thead>
         <tbody>
           <tr>
-            <td><input type="date" className="form-control"  onChange={this.createdAtDate} /></td>
-            <td><input className="form-control eventHead" onChange={this.onEventLinkChange} /></td>
-            <td><input className="form-control" onChange={this.onEventNameChange} /></td>
+            <td><input type="date" className="form-control" ref="clearStartDate" id="clearStartDate" onChange={this.createdAtDate} /></td>
+            <td><input className="form-control eventHead" ref="clearText" id="clearText" onChange={this.onEventLinkChange} /></td>
+            <td><input className="form-control" ref="clearText1" id="clearText1" onChange={this.onEventNameChange} /></td>
             <td>
-            <select className="form-control" onChange={this.onTypeChange} >
+            <select className="form-control" ref="clearSelect" id="clearSelect" onChange={this.onTypeChange} >
               <option hidden>Please select</option>
               <option>high</option>
               <option>medium</option>
               <option>low</option>
             </select>
             </td>
-            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
+            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add Event</button></td>
           </tr>
           {this.props.mandatorytrainings.map(this.mandatorytrainingsRow)}
         </tbody>

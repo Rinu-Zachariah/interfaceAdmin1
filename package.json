@@ -32,7 +32,7 @@
     "multer": "^1.2.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "react": "15.3.0",
+    "react": "^15.3.0",
     "react-bootstrap": "^0.30.6",
     "react-bootstrap-daterangepicker": "^3.2.2",
     "react-data-grid": "^1.0.46",
@@ -40,9 +40,11 @@
     "react-dom": "15.3.0",
     "react-dropzone": "^3.6.0",
     "react-dropzone-component": "^1.2.0",
+    "react-filter": "0.0.7",
     "react-redux": "4.4.5",
     "react-router": "2.6.1",
     "react-router-redux": "4.0.5",
+    "react-text-filter": "^2.1.0",
     "redux": "3.5.2",
     "redux-file-upload": "0.0.16",
     "redux-thunk": "2.1.0",
@@ -94,7 +96,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rinu-Zachariah/React-Redux-Trial.git"
+    "url": "git+https://github.com/Rinu-Zachariah/interfaceAdmin1.git"
   },
   "author": "",
   "license": "ISC"

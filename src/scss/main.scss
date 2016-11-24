@@ -114,6 +114,7 @@ table{
 	.longLink{
 		min-width: 32px;
 	  max-width: 32px;
+		word-wrap:break-word;
 	  overflow: hidden;
 	}
 
@@ -121,11 +122,6 @@ table{
 		min-width: 60px;
 		max-width: 60px;
 		word-wrap:break-word;
-		overflow: hidden;
-	}
-	.imagePath{
-		min-width: 20px;
-		max-width: 20px;
 		overflow: hidden;
 	}
 }
