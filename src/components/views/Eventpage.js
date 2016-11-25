@@ -37,7 +37,7 @@ class EventPage extends Component{
   }
 
   componentWillUpdate(nextProps, nextState) {
-    nextState.invalidData = !(nextState.events.startDate && nextState.events.endDate);
+    nextState.invalidData = !(nextState.events.startDate && nextState.events.endDate && nextState.events.type && nextState.events.eventText);
   }
 
 
@@ -68,6 +68,10 @@ class EventPage extends Component{
 
   onClickSave(){
     const propObject = this.props;
+    const clearText = this.refs.clearText;
+    const clearStartDate = this.refs.clearStartDate;
+    const clearEndDate = this.refs.clearEndDate;
+    const clearSelect = this.refs.clearSelect;
     $.ajax({
       type: "POST",
       url: env[init.env()].events,
@@ -75,6 +79,10 @@ class EventPage extends Component{
       success: function(data){
         console.log(data);
         propObject.dispatch(eventsActions.createEvents(data));
+        clearText.value = "";
+        clearStartDate.value = "";
+        clearEndDate.value = "";
+        clearSelect.value = "";
       },
       error: function(data){
         alert('error');
@@ -180,10 +188,10 @@ class EventPage extends Component{
             </thead>
             <tbody>
               <tr>
-                <td><input type="date" className="form-control"  onChange={this.onStartDateChange} /></td>
-                <td><input type="date" className="form-control" onChange={this.onEndDateChange} /></td>
+                <td><input type="date" className="form-control" ref="clearStartDate" id="clearStartDate" onChange={this.onStartDateChange} /></td>
+                <td><input type="date" className="form-control" ref="clearEndDate" id="clearEndDate" onChange={this.onEndDateChange} /></td>
                 <td>
-                <select className="form-control" onChange={this.onTypeChange}>
+                <select className="form-control" ref="clearSelect" id="clearSelect" onChange={this.onTypeChange}>
                   <option hidden>Please select</option>
                   <option>Birthday</option>
                   <option>Certification</option>
@@ -191,7 +199,7 @@ class EventPage extends Component{
                   <option>Others</option>
                 </select>
                 </td>
-                <td><input className="form-control eventHead" onChange={this.onEventTextChange}/></td>
+                <td><input ref="clearText" id="clearText" className="form-control eventHead" onChange={this.onEventTextChange}/></td>
                 <td><button className="btn btn-primary" onClick={this.onClickSave} id="save" value="save" disabled={this.state.invalidData}>Add Event</button></td>
               </tr>
               {this.props.events.map(this.eventRow)}
