@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import DatePicker from './DatePicker.js';
+import PieChart from './PieChart.js';
 import moment from 'moment';
 import momentRange from 'moment-range';
 
@@ -78,6 +79,7 @@ class HomePage extends Component{
         <p>Total Number of users: <strong>{this.props.logs.length}</strong></p>
         <button className="btn btn-primary" onClick={this.onClick}>Show Calendar</button><br/>
         { this.state.showDatePicker ? <DatePicker getRange={this.getRange} minimumDate = {this.props.logs[this.props.logs.length-1]} /> : null }
+        <PieChart />
         <table style={{textAlign:"left"}} className="table table-striped">
           <thead>
             <tr>

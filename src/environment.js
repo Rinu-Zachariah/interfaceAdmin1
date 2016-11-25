@@ -11,7 +11,7 @@ module.exports.development = {
       gallery: "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/gallery",
       upload:"http://dev-sandbox-lx61.amdc.mckinsey.com:4000/upload",
       logs:"http://dev-sandbox-lx61.amdc.mckinsey.com:4000/logs"
-}
+};
 
 module.exports.production = {
       history: "http://dev-sandbox-lx61.amdc.mckinsey.com:3000/odchistory",
@@ -23,7 +23,7 @@ module.exports.production = {
       gallery: "http://dev-sandbox-lx61.amdc.mckinsey.com:3000/gallery",
       upload:"http://dev-sandbox-lx61.amdc.mckinsey.com:3000/upload",
       logs:"http://dev-sandbox-lx61.amdc.mckinsey.com:3000/logs"
-}
+};
 
   module.exports.localhost = {
         history: "http://localhost:4000/odchistory",
@@ -35,4 +35,4 @@ module.exports.production = {
         gallery: "http://localhost:4000/gallery",
         upload:"http://localhost:4000/upload",
         logs:"http://localhost:4000/logs"
-  }
+  };

@@ -7,8 +7,7 @@ class App extends Component{
   render() {
     return(
       <div>
-
-        <header>
+        <header className="container-fluid col-md-12">
             <span className="head head-first">inter</span>
             <span className="head head-one">F</span>
             <span className="head head-two">A</span>
@@ -17,12 +16,11 @@ class App extends Component{
             &nbsp; ADMIN
         </header>
 
-        <div className="leftNav">
-          <Menu />
-        </div>
-        <div className="mainContainer">
+        <Menu  />
+        <div className = "col-md-offset-1 col-md-11 col-sm-offset-1 col-xs-offset-1 mainContainer">
             {this.props.children}
         </div>
+
       </div>
     );
   }

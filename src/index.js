@@ -56,24 +56,24 @@ $.when(
   // Get logs
   $.get(env[init.env()].logs, function(logs) {
     interfaceObjects.logs = logs;
-  }),
+  })
 )
 .then(function() {
-		const initialState = {
-		  histories: interfaceObjects.odchistory,
-			events: interfaceObjects.events.reverse(),
-      poll: interfaceObjects.poll.reverse(),
-      quicklinks: interfaceObjects.inductionMaterial.reverse(),
-      mandatorytrainings: interfaceObjects.mandatoryTrainings.reverse(),
-      gallery: interfaceObjects.gallery.reverse(),
-      logs: interfaceObjects.logs.reverse()
-		};
+	const initialState = {
+		histories: interfaceObjects.odchistory,
+		events: interfaceObjects.events.reverse(),
+    poll: interfaceObjects.poll.reverse(),
+    quicklinks: interfaceObjects.inductionMaterial.reverse(),
+    mandatorytrainings: interfaceObjects.mandatoryTrainings.reverse(),
+    gallery: interfaceObjects.gallery.reverse(),
+    logs: interfaceObjects.logs.reverse()
+	};
 
-		const store=configureStore(initialState);
+	const store=configureStore(initialState);
 
-		ReactDOM.render(
-			<Provider store={store}>
-		  	<Router history={browserHistory} routes={routes} />
-			</Provider>, document.getElementById('app'));
+	ReactDOM.render(
+		<Provider store={store}>
+	  <Router history={browserHistory} routes={routes} />
+		</Provider>, document.getElementById('app'));
 
 });

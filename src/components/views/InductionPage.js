@@ -179,7 +179,7 @@ class InductionPage extends Component{
     return (
       <div>
       <h2>INDUCTION</h2>
-      <table style={{textAlign:"left"}}className="table">
+      <table style={{textAlign:"left"}}className="table table-responsive">
         <thead>
           <tr>
             <th>DocPath</th>

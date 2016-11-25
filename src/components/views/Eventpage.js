@@ -169,7 +169,7 @@ class EventPage extends Component{
     return (
         <div>
           <h2>EVENTS</h2>
-          <table>
+          <table className="table table-striped table-responsive">
             <thead>
               <tr>
                 <th>Start Date</th>

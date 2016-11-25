@@ -3,38 +3,82 @@ import {Link, IndexLink} from 'react-router';
 
 class ComponentName extends Component{
   render(){
-    //    {"  |  "}
     return(
       <div className="container-fluid">
-        <nav>
-          <ul style={{listStyleType: "none"}}>
-            <li>
-              <IndexLink to="/"><span className="glyphicon glyphicon-home" />Home</IndexLink>
-            </li>
-            <li>
-              <Link to="/events"><span className="glyphicon glyphicon-list-alt" />Events</Link>
-            </li>
-            <li>
-              <Link to="/polls"><span className="glyphicon glyphicon-edit" />Poll</Link>
-            </li>
-            <li>
-              <Link to="/odchistory"><span className="glyphicon glyphicon-fast-backward" />ODC History</Link>
-            </li>
-            <li>
-              <Link to="/induction"><span className="glyphicon glyphicon-inbox" />Induction</Link>
-            </li>
-            <li>
-              <Link to="/gallery"><span className="glyphicon glyphicon-th" />Gallery</Link>
-            </li>
-            <li>
-              <Link to="/trainings"><span className="glyphicon glyphicon-th-list" />Trainings</Link>
-            </li>
-            <li>
-              <Link to="/contributors"><span className="glyphicon glyphicon-user" />Contributors</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <div className="area"></div>
+      <nav className="main-menu">
+                <ul>
+                    <li>
+                        <IndexLink to="/">
+                            <i className="fa fa-home fa-2x"></i>
+                            <span className="nav-text">
+                                Home
+                            </span>
+                        </IndexLink>
+
+                    </li>
+                    <li className="has-subnav">
+                        <Link to="/events">
+                            <i className="fa fa-list fa-2x"></i>
+                            <span className="nav-text">
+                                Events
+                            </span>
+                        </Link>
+
+                    </li>
+                    <li className="has-subnav">
+                        <Link to="/polls">
+                           <i className="fa fa-bar-chart-o fa-2x"></i>
+                            <span className="nav-text">
+                                Polls
+                            </span>
+                        </Link>
+
+                    </li>
+                    <li className="has-subnav">
+                        <Link to="/odchistory">
+                           <i className="fa fa-history fa-2x"></i>
+                            <span className="nav-text">
+                                History
+                            </span>
+                        </Link>
+
+                    </li>
+                    <li>
+                        <Link to="/induction">
+                            <i className="fa fa-folder-open-o fa-2x"></i>
+                            <span className="nav-text">
+                                Induction
+                            </span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/gallery">
+                            <i className="fa fa-picture-o fa-2x"></i>
+                            <span className="nav-text">
+                                Gallery
+                            </span>
+                        </Link>
+                    </li>
+                    <li>
+                       <Link to="/trainings">
+                           <i className="fa fa-graduation-cap fa-2x"></i>
+                            <span className="nav-text">
+                                Trainings
+                            </span>
+                        </Link>
+                    </li>
+                    <li>
+                       <Link to="/contributors">
+                            <i className="fa fa-users fa-2x"></i>
+                            <span className="nav-text">
+                                Contributors
+                            </span>
+                        </Link>
+                    </li>
+                </ul>
+              </nav>
+              </div>
     );
   }
 }
