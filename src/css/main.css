@@ -47,6 +47,8 @@ header {
   width: 90%;
   overflow: auto;
   height: 600px; }
+  .mainContainer div {
+    padding-top: 1%; }
 
 .table {
   display: table;
@@ -110,6 +112,7 @@ table {
       -webkit-transition: background-color 0.5s ease-in-out; }
   .accordionContainer .mainContent {
     height: auto;
+    overflow: auto;
     max-height: 50em;
     -moz-transition: max-height 1s;
     -o-transition: max-height 1s;

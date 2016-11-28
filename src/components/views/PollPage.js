@@ -154,6 +154,7 @@ class PollPage extends Component{
     return (
       <div>
       <h2>POLLS</h2>
+      <div className="table-responsive">
       <table style={{textAlign:"left"}}className="table">
         <thead>
           <tr className="table-row">
@@ -181,6 +182,7 @@ class PollPage extends Component{
           </tr>
         </tbody>
       </table>
+      </div>
       {this.props.poll.map(this.pollRow)}
       </div>
     );
