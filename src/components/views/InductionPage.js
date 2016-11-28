@@ -151,10 +151,10 @@ class InductionPage extends Component{
     if(event.isEditing)
     {
       return(
-        <tr key={index}>
-          <td><input className="form-control eventHead" onChange={this.onDocPath} value={this.state.quicklinks.docpath}/></td>
-          <td><input className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
-          <td>
+        <tr key={index} className="table-row">
+          <td className="table-cell"><input className="form-control eventHead" onChange={this.onDocPath} value={this.state.quicklinks.docpath}/></td>
+          <td className="table-cell"><input className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
+          <td className="table-cell">
             <select className="form-control" onChange={this.onSectionHeader} value={this.state.quicklinks.section_header}>
               <option hidden>Please select</option>
               <option>ODC INDUCTION</option>
@@ -162,13 +162,12 @@ class InductionPage extends Component{
               <option>DOMAIN COE</option>
             </select>
           </td>
-          <td><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
+          <td className="table-cell"><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
         </tr>
       )
     }
     return(
       <tr key={index}>
-
         <td className="docPath">{filename}</td>
         <td><img id="imagePath" ref="imagePath" src={obj.src} width="50px"/></td>
         <td>{event.label}</td>
@@ -183,7 +182,8 @@ class InductionPage extends Component{
     return (
       <div>
       <h2>INDUCTION</h2>
-      <table style={{textAlign:"left"}}className="table table-responsive">
+      <div className="table-responsive">
+      <table className="table table-responsive table-sm">
         <thead>
           <tr>
             <th>File Name</th>
@@ -196,6 +196,7 @@ class InductionPage extends Component{
           {this.props.quicklinks.map(this.inductionRow)}
         </tbody>
       </table>
+      </div>
       </div>
     );
   }

@@ -156,7 +156,7 @@ class PollPage extends Component{
       <h2>POLLS</h2>
       <table style={{textAlign:"left"}}className="table">
         <thead>
-          <tr>
+          <tr className="table-row">
             <th>question</th>
             <th>choice1</th>
             <th>choice2</th>
@@ -166,18 +166,18 @@ class PollPage extends Component{
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr className="table-row">
             <td><input className="form-control" ref="clearQues" id="clearQues" onChange={this.onQuestionChange} value={this.state.poll.question}/></td>
             <td><input className="form-control" ref="clearC1" id="clearC1" onChange={this.onChoice1Change} value={this.state.poll.choice1}/></td>
             <td><input className="form-control" ref="clearC2" id="clearC2" onChange={this.onChoice2Change} value={this.state.poll.choice2}/></td>
-            <td><input className="form-control" ref="clearC3" id="clearC3" onChange={this.onChoice3Change} value={this.state.poll.choice3}/></td>
-            <td><input className="form-control" ref="clearC4" id="clearC4" onChange={this.onChoice4Change} value={this.state.poll.choice4}/></td>
-            <td><select className="form-control" ref="clearSelect" id="clearSelect" onChange={this.onisActiveChange} value={this.state.poll.isActive}>
+            <td className="table-cell"><input className="form-control" ref="clearC3" id="clearC3" onChange={this.onChoice3Change} value={this.state.poll.choice3}/></td>
+            <td className="table-cell"><input className="form-control" ref="clearC4" id="clearC4" onChange={this.onChoice4Change} value={this.state.poll.choice4}/></td>
+            <td className="table-cell"><select className="form-control" ref="clearSelect" id="clearSelect" onChange={this.onisActiveChange} value={this.state.poll.isActive}>
               <option hidden>Please select</option>
               <option>true</option>
               <option>false</option>
             </select></td>
-            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add Event</button></td>
+            <td className="table-cell"><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add Event</button></td>
           </tr>
         </tbody>
       </table>

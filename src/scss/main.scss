@@ -58,16 +58,35 @@ header {
 .mainContainer{
  	 height: 80%;
    width: 90%;
-	 overflow-y: auto;
+	 overflow: auto;
 	 height:600px;
+}
+
+.table {
+    display: table;
+    width: 100%;
+}
+
+.table-row {
+    display: table-row;
+    width: 100%;
+}
+
+.table-cell {
+    display: table-cell;
+}
+
+@media screen and (max-width: 1180px) {
+    .table-row {
+        display: block;
+    }
+    .table-cell {
+        display:inline-block;
+    }
 }
 
 table{
 	text-align: left;
-
-	td{
-		padding: 4px;
-	}
 
 	.longLink{
 		min-width: 32px;
@@ -82,6 +101,13 @@ table{
 		word-wrap:break-word;
 		overflow: hidden;
 	}
+	.longText{
+		min-width: 30px;
+		min-height: 50px;
+		word-wrap:break-word;
+		overflow: hidden;
+	}
+
 }
 .form-control{
 	width: 155px;
@@ -118,7 +144,6 @@ table{
 	}
 	.mainContent{
 		height: auto;
- 		overflow: hidden;
 		max-height: 50em;
     -moz-transition: max-height 1s;
     -o-transition: max-height 1s;

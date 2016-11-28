@@ -124,12 +124,6 @@ class TrainingsPage extends Component{
   onClickEditSave(index){
     const mandatorytraining = this.state.mandatorytrainings;
     mandatorytraining._id = index;
-    // const mandatorytrainings = {created_at: '',
-    // link: '' ,
-    // name: '',
-    // priority: ''
-    // }
-    // this.setState({mandatorytrainings: mandatorytrainings});
     const propObject = this.props;
     singleFieldEdit = true;
     $.ajax({
@@ -168,11 +162,11 @@ class TrainingsPage extends Component{
       )
     }
     return(
-      <tr key={index}>
-        <td>{event.created_at.split("T")[0]}</td>
-        <td className="longLink">{event.link}</td>
-        <td>{event.name}</td>
-        <td>{event.priority}</td>
+      <tr key={index} className="table-row">
+        <td className="table-cell">{event.created_at.split("T")[0]}</td>
+        <td className="table-cell">{event.link}</td>
+        <td className="table-cell">{event.name}</td>
+        <td className="table-cell">{event.priority}</td>
         <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
         <td><button className="btn btn-warning" onClick={()=>{this.onEditEvent(event)}} >Edit</button></td>
       </tr>
@@ -183,6 +177,7 @@ class TrainingsPage extends Component{
     return (
       <div>
       <h2>TRAININGS</h2>
+      <div className="table-responsive">
       <table style={{textAlign:"left"}}className="table">
         <thead>
           <tr>
@@ -193,10 +188,10 @@ class TrainingsPage extends Component{
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><input type="date" className="form-control" ref="clearStartDate" id="clearStartDate" onChange={this.createdAtDate} /></td>
-            <td><input className="form-control eventHead" ref="clearText" id="clearText" onChange={this.onEventLinkChange} /></td>
-            <td><input className="form-control" ref="clearText1" id="clearText1" onChange={this.onEventNameChange} /></td>
+          <tr className="table-row">
+            <td className="table-cell"><input type="date" className="form-control" ref="clearStartDate" id="clearStartDate" onChange={this.createdAtDate} /></td>
+            <td className="table-cell"><input className="form-control eventHead" ref="clearText" id="clearText" onChange={this.onEventLinkChange} /></td>
+            <td className="table-cell"><input className="form-control" ref="clearText1" id="clearText1" onChange={this.onEventNameChange} /></td>
             <td>
             <select className="form-control" ref="clearSelect" id="clearSelect" onChange={this.onTypeChange} >
               <option hidden>Please select</option>
@@ -210,6 +205,7 @@ class TrainingsPage extends Component{
           {this.props.mandatorytrainings.map(this.mandatorytrainingsRow)}
         </tbody>
       </table>
+      </div>
     </div>
     );
   }
