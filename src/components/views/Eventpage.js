@@ -189,14 +189,16 @@ class EventPage extends Component{
 
         events = events.filter(function(l){
              return(l.eventText.toLowerCase().match(searchString) || l.type.toLowerCase().match(searchString));
-
+              // || l.startDate.toLowerCase().match(searchString) || l.endDate.toLowerCase().match(searchString)
         });
 
     }
     return (
         <div>
-          <h2>EVENTS</h2>
-          <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" />
+          <div className="row">
+            <div className="col-md-5"><h2>EVENTS</h2></div>
+            <div className="col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
+          </div>
           <table className="table table-striped table-responsive">
             <thead>
               <tr className="table-row">
