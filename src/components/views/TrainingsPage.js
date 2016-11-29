@@ -20,12 +20,15 @@ class TrainingsPage extends Component{
     this.mandatorytrainingsRow = this.mandatorytrainingsRow.bind(this);
     this.onEditEvent = this.onEditEvent.bind(this);
     this.onClickEditSave = this.onClickEditSave.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
-      mandatorytrainings: {created_at: {},
-      link: '',
-      name: '',
-      priority: ''
-      }
+      mandatorytrainings: {
+        created_at: {},
+        link: '',
+        name: '',
+        priority: ''
+      },
+      searchString: ''
     };
   }
 
@@ -124,12 +127,6 @@ class TrainingsPage extends Component{
   onClickEditSave(index){
     const mandatorytraining = this.state.mandatorytrainings;
     mandatorytraining._id = index;
-    // const mandatorytrainings = {created_at: '',
-    // link: '' ,
-    // name: '',
-    // priority: ''
-    // }
-    // this.setState({mandatorytrainings: mandatorytrainings});
     const propObject = this.props;
     singleFieldEdit = true;
     $.ajax({
@@ -146,6 +143,9 @@ class TrainingsPage extends Component{
 
   }
 
+  handleChange(event){
+    this.setState({searchString: event.target.value});
+  }
 
   mandatorytrainingsRow(event,index){
     if(event.isEditing)
@@ -179,10 +179,25 @@ class TrainingsPage extends Component{
     );
   }
 
+
+
   render(){
+    let mandatorytrainings = this.props.mandatorytrainings;
+
+    if(this.state.searchString.length > 0){
+
+        let searchString = this.state.searchString.trim().toLowerCase();
+        console.log(searchString);
+        mandatorytrainings = mandatorytrainings.filter(function(l){
+             return(l.link.toLowerCase().match(searchString) || l.name.toLowerCase().match(searchString));
+
+        });
+
+    }
     return (
       <div>
       <h2>TRAININGS</h2>
+      <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" />
       <table style={{textAlign:"left"}}className="table">
         <thead>
           <tr>
@@ -207,7 +222,7 @@ class TrainingsPage extends Component{
             </td>
             <td><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add Event</button></td>
           </tr>
-          {this.props.mandatorytrainings.map(this.mandatorytrainingsRow)}
+          {mandatorytrainings.map(this.mandatorytrainingsRow)}
         </tbody>
       </table>
     </div>

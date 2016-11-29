@@ -20,13 +20,16 @@ class EventPage extends Component{
     this.eventRow = this.eventRow.bind(this);
     this.onEditEvent = this.onEditEvent.bind(this);
     this.onClickEditSave = this.onClickEditSave.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      events: {eventText: '',
-      startDate: '' ,
-      endDate: '',
-      type: ''
-      }
+      events: {
+        eventText: '',
+        startDate: '' ,
+        endDate: '',
+        type: ''
+      },
+      searchString: ''
     };
   }
 
@@ -137,7 +140,10 @@ class EventPage extends Component{
         alert('error');
       }
     });
+  }
 
+  handleChange(event){
+    this.setState({searchString: event.target.value});
   }
 
   eventRow(event,index){
@@ -174,9 +180,22 @@ class EventPage extends Component{
   }
 
   render(){
+    let events = this.props.events;
+
+    if(this.state.searchString.length > 0){
+
+        let searchString = this.state.searchString.trim().toLowerCase();
+
+        events = events.filter(function(l){
+             return(l.eventText.toLowerCase().match(searchString) || l.type.toLowerCase().match(searchString));
+
+        });
+
+    }
     return (
         <div>
           <h2>EVENTS</h2>
+          <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" />
           <table>
             <thead>
               <tr>
@@ -202,7 +221,7 @@ class EventPage extends Component{
                 <td><input ref="clearText" id="clearText" className="form-control eventHead" onChange={this.onEventTextChange}/></td>
                 <td><button className="btn btn-primary" onClick={this.onClickSave} id="save" value="save" disabled={this.state.invalidData}>Add Event</button></td>
               </tr>
-              {this.props.events.map(this.eventRow)}
+              {events.map(this.eventRow)}
             </tbody>
           </table>
         </div>

@@ -25,11 +25,14 @@ class InductionPage extends Component{
     this.inductionRow = this.inductionRow.bind(this);
     this.onEditEvent = this.onEditEvent.bind(this);
     this.onClickEditSave = this.onClickEditSave.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
-      quicklinks: {docpath: '',
-      label: '' ,
-      section_header: ''
-      }
+      quicklinks: {
+        docpath: '',
+        label: '' ,
+        section_header: ''
+      },
+      searchString: ''
     };
   }
 
@@ -124,6 +127,11 @@ class InductionPage extends Component{
 
   }
 
+  handleChange(event){
+    console.log(event.target.value);
+   this.setState({searchString: event.target.value});
+  }
+
   inductionRow(event,index){
     const obj={};
     const extn = event.docpath.split('.').pop();
@@ -180,9 +188,24 @@ class InductionPage extends Component{
   }
 
   render(){
+    let quicklinks = this.props.quicklinks;
+    console.log(this.state);
+
+    if(this.state.searchString.length > 0){
+
+        let searchString = this.state.searchString.trim().toLowerCase();
+
+        quicklinks = quicklinks.filter(function(l){
+             let filename = l.docpath.substring(l.docpath.lastIndexOf('/')+1);
+             return(l.label.toLowerCase().match(searchString) || l.section_header.toLowerCase().match(searchString) || filename.toLowerCase().match(searchString));
+
+        });
+
+    }
     return (
       <div>
       <h2>INDUCTION</h2>
+      <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" />
       <table style={{textAlign:"left"}}className="table">
         <thead>
           <tr>
@@ -193,7 +216,7 @@ class InductionPage extends Component{
         </thead>
         <tbody>
           <DropZone/>
-          {this.props.quicklinks.map(this.inductionRow)}
+          {quicklinks.map(this.inductionRow)}
         </tbody>
       </table>
       </div>
