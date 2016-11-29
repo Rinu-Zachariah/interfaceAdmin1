@@ -15,14 +15,14 @@ export default function eventsReducer(state =[], action){
     }
     case 'IS_EDITING_EVENTS': {
       const newState = Object.assign([], state);
-      const indexOfEventToDelete = state.findIndex(event => {return event._id == action.event._id});
+      const indexOfEventToDelete = state.findIndex(event => {return event._id == action.event._id;});
       newState[indexOfEventToDelete].isEditing = true;
       return newState;
     }
 
     case 'EDIT_EVENTS': {
       const newState = Object.assign([], state);
-      const indexOfEventToEdit = state.findIndex(event => {return event._id == action.event._id});
+      const indexOfEventToEdit = state.findIndex(event => {return event._id == action.event._id;});
       newState[indexOfEventToEdit] = action.event;
       return newState;
     }

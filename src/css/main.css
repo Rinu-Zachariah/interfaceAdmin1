@@ -8,24 +8,28 @@
 /*Purple*/
 /*Crusta Orange*/
 /*Chestnut Rose Red*/
+@import url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.css);
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web:300);
+html {
+  overflow: hidden; }
+
 header {
   color: #006983;
   font-size: 2.8em;
   letter-spacing: -3px;
-  margin-left: 1%;
   padding-right: 30px;
   position: fixed;
   background-color: white;
   top: 0px;
   height: 60px;
-  width: 100%;
   border-bottom: 2px solid black; }
   header .head {
     font-weight: bold;
     font-size: 1.2em; }
   header .head-first {
     font-size: 1.1em;
-    letter-spacing: 0px; }
+    letter-spacing: 0px;
+    margin-left: 1%; }
   header .head-one {
     color: #D24D57; }
   header .head-two {
@@ -35,51 +39,36 @@ header {
   header .head-four {
     color: #67317E; }
 
-.leftNav {
-  top: 58px;
-  float: left;
-  background: #2b343f;
-  text-align: left;
-  -webkit-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
-  box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.5);
-  overflow-y: auto;
-  z-index: 9999;
-  position: fixed;
-  height: 100%;
-  -webkit-transition: all 0.25s;
-  transition: all 0.25s; }
-  .leftNav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none; }
-    .leftNav ul li a {
-      display: block;
-      text-decoration: none !important;
-      height: 60px;
-      line-height: 60px;
-      font-size: 17px;
-      color: #fff; }
-      .leftNav ul li a:hover {
-        background: #4EFFFF;
-        color: #000; }
-      .leftNav ul li a .glyphicon {
-        padding-right: 10px; }
-
 .blue {
   color: blue; }
 
 .mainContainer {
-  margin: 4% 0 0 13%;
-  height: 100%;
-  width: 80%; }
+  height: 80%;
+  width: 90%;
+  overflow: auto;
+  height: 600px; }
   .mainContainer div {
     padding-top: 1%; }
 
+.table {
+  display: table;
+  width: 100%; }
+
+.table-row {
+  display: table-row;
+  width: 100%; }
+
+.table-cell {
+  display: table-cell; }
+
+@media screen and (max-width: 1180px) {
+  .table-row {
+    display: block; }
+
+  .table-cell {
+    display: inline-block; } }
 table {
   text-align: left; }
-  table td {
-    padding: 4px; }
   table .longLink {
     min-width: 32px;
     max-width: 32px;
@@ -88,6 +77,11 @@ table {
   table .docPath {
     min-width: 60px;
     max-width: 60px;
+    word-wrap: break-word;
+    overflow: hidden; }
+  table .longText {
+    min-width: 30px;
+    min-height: 50px;
     word-wrap: break-word;
     overflow: hidden; }
 
@@ -118,7 +112,7 @@ table {
       -webkit-transition: background-color 0.5s ease-in-out; }
   .accordionContainer .mainContent {
     height: auto;
-    overflow: hidden;
+    overflow: auto;
     max-height: 50em;
     -moz-transition: max-height 1s;
     -o-transition: max-height 1s;
@@ -252,5 +246,105 @@ input[type=text] {
   display: block;
   color: #7B8585;
   margin: 0 auto 20px; }
+
+.fa-2x {
+  font-size: 2em; }
+
+.fa {
+  position: relative;
+  display: table-cell;
+  width: 60px;
+  height: 36px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 20px; }
+
+.main-menu:hover, nav.main-menu.expanded {
+  width: 250px;
+  overflow: visible; }
+
+.main-menu {
+  background: #2b343f;
+  border-right: 1px solid #e5e5e5;
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  overflow: hidden;
+  -webkit-transition: width .05s linear;
+  transition: width .05s linear;
+  -webkit-transform: translateZ(0) scale(1, 1);
+  z-index: 1000; }
+  .main-menu ul {
+    margin: 7px 0; }
+    .main-menu ul li {
+      position: relative;
+      display: block;
+      width: 250px; }
+      .main-menu ul li a {
+        position: relative;
+        display: table;
+        border-collapse: collapse;
+        border-spacing: 0;
+        color: #999;
+        font-family: arial;
+        font-size: 14px;
+        text-decoration: none;
+        -webkit-transform: translateZ(0) scale(1, 1);
+        -webkit-transition: all .1s linear;
+        transition: all .1s linear; }
+  .main-menu .nav-icon {
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px; }
+  .main-menu .nav-text {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    width: 190px;
+    font-family: 'Titillium Web', sans-serif; }
+
+.no-touch .scrollable.hover {
+  overflow-y: hidden; }
+
+.no-touch .scrollable.hover:hover {
+  overflow-y: auto;
+  overflow: visible; }
+
+a:hover, a:focus {
+  text-decoration: none; }
+
+nav {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+
+.area {
+  float: left;
+  background: #e2e2e2;
+  width: 100%;
+  height: 100%; }
+
+nav ul, nav li {
+  outline: 0;
+  margin: 0;
+  padding: 0; }
+
+.main-menu li:hover > a, nav.main-menu li.active > a, .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus, .no-touch .dashboard-page nav.dashboard-menu ul li:hover a, .dashboard-page nav.dashboard-menu ul li.active a {
+  color: #fff;
+  background-color: #EA7A30; }
+
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Titillium WebLight"), local("TitilliumWeb-Light"), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format("woff"); }
 
 /*# sourceMappingURL=main.css.map */

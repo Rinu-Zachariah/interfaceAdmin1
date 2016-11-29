@@ -44,6 +44,7 @@ class EventPage extends Component{
   }
 
 
+
   onStartDateChange(event){
     const events = this.state.events;
     events.startDate = event.target.value;
@@ -150,10 +151,10 @@ class EventPage extends Component{
     if(event.isEditing)
     {
       return(
-        <tr key={index}>
-          <td><input type="date" className="form-control"  onChange={this.onStartDateChange} value={this.state.events.startDate}/></td>
-          <td><input type="date" className="form-control" onChange={this.onEndDateChange} value={this.state.events.endDate}/></td>
-          <td>
+        <tr key={index} className="table-row">
+          <td className="table-cell"><input type="date" className="form-control"  onChange={this.onStartDateChange} value={this.state.events.startDate}/></td>
+          <td className="table-cell"><input type="date" className="form-control" onChange={this.onEndDateChange} value={this.state.events.endDate}/></td>
+          <td className="table-cell">
           <select className="form-control" onChange={this.onTypeChange} value={this.state.events.type}>
             <option hidden>Please select</option>
             <option>Birthday</option>
@@ -162,17 +163,17 @@ class EventPage extends Component{
             <option>Others</option>
           </select>
           </td>
-          <td><input className="form-control eventHead" onChange={this.onEventTextChange} value={this.state.events.eventText}/></td>
+          <td className="table-cell"><input className="form-control eventHead" onChange={this.onEventTextChange} value={this.state.events.eventText}/></td>
           <td><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
         </tr>
       )
     }
     return(
-      <tr key={index}>
-        <td>{event.startDate.split("T")[0]}</td>
-        <td>{event.endDate.split("T")[0]}</td>
-        <td>{event.type}</td>
-        <td>{event.eventText}</td>
+      <tr key={index} className="table-row">
+        <td className="table-cell">{event.startDate.split("T")[0]}</td>
+        <td className="table-cell">{event.endDate.split("T")[0]}</td>
+        <td className="table-cell">{event.type}</td>
+        <td className="table-cell">{event.eventText}</td>
         <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
         <td><button className="btn btn-warning" onClick={()=>{this.onEditEvent(event)}} >Edit</button></td>
       </tr>
@@ -196,9 +197,9 @@ class EventPage extends Component{
         <div>
           <h2>EVENTS</h2>
           <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" />
-          <table>
+          <table className="table table-striped table-responsive">
             <thead>
-              <tr>
+              <tr className="table-row">
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Type</th>
@@ -206,10 +207,10 @@ class EventPage extends Component{
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><input type="date" className="form-control" ref="clearStartDate" id="clearStartDate" onChange={this.onStartDateChange} /></td>
-                <td><input type="date" className="form-control" ref="clearEndDate" id="clearEndDate" onChange={this.onEndDateChange} /></td>
-                <td>
+              <tr className="table-row">
+                <td className="table-cell"><input type="date" className="form-control" ref="clearStartDate" id="clearStartDate" onChange={this.onStartDateChange} /></td>
+                <td className="table-cell"><input type="date" className="form-control" ref="clearEndDate" id="clearEndDate" onChange={this.onEndDateChange} /></td>
+                <td className="table-cell">
                 <select className="form-control" ref="clearSelect" id="clearSelect" onChange={this.onTypeChange}>
                   <option hidden>Please select</option>
                   <option>Birthday</option>
@@ -218,8 +219,8 @@ class EventPage extends Component{
                   <option>Others</option>
                 </select>
                 </td>
-                <td><input ref="clearText" id="clearText" className="form-control eventHead" onChange={this.onEventTextChange}/></td>
-                <td><button className="btn btn-primary" onClick={this.onClickSave} id="save" value="save" disabled={this.state.invalidData}>Add Event</button></td>
+                <td className="table-cell"><input className="form-control eventHead" ref="clearText" id="clearText" onChange={this.onEventTextChange}/></td>
+                <td className="table-cell"><button className="btn btn-primary" onClick={this.onClickSave} id="save" value="save" disabled={this.state.invalidData}>Add Event</button></td>
               </tr>
               {events.map(this.eventRow)}
             </tbody>

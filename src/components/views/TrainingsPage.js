@@ -169,8 +169,8 @@ class TrainingsPage extends Component{
     }
     return(
       <tr key={index}>
-        <td>{event.created_at.split("T")[0]}</td>
-        <td className="longLink">{event.link}</td>
+        <td >{event.created_at.split("T")[0]}</td>
+        <td>{event.link}</td>
         <td>{event.name}</td>
         <td>{event.priority}</td>
         <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
@@ -189,7 +189,7 @@ class TrainingsPage extends Component{
         let searchString = this.state.searchString.trim().toLowerCase();
         console.log(searchString);
         mandatorytrainings = mandatorytrainings.filter(function(l){
-             return(l.link.toLowerCase().match(searchString) || l.name.toLowerCase().match(searchString));
+             return(l.link.toLowerCase().match(searchString) || l.name.toLowerCase().match(searchString) || l.priority.toLowerCase().match(searchString));
 
         });
 
@@ -197,8 +197,10 @@ class TrainingsPage extends Component{
     return (
       <div>
       <h2>TRAININGS</h2>
+
       <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" />
-      <table style={{textAlign:"left"}}className="table">
+      <div className="table-responsive">
+      <table className="table">
         <thead>
           <tr>
             <th>Created at</th>
@@ -225,6 +227,7 @@ class TrainingsPage extends Component{
           {mandatorytrainings.map(this.mandatorytrainingsRow)}
         </tbody>
       </table>
+      </div>
     </div>
     );
   }
