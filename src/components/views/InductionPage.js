@@ -202,8 +202,10 @@ class InductionPage extends Component{
     }
     return (
       <div>
-      <h2>INDUCTION</h2>
-      <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" />
+      <div className="row">
+        <div className="col-md-5"><h2>INDUCTION</h2></div>
+        <div className="col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
+      </div>
       <div className="table-responsive">
       <table className="table table-responsive table-sm">
         <thead>
