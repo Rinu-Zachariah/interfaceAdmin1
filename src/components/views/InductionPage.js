@@ -12,7 +12,6 @@ import zip from '../../images/zip.png';
 import png from '../../images/png.png';
 import xls from '../../images/xls.png';
 import doc from '../../images/doc.png';
-import Customizable from './Customizable.js';
 
 class InductionPage extends Component{
   constructor(props, context) {
