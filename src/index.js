@@ -37,10 +37,10 @@ $.when(
           method: 'GET',
           dataType: 'JSONP',
           success: function(response) {
-              if(_.find(admins, "fmno" : response.fmno))
-              {
+            if(_.includes(admins,(_.find(admins, {"fmno" : response.fmno}))))
+            {
                 isAdmin = true;
-              }
+            }
           }
       }),
   // Get ODC History
@@ -94,8 +94,7 @@ $.when(
 	};
 
 	const store=configureStore(initialState);
-  console.log(isAdmin);
-
+  
 if(isAdmin)
 {
   ReactDOM.render(
