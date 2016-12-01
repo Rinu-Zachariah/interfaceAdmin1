@@ -152,10 +152,10 @@ class TrainingsPage extends Component{
     {
       return(
         <tr key={index}>
-          <td><input type="date" className="form-control"  onChange={this.createdAtDate} value={this.state.mandatorytrainings.created_at}/></td>
-          <td><input className="form-control eventHead" onChange={this.onEventLinkChange} value={this.state.mandatorytrainings.link}/></td>
-          <td><input className="form-control" onChange={this.onEventNameChange} value={this.state.mandatorytrainings.name}/></td>
-          <td>
+          <td className="col-md-2"><input type="date" className="form-control"  onChange={this.createdAtDate} value={this.state.mandatorytrainings.created_at}/></td>
+          <td className="col-md-2"><input className="form-control eventHead" onChange={this.onEventLinkChange} value={this.state.mandatorytrainings.link}/></td>
+          <td className="col-md-2"><input className="form-control" onChange={this.onEventNameChange} value={this.state.mandatorytrainings.name}/></td>
+          <td className="col-md-2">
           <select className="form-control" onChange={this.onTypeChange} value={this.state.mandatorytrainings.priority}>
             <option hidden>Please select</option>
             <option>high</option>
@@ -163,18 +163,18 @@ class TrainingsPage extends Component{
             <option>low</option>
           </select>
           </td>
-          <td><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
+          <td className="col-md-2"><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
         </tr>
       )
     }
     return(
       <tr key={index}>
-        <td >{event.created_at.split("T")[0]}</td>
-        <td>{event.link}</td>
-        <td>{event.name}</td>
-        <td>{event.priority}</td>
-        <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
-        <td><button className="btn btn-warning" onClick={()=>{this.onEditEvent(event)}} >Edit</button></td>
+        <td className="col-md-2">{event.created_at.split("T")[0]}</td>
+        <td className="col-md-2">{event.link}</td>
+        <td className="col-md-2">{event.name}</td>
+        <td className="col-md-2">{event.priority}</td>
+        <td className="col-md-2"><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
+        <td className="col-md-2"><button className="btn btn-warning" onClick={()=>{this.onEditEvent(event)}} >Edit</button></td>
       </tr>
     );
   }
@@ -213,10 +213,10 @@ class TrainingsPage extends Component{
         </thead>
         <tbody>
           <tr>
-            <td><input type="date" className="form-control" ref="clearStartDate" id="clearStartDate" onChange={this.createdAtDate} /></td>
-            <td><input className="form-control eventHead" ref="clearText" id="clearText" onChange={this.onEventLinkChange} /></td>
-            <td><input className="form-control" ref="clearText1" id="clearText1" onChange={this.onEventNameChange} /></td>
-            <td>
+            <td className="col-md-2"><input type="date" className="form-control" ref="clearStartDate" id="clearStartDate" onChange={this.createdAtDate} /></td>
+            <td className="col-md-2"><input className="form-control eventHead" ref="clearText" id="clearText" onChange={this.onEventLinkChange} /></td>
+            <td className="col-md-2"><input className="form-control" ref="clearText1" id="clearText1" onChange={this.onEventNameChange} /></td>
+            <td className="col-md-2">
             <select className="form-control" ref="clearSelect" id="clearSelect" onChange={this.onTypeChange} >
               <option hidden>Please select</option>
               <option>high</option>
@@ -224,7 +224,7 @@ class TrainingsPage extends Component{
               <option>low</option>
             </select>
             </td>
-            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add Event</button></td>
+            <td className="col-md-2"><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add Event</button></td>
           </tr>
           {mandatorytrainings.map(this.mandatorytrainingsRow)}
         </tbody>

@@ -70,8 +70,8 @@ header {
 table {
   text-align: left; }
   table .longLink {
-    min-width: 32px;
-    max-width: 32px;
+    min-width: 25px;
+    max-width: 25px;
     word-wrap: break-word;
     overflow: hidden; }
   table .docPath {
