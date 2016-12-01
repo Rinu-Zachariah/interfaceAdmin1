@@ -1,3 +1,4 @@
+
 $base-color-one:#002960;	/*McKinsey BLue*/
 $base-color-two:#2c3e50; 	/*Madison Grey*/
 $base-color-three:#0065BD;	/*Global Blue*/
@@ -56,10 +57,10 @@ header {
   color:blue;
 }
 .mainContainer{
- 	 height: 80%;
+	position: fixed;
+ 	 height: 90%;
    width: 90%;
 	 overflow: auto;
-	 height:600px;
 	 div{
 		 padding-top: 1%;
 	 }
@@ -292,6 +293,14 @@ div.filepicker {
 
 .RichEditor-activeButton {
   color: #5890ff;
+}
+
+input[type=text]{
+    width: 250px;
+    display: block;
+    color: #7B8585;
+    margin-top: 20px;
+		float:right;
 }
 
 @import url(//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.css);

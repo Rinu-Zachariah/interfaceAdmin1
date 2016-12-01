@@ -6,6 +6,7 @@ import Accordion from './Accordion.js';
 import RichEditor from './RichText.js';
 import env from '../../environment';
 import init from '../../../tools/init';
+import js from '../../js/datatables.js';
 
 class ODCHistory extends Component{
   constructor(props, context) {
@@ -18,6 +19,15 @@ class ODCHistory extends Component{
       contentyear: ''}
     };
   }
+
+  componentWillMount() {
+       const script = document.createElement("script");
+
+       script.src = "../../js/datatables.js";
+       script.async = true;
+
+       document.body.appendChild(script);
+   }
 
   onTitleChange(data){
     const history = this.state.history;
@@ -64,7 +74,8 @@ class ODCHistory extends Component{
     return (
       <div>
       <h2>ODC History</h2>
-      <table style={{textAlign:"left"}}className="table">
+      <div className="table-responsive">
+      <table className="table" id="odchistory">
         <thead>
           <tr>
             <th>year</th>
@@ -79,6 +90,7 @@ class ODCHistory extends Component{
           </tr>
         </tbody>
       </table>
+      </div>
       {this.props.histories.map(this.historyRow)}
       </div>
     );

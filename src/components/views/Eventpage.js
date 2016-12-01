@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as eventsActions from '../../actions/eventsActions';
-import $ from 'jquery';
+import  $ from 'jquery';
 import _ from 'underscore';
-import env from '../../environment';
-import init from '../../../tools/init';
+import * as env from '../../environment';
+import * as init from '../../../tools/init';
+
 let singleFieldEdit = true;
 
 class EventPage extends Component{
@@ -35,6 +36,14 @@ class EventPage extends Component{
       invalidData: true,
     };
   }
+
+  componentDidMount() {
+    $('#events').DataTable({
+   "sPaginationType": "bootstrap",
+   "bAutoWidth": false,
+   "bDestroy": true,
+ });
+   }
 
   componentWillUpdate(nextProps, nextState) {
     nextState.invalidData = !(nextState.events.startDate && nextState.events.endDate);
@@ -169,7 +178,7 @@ class EventPage extends Component{
     return (
         <div>
           <h2>EVENTS</h2>
-          <table className="table table-striped table-responsive">
+          <table id="events" className="table table-striped" >
             <thead>
               <tr className="table-row">
                 <th>Start Date</th>

@@ -43,10 +43,10 @@ header {
   color: blue; }
 
 .mainContainer {
-  height: 80%;
+  position: fixed;
+  height: 90%;
   width: 90%;
-  overflow: auto;
-  height: 600px; }
+  overflow: auto; }
   .mainContainer div {
     padding-top: 1%; }
 
@@ -233,6 +233,13 @@ div.filepicker {
 
 .RichEditor-activeButton {
   color: #5890ff; }
+
+input[type=text] {
+  width: 250px;
+  display: block;
+  color: #7B8585;
+  margin-top: 20px;
+  float: right; }
 
 .fa-2x {
   font-size: 2em; }
