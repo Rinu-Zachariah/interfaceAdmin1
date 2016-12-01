@@ -16,9 +16,33 @@ import init from '../tools/init';
 import {Provider} from 'react-redux';
 import $ from 'jquery';
 import App from './components/app';
+import Error from './error';
+import _ from 'lodash';
+
 const interfaceObjects = {};
+let isAdmin = false;
+let admins = [];
 
 $.when(
+  $.ajax({
+          url: env[init.env()].admins,
+          method: 'GET',
+          dataType: 'JSON',
+          success: function(response) {
+              admins = response
+          }
+      }),
+  $.ajax({
+          url: 'http://home.intranet.mckinsey.com/ksapi/person/current_user?callback=JSON_CALLBACK',
+          method: 'GET',
+          dataType: 'JSONP',
+          success: function(response) {
+            if(_.includes(admins,(_.find(admins, {"fmno" : response.fmno}))))
+            {
+                isAdmin = true;
+            }
+          }
+      }),
   // Get ODC History
 
   $.get(env[init.env()].history, function(odchistory) {
@@ -70,10 +94,17 @@ $.when(
 	};
 
 	const store=configureStore(initialState);
+  
+if(isAdmin)
+{
+  ReactDOM.render(
+    <Provider store={store}>
+    <Router history={browserHistory} routes={routes} />
+    </Provider>, document.getElementById('app'));
+}
+else {
+    ReactDOM.render(<Error/>, document.getElementById('app'));
+}
 
-	ReactDOM.render(
-		<Provider store={store}>
-	  <Router history={browserHistory} routes={routes} />
-		</Provider>, document.getElementById('app'));
 
 });

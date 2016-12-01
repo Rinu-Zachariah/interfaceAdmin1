@@ -12,7 +12,6 @@ import zip from '../../images/zip.png';
 import png from '../../images/png.png';
 import xls from '../../images/xls.png';
 import doc from '../../images/doc.png';
-import Customizable from './Customizable.js';
 
 class InductionPage extends Component{
   constructor(props, context) {
@@ -25,11 +24,14 @@ class InductionPage extends Component{
     this.inductionRow = this.inductionRow.bind(this);
     this.onEditEvent = this.onEditEvent.bind(this);
     this.onClickEditSave = this.onClickEditSave.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
-      quicklinks: {docpath: '',
-      label: '' ,
-      section_header: ''
-      }
+      quicklinks: {
+        docpath: '',
+        label: '' ,
+        section_header: ''
+      },
+      searchString: ''
     };
   }
 
@@ -124,6 +126,11 @@ class InductionPage extends Component{
 
   }
 
+  handleChange(event){
+    console.log(event.target.value);
+   this.setState({searchString: event.target.value});
+  }
+
   inductionRow(event,index){
     const obj={};
     const extn = event.docpath.split('.').pop();
@@ -179,9 +186,26 @@ class InductionPage extends Component{
   }
 
   render(){
+    let quicklinks = this.props.quicklinks;
+    console.log(this.state);
+
+    if(this.state.searchString.length > 0){
+
+        let searchString = this.state.searchString.trim().toLowerCase();
+
+        quicklinks = quicklinks.filter(function(l){
+             let filename = l.docpath.substring(l.docpath.lastIndexOf('/')+1);
+             return(l.label.toLowerCase().match(searchString) || l.section_header.toLowerCase().match(searchString) || filename.toLowerCase().match(searchString));
+
+        });
+
+    }
     return (
       <div>
-      <h2>INDUCTION</h2>
+      <div className="row">
+        <div className="col-md-5"><h2>INDUCTION</h2></div>
+        <div className="col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
+      </div>
       <div className="table-responsive">
       <table className="table table-responsive table-sm">
         <thead>
@@ -193,7 +217,7 @@ class InductionPage extends Component{
         </thead>
         <tbody>
           <DropZone/>
-          {this.props.quicklinks.map(this.inductionRow)}
+          {quicklinks.map(this.inductionRow)}
         </tbody>
       </table>
       </div>
