@@ -20,15 +20,29 @@ class TrainingsPage extends Component{
     this.mandatorytrainingsRow = this.mandatorytrainingsRow.bind(this);
     this.onEditEvent = this.onEditEvent.bind(this);
     this.onClickEditSave = this.onClickEditSave.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
-      mandatorytrainings: {created_at: {},
-      link: '',
-      name: '',
-      priority: ''
-      }
+      mandatorytrainings: {
+        created_at: {},
+        link: '',
+        name: '',
+        priority: ''
+      },
+      searchString: ''
     };
   }
 
+  getInitialState() {
+    return {
+      invalidData: true,
+    };
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log("going in");
+    nextState.invalidData = !(nextState.mandatorytrainings.created_at && nextState.mandatorytrainings.link && nextState.mandatorytrainings.name && nextState.mandatorytrainings.priority);
+    console.log(nextState);
+  }
 
   createdAtDate(event){
     const mandatorytrainings = this.state.mandatorytrainings;
@@ -56,6 +70,10 @@ class TrainingsPage extends Component{
 
   onClickSave(){
     const propObject = this.props;
+    const clearText = this.refs.clearText;
+    const clearStartDate = this.refs.clearStartDate;
+    const clearText1 = this.refs.clearText1;
+    const clearSelect = this.refs.clearSelect;
     $.ajax({
       type: "POST",
       url: env[init.env()].mandatorytrainings,
@@ -63,6 +81,10 @@ class TrainingsPage extends Component{
       success: function(data){
         console.log(data);
         propObject.dispatch(mandatorytrainingActions.createMandatoryTrainings(data));
+        clearText.value = "";
+        clearStartDate.value = "";
+        clearText1.value = "";
+        clearSelect.value = "";
       },
       error: function(data){
         alert('error');
@@ -105,12 +127,6 @@ class TrainingsPage extends Component{
   onClickEditSave(index){
     const mandatorytraining = this.state.mandatorytrainings;
     mandatorytraining._id = index;
-    // const mandatorytrainings = {created_at: '',
-    // link: '' ,
-    // name: '',
-    // priority: ''
-    // }
-    // this.setState({mandatorytrainings: mandatorytrainings});
     const propObject = this.props;
     singleFieldEdit = true;
     $.ajax({
@@ -127,16 +143,19 @@ class TrainingsPage extends Component{
 
   }
 
+  handleChange(event){
+    this.setState({searchString: event.target.value});
+  }
 
   mandatorytrainingsRow(event,index){
     if(event.isEditing)
     {
       return(
         <tr key={index}>
-          <td><input type="date" className="form-control"  onChange={this.createdAtDate} value={this.state.mandatorytrainings.created_at}/></td>
-          <td><input className="form-control eventHead" onChange={this.onEventLinkChange} value={this.state.mandatorytrainings.link}/></td>
-          <td><input className="form-control" onChange={this.onEventNameChange} value={this.state.mandatorytrainings.name}/></td>
-          <td>
+          <td className="col-md-2"><input type="date" className="form-control"  onChange={this.createdAtDate} value={this.state.mandatorytrainings.created_at}/></td>
+          <td className="col-md-2"><input className="form-control eventHead" onChange={this.onEventLinkChange} value={this.state.mandatorytrainings.link}/></td>
+          <td className="col-md-2"><input className="form-control" onChange={this.onEventNameChange} value={this.state.mandatorytrainings.name}/></td>
+          <td className="col-md-2">
           <select className="form-control" onChange={this.onTypeChange} value={this.state.mandatorytrainings.priority}>
             <option hidden>Please select</option>
             <option>high</option>
@@ -144,27 +163,46 @@ class TrainingsPage extends Component{
             <option>low</option>
           </select>
           </td>
-          <td><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
+          <td className="col-md-2"><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
         </tr>
       )
     }
     return(
       <tr key={index}>
-        <td>{event.created_at.split("T")[0]}</td>
-        <td className="longLink">{event.link}</td>
-        <td>{event.name}</td>
-        <td>{event.priority}</td>
-        <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
-        <td><button className="btn btn-warning" onClick={()=>{this.onEditEvent(event)}} >Edit</button></td>
+        <td className="col-md-2">{event.created_at.split("T")[0]}</td>
+        <td className="col-md-2 longLink">{event.link}</td>
+        <td className="col-md-2">{event.name}</td>
+        <td className="col-md-2">{event.priority}</td>
+        <td className="col-md-2"><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
+        <td className="col-md-2"><button className="btn btn-warning" onClick={()=>{this.onEditEvent(event)}} >Edit</button></td>
       </tr>
     );
   }
 
+
+
   render(){
+    let mandatorytrainings = this.props.mandatorytrainings;
+
+    if(this.state.searchString.length > 0){
+
+        let searchString = this.state.searchString.trim().toLowerCase();
+        console.log(searchString);
+        mandatorytrainings = mandatorytrainings.filter(function(l){
+             return(l.link.toLowerCase().match(searchString) || l.name.toLowerCase().match(searchString) || l.priority.toLowerCase().match(searchString));
+
+        });
+
+    }
     return (
       <div>
-      <h2>TRAININGS</h2>
-      <table style={{textAlign:"left"}}className="table">
+        <div className="row">
+          <div className="col-md-5"><h2>TRAININGS</h2></div>
+          <div className="col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
+
+        </div>
+      <div className="table-responsive">
+      <table className="table">
         <thead>
           <tr>
             <th>Created at</th>
@@ -175,22 +213,23 @@ class TrainingsPage extends Component{
         </thead>
         <tbody>
           <tr>
-            <td><input type="date" className="form-control"  onChange={this.createdAtDate} /></td>
-            <td><input className="form-control eventHead" onChange={this.onEventLinkChange} /></td>
-            <td><input className="form-control" onChange={this.onEventNameChange} /></td>
-            <td>
-            <select className="form-control" onChange={this.onTypeChange} >
+            <td className="col-md-2"><input type="date" className="form-control" ref="clearStartDate" id="clearStartDate" onChange={this.createdAtDate} /></td>
+            <td className="col-md-2"><input className="form-control eventHead" ref="clearText" id="clearText" onChange={this.onEventLinkChange} /></td>
+            <td className="col-md-2"><input className="form-control" ref="clearText1" id="clearText1" onChange={this.onEventNameChange} /></td>
+            <td className="col-md-2">
+            <select className="form-control" ref="clearSelect" id="clearSelect" onChange={this.onTypeChange} >
               <option hidden>Please select</option>
               <option>high</option>
               <option>medium</option>
               <option>low</option>
             </select>
             </td>
-            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
+            <td className="col-md-2"><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add Event</button></td>
           </tr>
-          {this.props.mandatorytrainings.map(this.mandatorytrainingsRow)}
+          {mandatorytrainings.map(this.mandatorytrainingsRow)}
         </tbody>
       </table>
+      </div>
     </div>
     );
   }

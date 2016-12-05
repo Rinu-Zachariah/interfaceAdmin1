@@ -14,10 +14,22 @@ class ODCHistory extends Component{
     this.onYearChange=this.onYearChange.bind(this);
     this.onClickSave = this.onClickSave.bind(this);
     this.state = {
-      history: {contenthtml: '',
-      contentyear: ''}
+      history: {
+        contenthtml: '',
+        contentyear: ''
+      }
     };
   }
+  getInitialState() {
+    return {
+      invalidData: true,
+    };
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    nextState.invalidData = !(nextState.history.contenthtml && nextState.history.contentyear);
+  }
+
 
   onTitleChange(data){
     const history = this.state.history;
@@ -32,6 +44,9 @@ class ODCHistory extends Component{
   }
 
   onClickSave(){
+
+    const clearContentyear = this.refs.clearContentyear;
+    const clearContenthtml = this.refs.clearContenthtml;
     const propObject = this.props;
     $.ajax({
       type: "POST",
@@ -40,6 +55,8 @@ class ODCHistory extends Component{
       success: function(data){
         console.log(data);
         propObject.dispatch(historyActions.createHistory(data));
+        clearContentyear.value = "";
+        clearContenthtml.value = "";
       },
       error: function(data){
         alert('error');
@@ -64,7 +81,8 @@ class ODCHistory extends Component{
     return (
       <div>
       <h2>ODC History</h2>
-      <table style={{textAlign:"left"}}className="table">
+      <div className="table-responsive">
+      <table className="table" id="odchistory">
         <thead>
           <tr>
             <th>year</th>
@@ -73,12 +91,13 @@ class ODCHistory extends Component{
         </thead>
         <tbody>
           <tr>
-            <td><input className="form-control" onChange={this.onYearChange} value={this.state.history.contentyear}/></td>
-            <td><RichEditor onTitleChange={this.onTitleChange}/></td>
-            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add History</button></td>
+            <td><input className="form-control" ref="clearContentyear" id="clearContentyear" onChange={this.onYearChange} value={this.state.history.contentyear}/></td>
+            <td><RichEditor ref="clearContenthtml" id="clearContenthtml" onTitleChange={this.onTitleChange}/></td>
+            <td><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add History</button></td>
           </tr>
         </tbody>
       </table>
+      </div>
       {this.props.histories.map(this.historyRow)}
       </div>
     );

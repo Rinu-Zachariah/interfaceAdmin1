@@ -11,7 +11,8 @@
     "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      'experimentalObjectRestSpread': true
     }
   },
   "env": {
@@ -21,6 +22,14 @@
     "jquery": true,
     "mocha": true
   },
+  "settings":{
+    "import/ignore":{
+        "node_modules":true,
+        "environment":true,
+        "tools/init":true
+    }
+  },
+  "prop-types": [1, { ignore: dispatch }],
   "rules": {
     "quotes": 0,
     "no-console": 1,

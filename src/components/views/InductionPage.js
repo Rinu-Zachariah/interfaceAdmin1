@@ -9,6 +9,9 @@ let singleFieldEdit = true;
 import pdf from '../../images/pdf.png';
 import ppt from '../../images/pptx.png';
 import zip from '../../images/zip.png';
+import png from '../../images/png.png';
+import xls from '../../images/xls.png';
+import doc from '../../images/doc.png';
 
 class InductionPage extends Component{
   constructor(props, context) {
@@ -21,26 +24,20 @@ class InductionPage extends Component{
     this.inductionRow = this.inductionRow.bind(this);
     this.onEditEvent = this.onEditEvent.bind(this);
     this.onClickEditSave = this.onClickEditSave.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
-      quicklinks: {docpath: '',
-      label: '' ,
-      section_header: ''
-      }
+      quicklinks: {
+        docpath: '',
+        label: '' ,
+        section_header: ''
+      },
+      searchString: ''
     };
   }
 
-  // componentDidMount(){
-  //   let obj = document.getElementById('imagePath');
-  //   const quicklinks = this.state.quicklinks;
-  //
-  // }
-
-
   onDocPath(event){
     const quicklinks = this.state.quicklinks;
-    console.log(this.state.quicklinks.docpath);
     quicklinks.docpath = event.target.value;
-    console.log(quicklinks.docpath.split('.').pop());
     this.setState({quicklinks: quicklinks});
   }
 
@@ -129,28 +126,42 @@ class InductionPage extends Component{
 
   }
 
+  handleChange(event){
+    console.log(event.target.value);
+   this.setState({searchString: event.target.value});
+  }
+
   inductionRow(event,index){
     const obj={};
     const extn = event.docpath.split('.').pop();
     if(extn == "pdf"){
-      console.log("Are u in");
       obj.src=pdf;
     }
     else if (extn == "ppt" || extn == "pptx") {
       obj.src=ppt;
     }
+    else if (extn == "doc" || extn == "docx") {
+      obj.src=doc;
+    }
+    else if (extn == "xls" || extn == "xlsx") {
+      obj.src=xls;
+    }
+    else if (extn == "png") {
+      obj.src=png;
+    }
     else if (extn == "zip") {
       obj.src=zip;
     }
-    console.log(obj);
+
+    const filename = event.docpath.substring(event.docpath.lastIndexOf('/')+1);
 
     if(event.isEditing)
     {
       return(
-        <tr key={index}>
-          <td><input className="form-control eventHead" onChange={this.onDocPath} value={this.state.quicklinks.docpath}/></td>
-          <td><input className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
-          <td>
+        <tr key={index} className="table-row">
+          <td className="table-cell"><input className="form-control eventHead" onChange={this.onDocPath} value={this.state.quicklinks.docpath}/></td>
+          <td className="table-cell"><input className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
+          <td className="table-cell">
             <select className="form-control" onChange={this.onSectionHeader} value={this.state.quicklinks.section_header}>
               <option hidden>Please select</option>
               <option>ODC INDUCTION</option>
@@ -158,14 +169,13 @@ class InductionPage extends Component{
               <option>DOMAIN COE</option>
             </select>
           </td>
-          <td><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
+          <td className="table-cell"><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
         </tr>
       )
     }
     return(
       <tr key={index}>
-
-        <td className="docPath">{event.docpath}</td>
+        <td className="docPath">{filename}</td>
         <td><img id="imagePath" ref="imagePath" src={obj.src} width="50px"/></td>
         <td>{event.label}</td>
         <td>{event.section_header}</td>
@@ -176,22 +186,41 @@ class InductionPage extends Component{
   }
 
   render(){
+    let quicklinks = this.props.quicklinks;
+    console.log(this.state);
+
+    if(this.state.searchString.length > 0){
+
+        let searchString = this.state.searchString.trim().toLowerCase();
+
+        quicklinks = quicklinks.filter(function(l){
+             let filename = l.docpath.substring(l.docpath.lastIndexOf('/')+1);
+             return(l.label.toLowerCase().match(searchString) || l.section_header.toLowerCase().match(searchString) || filename.toLowerCase().match(searchString));
+
+        });
+
+    }
     return (
       <div>
-      <h2>INDUCTION</h2>
-      <table style={{textAlign:"left"}}className="table">
+      <div className="row">
+        <div className="col-md-5"><h2>INDUCTION</h2></div>
+        <div className="col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
+      </div>
+      <div className="table-responsive">
+      <table className="table table-responsive table-sm">
         <thead>
           <tr>
-            <th>DocPath</th>
+            <th>File Name</th>
             <th>Label</th>
             <th>Section Header</th>
           </tr>
         </thead>
         <tbody>
           <DropZone/>
-          {this.props.quicklinks.map(this.inductionRow)}
+          {quicklinks.map(this.inductionRow)}
         </tbody>
       </table>
+      </div>
       </div>
     );
   }

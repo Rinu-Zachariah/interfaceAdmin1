@@ -13,6 +13,8 @@ import dropZoneStyles from '../../css/dropzone.css';
         this.onLabelChange = this.onLabelChange.bind(this);
         this.onSectionHeader = this.onSectionHeader.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
+
+
         // For a full list of possible configurations,
         // please consult http://www.dropzonejs.com/#configuration
         this.djsConfig = {
@@ -53,6 +55,17 @@ import dropZoneStyles from '../../css/dropzone.css';
         };
     }
 
+
+    getInitialState() {
+      return {
+        invalidData: true,
+      };
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+      nextState.invalidData = !(nextState.quicklinks.label && nextState.quicklinks.section_header);
+    }
+
     onLabelChange(event){
       const quicklinks = this.state.quicklinks;
       quicklinks.label = event.target.value;
@@ -67,6 +80,8 @@ import dropZoneStyles from '../../css/dropzone.css';
 
     onClickSave(){
       const propObject = this.props;
+      const clearText = this.refs.clearText;
+      const clearSelect = this.refs.clearSelect;
       $.ajax({
         type: "POST",
         url: env[init.env()].quicklinks,
@@ -74,6 +89,8 @@ import dropZoneStyles from '../../css/dropzone.css';
         success: function(data){
           console.log(data);
           propObject.dispatch(quicklinksActions.createQuicklinks(data));
+          clearText.value = "";
+          clearSelect.value = "";
         },
         error: function(data){
           console.log(data);
@@ -99,16 +116,16 @@ import dropZoneStyles from '../../css/dropzone.css';
         return (
           <tr>
           <td className="dropHead"><DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}/> </td>
-          <td><input className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
+          <td><input ref="clearText" id="clearText" className="form-control" onChange={this.onLabelChange} value={this.state.quicklinks.label}/></td>
           <td>
-            <select className="form-control" onChange={this.onSectionHeader}  value={this.state.quicklinks.section_header}>
+            <select className="form-control" ref="clearSelect" id="clearSelect" onChange={this.onSectionHeader}  value={this.state.quicklinks.section_header}>
               <option hidden>Please select</option>
               <option>ODC INDUCTION</option>
               <option>AGILE INDUCTION</option>
               <option>DOMAIN COE</option>
             </select>
           </td>
-          <td><button className="btn btn-primary" onClick={this.onClickSave} value="save">Add Event</button></td>
+          <td><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add Event</button></td>
           </tr>
         )
 

@@ -17,14 +17,14 @@ export default function mandatorytrainingsReducer(state =[], action){
 
     case 'IS_EDITING_MANDATORYTRAININGS': {
       const newState = Object.assign([], state);
-      const indexOfEventToDelete = state.findIndex(mandatorytrainings => {return mandatorytrainings._id == action.mandatorytrainings._id});
+      const indexOfEventToDelete = state.findIndex(mandatorytrainings => {return mandatorytrainings._id == action.mandatorytrainings._id;});
       newState[indexOfEventToDelete].isEditing = true;
       return newState;
     }
 
     case 'EDIT_MANDATORYTRAININGS': {
       const newState = Object.assign([], state);
-      const indexOfEventToEdit = state.findIndex(mandatorytrainings => {return mandatorytrainings._id == action.mandatorytrainings._id});
+      const indexOfEventToEdit = state.findIndex(mandatorytrainings => {return mandatorytrainings._id == action.mandatorytrainings._id;});
       newState[indexOfEventToEdit] = action.mandatorytrainings;
       return newState;
     }
