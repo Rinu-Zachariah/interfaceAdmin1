@@ -75,8 +75,8 @@ table {
     word-wrap: break-word;
     overflow: hidden; }
   table .docPath {
-    min-width: 60px;
-    max-width: 60px;
+    min-width: 30px;
+    max-width: 30px;
     word-wrap: break-word;
     overflow: hidden; }
   table .longText {
