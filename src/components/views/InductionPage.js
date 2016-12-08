@@ -188,7 +188,7 @@ class InductionPage extends Component{
   render(){
     let quicklinks = this.props.quicklinks;
     console.log(this.state);
-
+    console.log(this.props.downloads);
     if(this.state.searchString.length > 0){
 
         let searchString = this.state.searchString.trim().toLowerCase();
@@ -203,8 +203,9 @@ class InductionPage extends Component{
     return (
       <div>
       <div className="row">
-        <div className="col-md-5"><h2>INDUCTION</h2></div>
-        <div className="col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
+        <div className="col-md-12"><h2>INDUCTION</h2></div>
+        <p>Total Number of downloads: <strong>{this.props.downloads.length}</strong></p>
+        <div className="col-md-offset-5 col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
       </div>
       <div className="table-responsive">
       <table className="table table-responsive table-sm">
@@ -228,7 +229,8 @@ class InductionPage extends Component{
 
 function mapStateToProps(state,ownProps){
   return {
-    quicklinks: state.quicklinks
+    quicklinks: state.quicklinks,
+    downloads: state.downloads
   };
 }
 

@@ -29,7 +29,8 @@ $.when(
           method: 'GET',
           dataType: 'JSON',
           success: function(response) {
-              admins = response
+              admins = response;
+              console.log(admins);
           }
       }),
   $.ajax({
@@ -76,10 +77,13 @@ $.when(
   $.get(env[init.env()].gallery, function(gallery) {
     interfaceObjects.gallery = gallery;
   }),
-
   // Get logs
   $.get(env[init.env()].logs, function(logs) {
     interfaceObjects.logs = logs;
+  }),
+  // Get DownloadsList
+  $.get(env[init.env()].downloads, function(downloads) {
+    interfaceObjects.downloads = downloads;
   })
 )
 .then(function() {
@@ -90,11 +94,12 @@ $.when(
     quicklinks: interfaceObjects.inductionMaterial.reverse(),
     mandatorytrainings: interfaceObjects.mandatoryTrainings.reverse(),
     gallery: interfaceObjects.gallery.reverse(),
-    logs: interfaceObjects.logs.reverse()
+    logs: interfaceObjects.logs.reverse(),
+    downloads: interfaceObjects.downloads
 	};
 
 	const store=configureStore(initialState);
-  
+
 if(isAdmin)
 {
   ReactDOM.render(
