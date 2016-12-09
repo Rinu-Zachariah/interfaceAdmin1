@@ -29,7 +29,7 @@ $.when(
           method: 'GET',
           dataType: 'JSON',
           success: function(response) {
-              admins = response
+              admins = response;
           }
       }),
   $.ajax({
@@ -94,7 +94,7 @@ $.when(
 	};
 
 	const store=configureStore(initialState);
-  
+
 if(isAdmin)
 {
   ReactDOM.render(

@@ -39,9 +39,7 @@ class TrainingsPage extends Component{
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log("going in");
     nextState.invalidData = !(nextState.mandatorytrainings.created_at && nextState.mandatorytrainings.link && nextState.mandatorytrainings.name && nextState.mandatorytrainings.priority);
-    console.log(nextState);
   }
 
   createdAtDate(event){
@@ -79,7 +77,6 @@ class TrainingsPage extends Component{
       url: env[init.env()].mandatorytrainings,
       data: this.state.mandatorytrainings,
       success: function(data){
-        console.log(data);
         propObject.dispatch(mandatorytrainingActions.createMandatoryTrainings(data));
         clearText.value = "";
         clearStartDate.value = "";
@@ -102,7 +99,7 @@ class TrainingsPage extends Component{
         console.log(data);
       }
     });
-    this.props.dispatch(mandatorytrainingActions.deleteMandatoryTrainings(mandatorytrainings))
+    this.props.dispatch(mandatorytrainingActions.deleteMandatoryTrainings(mandatorytrainings));
   }
 
   onEditEvent(eventObject){

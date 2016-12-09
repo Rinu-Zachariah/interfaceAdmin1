@@ -21,10 +21,10 @@ class ContributorsPage extends Component{
       <div>
         <h1>Contributors</h1>
         <center>
-        	<br/>
         	<img src={ComingSoonImg} />
-        	<br/><br/>
-        	<span className="sub-heading-small">Page coming soon! Stay Tuned!</span>
+        	<div className="row">
+          	<span className="sub-heading-small">Page coming soon! Stay Tuned!</span>
+          </div>
         </center>
 
       </div>
