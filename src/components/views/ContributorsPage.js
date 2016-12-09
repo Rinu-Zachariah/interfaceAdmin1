@@ -18,6 +18,7 @@ class ContributorsPage extends Component{
 
   render(){
     return (
+
       <div>
         <h1>Contributors</h1>
         <center>
@@ -28,6 +29,7 @@ class ContributorsPage extends Component{
         </center>
 
       </div>
+
     );
   }
 }

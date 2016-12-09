@@ -51,8 +51,6 @@ class PollPage extends Component{
 
   onChoice1Change(event){
       const poll = this.state.poll;
-      console.log(poll);
-      console.log(event.target.value);
       poll.choice1 = event.target.value;
       this.setState({poll: poll});
   }
@@ -109,19 +107,16 @@ class PollPage extends Component{
     choices.push(option3);
     choices.push(option4);
 
-    console.log(choices);
     const polls={
       isActive: this.state.poll.isActive,
       question: this.state.poll.question,
       choices: choices
     };
-    console.log(polls);
     $.ajax({
       type:'POST',
       url: env[init.env()].polls,
       data: polls,
       success: function(data){
-        console.log(data);
         propObject.dispatch(PollActions.createPolls(data));
         clearQues.value = "";
         clearC1.value = "";
@@ -189,9 +184,9 @@ class PollPage extends Component{
   }
 }
 
+
+
 function mapStateToProps(state,ownProps){
-  console.log("inside poll page");
-  console.log(state.poll);
   return {
     poll: state.poll
   };

@@ -82,7 +82,6 @@ class EventPage extends Component{
       url: env[init.env()].events,
       data: this.state.events,
       success: function(data){
-        console.log(data);
         propObject.dispatch(eventsActions.createEvents(data));
         clearText.value = "";
         clearStartDate.value = "";
@@ -95,13 +94,11 @@ class EventPage extends Component{
     });
   }
   onDeleteEvent(eventObject){
-    console.log(eventObject);
     $.ajax({
     url: env[init.env()].events,
     type: "DELETE",
     data: eventObject,
     success: function(data){
-      console.log(data);
     }
   });
     this.props.dispatch(eventsActions.deleteEvents(eventObject));
