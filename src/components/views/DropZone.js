@@ -40,12 +40,10 @@ import dropZoneStyles from '../../css/dropzone.css';
         // Simple callbacks work too, of course
         this.callback = (data) => {
           let url = "modules/main/dlc/Induction_Material/"+data.name;
-          console.log(data);
-          console.log(url);
           const quicklinks = this.state.quicklinks;
           quicklinks.docpath = url;
           this.setState({quicklinks: quicklinks});
-        }
+        };
 
         this.state = {
           quicklinks: {docpath: '',
@@ -87,13 +85,11 @@ import dropZoneStyles from '../../css/dropzone.css';
         url: env[init.env()].quicklinks,
         data: this.state.quicklinks,
         success: function(data){
-          console.log(data);
           propObject.dispatch(quicklinksActions.createQuicklinks(data));
           clearText.value = "";
           clearSelect.value = "";
         },
         error: function(data){
-          console.log(data);
           alert('error');
         }
       });
@@ -110,7 +106,7 @@ import dropZoneStyles from '../../css/dropzone.css';
         const eventHandlers = {
             drop: this.callbackArray,
             addedfile: this.callback,
-        }
+        };
         //console.log(eventHandlers);
         //return <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig}  />
         return (
@@ -127,7 +123,7 @@ import dropZoneStyles from '../../css/dropzone.css';
           </td>
           <td><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add Event</button></td>
           </tr>
-        )
+        );
 
     }
 }

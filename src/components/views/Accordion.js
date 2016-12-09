@@ -36,7 +36,6 @@ class Accordion extends React.Component {
         type: 'DELETE',
         data: menuObject,
         success: function(data){
-          console.log(data);
         }
       });
       this.props.dispatch(PollActions.deletePolls(menuObject));

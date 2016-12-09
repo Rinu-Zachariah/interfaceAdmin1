@@ -30,7 +30,6 @@ $.when(
           dataType: 'JSON',
           success: function(response) {
               admins = response;
-              console.log(admins);
           }
       }),
   $.ajax({

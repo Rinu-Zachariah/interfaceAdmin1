@@ -39,9 +39,7 @@ class TrainingsPage extends Component{
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log("going in");
     nextState.invalidData = !(nextState.mandatorytrainings.created_at && nextState.mandatorytrainings.link && nextState.mandatorytrainings.name && nextState.mandatorytrainings.priority);
-    console.log(nextState);
   }
 
   createdAtDate(event){
@@ -79,7 +77,6 @@ class TrainingsPage extends Component{
       url: env[init.env()].mandatorytrainings,
       data: this.state.mandatorytrainings,
       success: function(data){
-        console.log(data);
         propObject.dispatch(mandatorytrainingActions.createMandatoryTrainings(data));
         clearText.value = "";
         clearStartDate.value = "";
@@ -99,10 +96,9 @@ class TrainingsPage extends Component{
       type: "DELETE",
       data: mandatorytrainings,
       success: function(data){
-        console.log(data);
       }
     });
-    this.props.dispatch(mandatorytrainingActions.deleteMandatoryTrainings(mandatorytrainings))
+    this.props.dispatch(mandatorytrainingActions.deleteMandatoryTrainings(mandatorytrainings));
   }
 
   onEditEvent(eventObject){
@@ -116,7 +112,6 @@ class TrainingsPage extends Component{
       this.setState({mandatorytrainings: mandatorytrainings});
       singleFieldEdit = false;
       this.props.dispatch(mandatorytrainingActions.isEditingMandatoryTrainings(eventObject));
-      console.log("Editing");
     }
     else {
       alert('Please Finish Editing One Module');
@@ -163,9 +158,9 @@ class TrainingsPage extends Component{
             <option>low</option>
           </select>
           </td>
-          <td className="col-md-2"><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
+          <td className="col-md-2"><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id);}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
         </tr>
-      )
+      );
     }
     return(
       <tr key={index}>
@@ -173,8 +168,8 @@ class TrainingsPage extends Component{
         <td className="col-md-2 longLink">{event.link}</td>
         <td className="col-md-2">{event.name}</td>
         <td className="col-md-2">{event.priority}</td>
-        <td className="col-md-2"><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
-        <td className="col-md-2"><button className="btn btn-warning" onClick={()=>{this.onEditEvent(event)}} >Edit</button></td>
+        <td className="col-md-2"><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event);}} value="delete">Remove</button></td>
+        <td className="col-md-2"><button className="btn btn-warning" onClick={()=>{this.onEditEvent(event);}} >Edit</button></td>
       </tr>
     );
   }
@@ -187,7 +182,6 @@ class TrainingsPage extends Component{
     if(this.state.searchString.length > 0){
 
         let searchString = this.state.searchString.trim().toLowerCase();
-        console.log(searchString);
         mandatorytrainings = mandatorytrainings.filter(function(l){
              return(l.link.toLowerCase().match(searchString) || l.name.toLowerCase().match(searchString) || l.priority.toLowerCase().match(searchString));
 
