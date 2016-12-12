@@ -55,6 +55,7 @@ class GalleryPage extends Component{
 
 function mapStateToProps(state,ownProps){
   console.log("Inside gallery");
+
   return {
     gallery: state.gallery
   };

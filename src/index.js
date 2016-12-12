@@ -94,7 +94,7 @@ $.when(
 	};
 
 	const store=configureStore(initialState);
-  
+
 if(isAdmin)
 {
   ReactDOM.render(

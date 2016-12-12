@@ -91,10 +91,11 @@ header {
 
 table{
 	text-align: left;
+	
 
 	.longLink{
-		min-width: 32px;
-	  max-width: 32px;
+		min-width: 20px;
+	  max-width: 20px;
 		word-wrap:break-word;
 	  overflow: hidden;
 	}
