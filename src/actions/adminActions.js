@@ -4,3 +4,6 @@ export function createAdmin(admin){
 export function getAdmin(){
   return {type: 'GET_ADMIN'};
 }
+export function deleteAdmin(admin){
+  return {type: 'DELETE_ADMIN', admin};
+}

@@ -83,7 +83,12 @@ $.when(
   // Get DownloadsList
   $.get(env[init.env()].downloads, function(downloads) {
     interfaceObjects.downloads = downloads;
+  }),
+  //Get All Admins
+  $.get(env[init.env()].admins, function(admins) {
+    interfaceObjects.admins = admins;
   })
+
 )
 .then(function() {
 	const initialState = {
@@ -94,7 +99,8 @@ $.when(
     mandatorytrainings: interfaceObjects.mandatoryTrainings.reverse(),
     gallery: interfaceObjects.gallery.reverse(),
     logs: interfaceObjects.logs.reverse(),
-    downloads: interfaceObjects.downloads
+    downloads: interfaceObjects.downloads,
+    admins: interfaceObjects.admins.reverse()
 	};
 
 	const store=configureStore(initialState);

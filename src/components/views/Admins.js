@@ -5,48 +5,123 @@ import env from '../../environment';
 import init from '../../../tools/init';
 import ComingSoonImg from '../../images/wip.png';
 
+let singleFieldEdit = true;
+
 class AdminPage extends Component{
   constructor(props, context) {
     console.log("inside constructor");
     super(props, context);
-    this.AdminRow = this.AdminRow.bind(this);
     this.state = {
       admins:{
-      }
+        name: '',
+        fmno: ''
+      },
+      searchString: ''
     };
+    this.AdminRow = this.AdminRow.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.onNameChange = this.onNameChange.bind(this);
+    this.onFmnoChange = this.onFmnoChange.bind(this);
+    this.onClickSave = this.onClickSave.bind(this);
+    this.onDeleteAdmin = this.onDeleteAdmin.bind(this);
+
   }
   componentDidMount() {
     console.log("componentDidMount");
-    console.log(this.props.dispatch(adminActions.getAdmin()));
+
+  }
+
+  onNameChange(event){
+    const admins = this.state.admins;
+    admins.name = event.target.value;
+    this.setState({admins: admins});
+  }
+
+  onFmnoChange(event){
+    const admins = this.state.admins;
+    admins.fmno = event.target.value;
+    this.setState({admins: admins});
+  }
+
+  onClickSave(){
+    const propObject = this.props;
+    const clearName = this.refs.clearName;
+    const clearFmno = this.refs.clearFmno;
+    console.log(this.state.admins)
+    $.ajax({
+      type: "POST",
+      url: env[init.env()].admins,
+      data: this.state.admins,
+      success: function(data){
+        propObject.dispatch(adminActions.createAdmin(data));
+        clearName.value = "";
+        clearFmno.value = "";
+      },
+      error: function(data){
+        alert('error');
+      }
+    });
+  }
+
+  onDeleteAdmin(adminObject){
+    $.ajax({
+    url: env[init.env()].admins,
+    type: "DELETE",
+    data: adminObject,
+    success: function(data){
+    }
+  });
+    this.props.dispatch(adminActions.deleteAdmin(adminObject));
   }
 
   AdminRow(admin,index){
     return(
-      <tr key={index}>
-        <td>{admin.fmno}</td>
-        <td><button className="btn btn-danger">Remove</button></td>
-        <td><button className="btn btn-warning">Edit</button></td>
+      <tr key={index} className="table-row">
+        <td className="table-cell">{admin.name}</td>
+        <td className="table-cell">{admin.fmno}</td>
+        <td><button className="btn btn-danger" onClick={()=>{this.onDeleteAdmin(admin)}} value="delete">Remove</button></td>
       </tr>
     );
   }
 
+  handleChange(event){
+    this.setState({searchString: event.target.value});
+  }
+
   render(){
-    console.log(this.props.admins);
+      let admins = this.props.admins;
+
+      if(this.state.searchString.length > 0){
+          let searchString = this.state.searchString.trim().toLowerCase();
+          admins = admins.filter(function(l){
+               return(l.name.toLowerCase().match(searchString) || l.fmno.toLowerCase().match(searchString));
+          });
+
+      }
     return (
       <div>
-      <h2>ADMIN</h2>
-      <center>
-        <table>
-        <thead>
-          <tr>
-            <th>FMNO</th>
-          </tr>
-        </thead>
-        <tbody>
-        {this.props.admins.map(this.AdminRow)}
-        </tbody>
+        <div className="row">
+          <div className="col-md-5"><h2>ADMINS</h2></div>
+          <div className="col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
+        </div>
+        <div className="table-responsive">
+        <table className="table table-striped">
+          <thead>
+            <tr className="table-row">
+              <th>Name</th>
+              <th>FMNO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="table-row">
+              <td className="table-cell"><input className="form-control eventHead" ref="clearName" id="clearName" onChange={this.onNameChange} /></td>
+              <td className="table-cell"><input type="number" className="form-control" ref="clearFmno" id="clearFmno" onChange={this.onFmnoChange} /></td>
+              <td className="table-cell"><button className="btn btn-primary" onClick={this.onClickSave} id="save" value="save" disabled={this.state.invalidData}>Add Event</button></td>
+            </tr>
+            {admins.map(this.AdminRow)}
+          </tbody>
         </table>
-      </center>
+        </div>
       </div>
     );
   }
