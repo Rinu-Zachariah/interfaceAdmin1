@@ -5,12 +5,14 @@ class ComponentName extends Component{
   render(){
     return(
       <div className="container-fluid">
-      <div className="area"></div>
+      <div className="area" />
       <nav className="main-menu">
                 <ul>
                     <li>
                         <IndexLink to="/">
+
                             <i className="fa fa-home"></i>
+
                             <span className="nav-text">
                                 Home
                             </span>
@@ -19,7 +21,9 @@ class ComponentName extends Component{
                     </li>
                     <li className="has-subnav">
                         <Link to="/events">
+
                             <i className="fa fa-list"></i>
+
                             <span className="nav-text">
                                 Events
                             </span>
@@ -28,7 +32,9 @@ class ComponentName extends Component{
                     </li>
                     <li className="has-subnav">
                         <Link to="/polls">
+
                            <i className="fa fa-bar-chart-o"></i>
+
                             <span className="nav-text">
                                 Polls
                             </span>
@@ -37,7 +43,9 @@ class ComponentName extends Component{
                     </li>
                     <li className="has-subnav">
                         <Link to="/odchistory">
+
                            <i className="fa fa-history"></i>
+
                             <span className="nav-text">
                                 History
                             </span>
@@ -46,7 +54,9 @@ class ComponentName extends Component{
                     </li>
                     <li>
                         <Link to="/induction">
+
                             <i className="fa fa-folder-open-o"></i>
+
                             <span className="nav-text">
                                 Induction
                             </span>
@@ -54,7 +64,9 @@ class ComponentName extends Component{
                     </li>
                     <li>
                         <Link to="/gallery">
+
                             <i className="fa fa-picture-o"></i>
+
                             <span className="nav-text">
                                 Gallery
                             </span>
@@ -62,7 +74,9 @@ class ComponentName extends Component{
                     </li>
                     <li>
                        <Link to="/trainings">
+
                            <i className="fa fa-graduation-cap"></i>
+
                             <span className="nav-text">
                                 Trainings
                             </span>
@@ -70,7 +84,9 @@ class ComponentName extends Component{
                     </li>
                     <li>
                        <Link to="/contributors">
+
                             <i className="fa fa-users"></i>
+
                             <span className="nav-text">
                                 Contributors
                             </span>

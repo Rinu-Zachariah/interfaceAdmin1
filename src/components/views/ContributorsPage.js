@@ -18,13 +18,18 @@ class ContributorsPage extends Component{
 
   render(){
     return (
-    <div>
-      <h1>Contributors</h1>
-      <center><br/>
-      <img src={ComingSoonImg} /><br/><br/>
-      <span className="sub-heading-small">Page coming soon! Stay Tuned!</span>
-      </center>
-    </div>
+
+      <div>
+        <h1>Contributors</h1>
+        <center>
+        	<img src={ComingSoonImg} />
+        	<div className="row">
+          	<span className="sub-heading-small">Page coming soon! Stay Tuned!</span>
+          </div>
+        </center>
+
+      </div>
+
     );
   }
 }
