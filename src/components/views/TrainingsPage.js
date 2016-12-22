@@ -164,6 +164,7 @@ class TrainingsPage extends Component{
     }
     return(
       <tr key={index}>
+
         <td className="col-md-2">{event.created_at.split("T")[0]}</td>
         <td className="col-md-2 longLink">{event.link}</td>
         <td className="col-md-2">{event.name}</td>

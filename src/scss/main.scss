@@ -50,7 +50,6 @@ header {
   	.head-four{
   	   color:$base-color-eight;
   	}
-
 }
 
 .blue{
@@ -92,7 +91,9 @@ header {
 table{
 	text-align: left;
 
+
 	.longLink{
+
 		min-width: 25px;
 	  max-width: 25px;
 		word-wrap:break-word;
@@ -478,4 +479,13 @@ nav ul,nav li {
   font-style: normal;
   font-weight: 300;
   src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}
+
+.spanLeft{
+  float: left;
+	font-weight: bold;
+}
+.spanRight{
+  float : right;
+	font-weight: bold;
 }

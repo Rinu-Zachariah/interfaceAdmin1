@@ -10,7 +10,6 @@ import $ from 'jquery';
 
 /* eslint-disable no-console */
 let port;
-
 process.env.NODE_ENV = init.env();
 if(init.env().toString() == 'production'){
   port = 3030;

@@ -8,6 +8,7 @@ import histories from './reducer/historyReducer';
 import events from './reducer/eventsReducer';
 import gallery from './reducer/galleryReducer';
 import poll from './reducer/pollReducer';
+import successstories from './reducer/successReducer';
 import quicklinks from './reducer/quicklinksReducer';
 import mandatorytrainings from './reducer/mandatorytrainingsReducer';
 import env from './environment';
@@ -43,22 +44,11 @@ $.when(
             }
           }
       }),
-  // Get ODC History
-
-  $.get(env[init.env()].history, function(odchistory) {
-    interfaceObjects.odchistory = odchistory;
-  }),
 
   // Get polls
 
   $.get(env[init.env()].polls, function(poll) {
     interfaceObjects.poll = poll;
-  }),
-
-	// Get events
-
-  $.get(env[init.env()].allevents, function(events) {
-    interfaceObjects.events = events;
   }),
 
 	// Get inductionmaterial
@@ -80,27 +70,39 @@ $.when(
   $.get(env[init.env()].logs, function(logs) {
     interfaceObjects.logs = logs;
   }),
+
+
+  // Get SuccessStories
+  $.get(env[init.env()].successstories, function(successstories) {
+    interfaceObjects.successstories = successstories;
+  }),
+
   // Get DownloadsList
   $.get(env[init.env()].downloads, function(downloads) {
     interfaceObjects.downloads = downloads;
-  })
+  }),
+
 )
 .then(function() {
+  if(isAdmin)
+  {
 	const initialState = {
-		histories: interfaceObjects.odchistory,
-		events: interfaceObjects.events.reverse(),
+		histories: [],
+		events: [],
     poll: interfaceObjects.poll.reverse(),
     quicklinks: interfaceObjects.inductionMaterial.reverse(),
     mandatorytrainings: interfaceObjects.mandatoryTrainings.reverse(),
     gallery: interfaceObjects.gallery.reverse(),
     logs: interfaceObjects.logs.reverse(),
-    downloads: interfaceObjects.downloads
+    successstories: interfaceObjects.successstories.reverse(),
+    downloads: interfaceObjects.downloads,
+    admins: []
+
 	};
 
 	const store=configureStore(initialState);
 
-if(isAdmin)
-{
+
   ReactDOM.render(
     <Provider store={store}>
     <Router history={browserHistory} routes={routes} />

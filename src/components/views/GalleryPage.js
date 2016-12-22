@@ -43,10 +43,10 @@ class GalleryPage extends Component{
       <div>
       <h2>GALLERY</h2>
       <center>
-        <br/>
         <img src={ComingSoonImg} />
-        <br/><br/>
-        <span className="sub-heading-small">Page coming soon! Stay Tuned!</span>
+        <div className="row">
+          <span className="sub-heading-small">Page coming soon! Stay Tuned!</span>
+        </div>
       </center>
       </div>
     );
@@ -55,6 +55,7 @@ class GalleryPage extends Component{
 
 function mapStateToProps(state,ownProps){
   console.log("Inside gallery");
+
   return {
     gallery: state.gallery
   };

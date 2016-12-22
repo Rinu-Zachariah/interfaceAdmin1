@@ -5,6 +5,8 @@ import  $ from 'jquery';
 import _ from 'underscore';
 import * as env from '../../environment';
 import * as init from '../../../tools/init';
+import EventDrop from './EventDrop.js';
+
 
 let singleFieldEdit = true;
 
@@ -41,18 +43,15 @@ class EventPage extends Component{
   }
 
   componentDidMount() {
-    $('#events').DataTable({
-   "sPaginationType": "bootstrap",
-   "bAutoWidth": false,
-   "bDestroy": true,
- });
-   }
+    const propObject = this.props;
+    $.get(env[init.env()].allevents, function(data){
+      propObject.getEvents(data);
+    });
+  }
 
   componentWillUpdate(nextProps, nextState) {
     nextState.invalidData = !(nextState.events.startDate && nextState.events.endDate && nextState.events.type && nextState.events.eventText);
   }
-
-
 
   onStartDateChange(event){
     const events = this.state.events;
@@ -109,7 +108,7 @@ class EventPage extends Component{
     success: function(data){
     }
   });
-    this.props.dispatch(eventsActions.deleteEvents(eventObject));
+    this.props.deleteEvents(eventObject);
   }
 
   onEditEvent(eventObject){
@@ -152,6 +151,7 @@ class EventPage extends Component{
   handleChange(event){
     this.setState({searchString: event.target.value});
   }
+
 
   eventRow(event,index){
     if(event.isEditing)
@@ -205,6 +205,10 @@ class EventPage extends Component{
             <div className="col-md-5"><h2>EVENTS</h2></div>
             <div className="col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
           </div>
+          <div className="row">
+            <div className="dropHead"><EventDrop /></div>
+            <a href="../../Template/MainTemplate.csv" download="MainTemplate.csv">Download link</a>
+          </div>
           <div className="table-responsive">
           <table className="table table-striped">
             <thead>
@@ -246,4 +250,4 @@ function mapStateToProps(state,ownProps){
   };
 }
 
-export default connect(mapStateToProps)(EventPage);
+export default connect(mapStateToProps, eventsActions)(EventPage);
