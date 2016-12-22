@@ -53,18 +53,18 @@ class ComponentName extends Component{
                         </Link>
                     </li>
                     <li>
-                        <Link to="/gallery">
-                            <i className="fa fa-picture-o"></i>
-                            <span className="nav-text">
-                                Gallery
-                            </span>
-                        </Link>
-                    </li>
-                    <li>
                        <Link to="/trainings">
                            <i className="fa fa-graduation-cap"></i>
                             <span className="nav-text">
                                 Trainings
+                            </span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/gallery">
+                            <i className="fa fa-picture-o"></i>
+                            <span className="nav-text">
+                                Gallery
                             </span>
                         </Link>
                     </li>

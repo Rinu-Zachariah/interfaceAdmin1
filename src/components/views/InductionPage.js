@@ -12,6 +12,11 @@ import zip from '../../images/zip.png';
 import png from '../../images/png.png';
 import xls from '../../images/xls.png';
 import doc from '../../images/doc.png';
+import moment from 'moment';
+import FusionCharts from 'fusioncharts';
+require("fusioncharts/fusioncharts.charts")(FusionCharts);
+
+let downloadDocs = [];
 
 class InductionPage extends Component{
   constructor(props, context) {
@@ -25,6 +30,7 @@ class InductionPage extends Component{
     this.onEditEvent = this.onEditEvent.bind(this);
     this.onClickEditSave = this.onClickEditSave.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getGraph = this.getGraph.bind(this);
     this.state = {
       quicklinks: {
         docpath: '',
@@ -131,6 +137,54 @@ class InductionPage extends Component{
    this.setState({searchString: event.target.value});
   }
 
+  getGraph(category){
+    downloadDocs.length = 0;
+    let date = new Date();
+    let month = date.getMonth()+1;
+    let year = date.getFullYear();
+    console.log(year);
+    for ( var i = 0; i < this.props.quicklinks.length; i++) {
+      let count = 0;
+      let selectedCategory = this.props.quicklinks[i].section_header;
+      if (category === selectedCategory ) {
+        for (var j = 0; j < this.props.downloads.length; j++) {
+          let label = this.props.quicklinks[i].label;
+          let monthDownloads = moment(this.props.downloads[j].downloaded_at);
+          let nmonth = monthDownloads.month()+1;
+          let nyear = monthDownloads.year();
+          console.log(nyear);
+          if ((label === this.props.downloads[j].name) && (month === nmonth) && (year === nyear)) {
+            count++;
+          }
+        }
+        downloadDocs.push({
+          "label":this.props.quicklinks[i].label,
+          "value":count
+        })
+      }
+    }
+      FusionCharts.ready(function() {
+      let fusioncharts = new FusionCharts({
+          type: 'line',
+          renderAt: 'chart-container',
+          width: '500',
+          height: '300',
+          dataFormat: "json",
+          dataSource:{
+            "chart":{
+              caption: "Categorywise Document Distribution",
+              subCaption: "Monthly downloads",
+              xAxisName: "Name of Documents",
+              yAxisName: "Number of Downloads",
+              theme: "ocean"
+            },
+            "data":downloadDocs
+          }
+      });
+      fusioncharts.render();
+    });
+  }
+
   inductionRow(event,index){
     const obj={};
     const extn = event.docpath.split('.').pop();
@@ -187,7 +241,6 @@ class InductionPage extends Component{
 
   render(){
     let quicklinks = this.props.quicklinks;
-    console.log(this.props.downloads);
     let odcCount = 0;
     let agileCount = 0;
     let domainCount = 0;
@@ -215,13 +268,14 @@ class InductionPage extends Component{
         });
 
     }
+
     return (
       <div>
       <div className="row">
         <div className="col-md-12"><h2>INDUCTION</h2></div>
         <div className="row">
            <div className="col-md-4 col-sm-6 col-xs-12">
-              <div className="info-box">
+              <div className="info-box" onClick={()=>this.getGraph("ODC INDUCTION")}>
                 <span className="info-box-icon bg-aqua"><i className="fa fa-2x fa-user-circle"></i></span>
                 <div className="info-box-content">
                   <span className="info-box-text">ODC INDUCTION</span>
@@ -230,7 +284,7 @@ class InductionPage extends Component{
               </div>
             </div>
             <div className="col-md-4 col-sm-6 col-xs-12">
-              <div className="info-box">
+              <div className="info-box" onClick={()=>this.getGraph("AGILE INDUCTION")}>
                 <span className="info-box-icon bg-yellow"><i className="fa fa-2x fa-tasks"></i></span>
 
                 <div className="info-box-content">
@@ -243,7 +297,7 @@ class InductionPage extends Component{
             <div className="clearfix visible-sm-block"></div>
 
             <div className="col-md-4 col-sm-6 col-xs-12">
-              <div className="info-box">
+              <div className="info-box" onClick={()=>this.getGraph("DOMAIN COE")}>
                 <span className="info-box-icon bg-green"><i className="fa fa-2x fa-book"></i></span>
 
                 <div className="info-box-content">
@@ -253,6 +307,7 @@ class InductionPage extends Component{
               </div>
             </div>
         </div>
+        <div id="chart-container">FusionCharts XT will load here!</div>
         <div className="col-md-offset-5 col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
       </div>
       <div className="table-responsive">

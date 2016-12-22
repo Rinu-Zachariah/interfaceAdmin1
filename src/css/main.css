@@ -292,7 +292,7 @@ input[type=text] {
   float: right; }
 
 .fa-2x {
-  padding: 8%;
+  padding: 5%;
   font-size: 1em !important;
   color: white; }
 
@@ -304,7 +304,7 @@ input[type=text] {
   text-align: center;
   vertical-align: middle;
   font-size: 1.5em;
-  padding: 8%; }
+  padding: 5%; }
 
 .main-menu:hover, nav.main-menu.expanded {
   width: 250px;
