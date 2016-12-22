@@ -6,6 +6,8 @@ import quicklinks from './quicklinksReducer';
 import gallery from './galleryReducer';
 import mandatorytrainings from './mandatorytrainingsReducer';
 import admins from './adminReducer';
+import logs from './logsReducer';
+import download from './downloadReducer';
 
 
 const rootReducer = combineReducers({

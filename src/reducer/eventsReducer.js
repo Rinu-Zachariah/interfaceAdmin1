@@ -1,5 +1,9 @@
 export default function eventsReducer(state =[], action){
   switch(action.type){
+    case 'GET_EVENTS':{
+      const newState = Object.assign([], state, action.event);
+      return newState.reverse();
+    }
     case 'CREATE_EVENTS':{
         const newState = Object.assign([], state.reverse());
         newState.push(action.event);

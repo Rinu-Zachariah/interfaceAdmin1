@@ -43,22 +43,11 @@ $.when(
             }
           }
       }),
-  // Get ODC History
-
-  $.get(env[init.env()].history, function(odchistory) {
-    interfaceObjects.odchistory = odchistory;
-  }),
 
   // Get polls
 
   $.get(env[init.env()].polls, function(poll) {
     interfaceObjects.poll = poll;
-  }),
-
-	// Get events
-
-  $.get(env[init.env()].allevents, function(events) {
-    interfaceObjects.events = events;
   }),
 
 	// Get inductionmaterial
@@ -84,28 +73,27 @@ $.when(
   $.get(env[init.env()].downloads, function(downloads) {
     interfaceObjects.downloads = downloads;
   }),
-  //Get All Admins
-  $.get(env[init.env()].admins, function(admins) {
-    interfaceObjects.admins = admins;
-  })
+
 
 )
 .then(function() {
+  if(isAdmin)
+  {
 	const initialState = {
-		histories: interfaceObjects.odchistory,
-		events: interfaceObjects.events.reverse(),
+		histories: [],
+		events: [],
     poll: interfaceObjects.poll.reverse(),
     quicklinks: interfaceObjects.inductionMaterial.reverse(),
     mandatorytrainings: interfaceObjects.mandatoryTrainings.reverse(),
     gallery: interfaceObjects.gallery.reverse(),
     logs: interfaceObjects.logs.reverse(),
-    downloads: interfaceObjects.downloads
+    downloads: interfaceObjects.downloads,
+    admins: []
 	};
 
 	const store=configureStore(initialState);
 
-if(isAdmin)
-{
+
   ReactDOM.render(
     <Provider store={store}>
     <Router history={browserHistory} routes={routes} />

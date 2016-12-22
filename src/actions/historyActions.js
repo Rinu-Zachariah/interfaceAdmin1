@@ -4,3 +4,6 @@ export function createHistory(history){
 export function deleteHistory(history){
   return {type: 'DELETE_HISTORY',history};
 }
+export function getHistory(history){
+  return {type: 'GET_HISTORY', history};
+}

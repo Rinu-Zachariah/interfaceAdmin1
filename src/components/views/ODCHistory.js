@@ -4,8 +4,10 @@ import * as historyActions from '../../actions/historyActions';
 //import Example from './TableView.js';
 import Accordion from './Accordion.js';
 import RichEditor from './RichText.js';
-import env from '../../environment';
-import init from '../../../tools/init';
+import * as env from '../../environment';
+import * as init from '../../../tools/init';
+import  $ from 'jquery';
+import _ from 'underscore';
 
 class ODCHistory extends Component{
   constructor(props, context) {
@@ -24,6 +26,13 @@ class ODCHistory extends Component{
     return {
       invalidData: true,
     };
+  }
+
+  componentDidMount() {
+    const propObject = this.props;
+    $.get(env[init.env()].history, function(data){
+      propObject.getHistory(data);
+    });
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -54,7 +63,7 @@ class ODCHistory extends Component{
       data: this.state.history,
       success: function(data){
         console.log(data);
-        propObject.dispatch(historyActions.createHistory(data));
+        propObject.createHistory(data);
         clearContentyear.value = "";
         clearContenthtml.value = "";
       },
@@ -110,4 +119,4 @@ function mapStateToProps(state, ownProps){
   };
 
 }
-export default connect(mapStateToProps)(ODCHistory);
+export default connect(mapStateToProps, historyActions)(ODCHistory);

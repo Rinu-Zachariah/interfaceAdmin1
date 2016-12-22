@@ -42,6 +42,13 @@ class EventPage extends Component{
     };
   }
 
+  componentDidMount() {
+    const propObject = this.props;
+    $.get(env[init.env()].allevents, function(data){
+      propObject.getEvents(data);
+    });
+  }
+
   componentWillUpdate(nextProps, nextState) {
     nextState.invalidData = !(nextState.events.startDate && nextState.events.endDate && nextState.events.type && nextState.events.eventText);
   }
@@ -101,7 +108,7 @@ class EventPage extends Component{
     success: function(data){
     }
   });
-    this.props.dispatch(eventsActions.deleteEvents(eventObject));
+    this.props.deleteEvents(eventObject);
   }
 
   onEditEvent(eventObject){
@@ -243,4 +250,4 @@ function mapStateToProps(state,ownProps){
   };
 }
 
-export default connect(mapStateToProps)(EventPage);
+export default connect(mapStateToProps, eventsActions)(EventPage);
