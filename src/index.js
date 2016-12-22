@@ -99,8 +99,7 @@ $.when(
     mandatorytrainings: interfaceObjects.mandatoryTrainings.reverse(),
     gallery: interfaceObjects.gallery.reverse(),
     logs: interfaceObjects.logs.reverse(),
-    downloads: interfaceObjects.downloads,
-    admins: interfaceObjects.admins.reverse()
+    downloads: interfaceObjects.downloads
 	};
 
 	const store=configureStore(initialState);

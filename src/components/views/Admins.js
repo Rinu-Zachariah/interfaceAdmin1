@@ -9,7 +9,6 @@ let singleFieldEdit = true;
 
 class AdminPage extends Component{
   constructor(props, context) {
-    console.log("inside constructor");
     super(props, context);
     this.state = {
       admins:{
@@ -27,8 +26,10 @@ class AdminPage extends Component{
 
   }
   componentDidMount() {
-    console.log("componentDidMount");
-
+    const propObject = this.props;
+    $.get(env[init.env()].admins, function(data){
+      propObject.getAdmin(data);
+    });
   }
 
   onNameChange(event){
@@ -53,7 +54,7 @@ class AdminPage extends Component{
       url: env[init.env()].admins,
       data: this.state.admins,
       success: function(data){
-        propObject.dispatch(adminActions.createAdmin(data));
+        propObject.createAdmin(data);
         clearName.value = "";
         clearFmno.value = "";
       },
@@ -71,7 +72,7 @@ class AdminPage extends Component{
     success: function(data){
     }
   });
-    this.props.dispatch(adminActions.deleteAdmin(adminObject));
+    this.props.deleteAdmin(adminObject);
   }
 
   AdminRow(admin,index){
@@ -90,7 +91,6 @@ class AdminPage extends Component{
 
   render(){
       let admins = this.props.admins;
-
       if(this.state.searchString.length > 0){
           let searchString = this.state.searchString.trim().toLowerCase();
           admins = admins.filter(function(l){
@@ -128,10 +128,9 @@ class AdminPage extends Component{
 }
 
 function mapStateToProps(state,ownProps){
-  console.log("Inside admin");
   return {
     admins: state.admins
-  };
+  }
 }
 
-export default connect(mapStateToProps)(AdminPage);
+export default connect(mapStateToProps, adminActions)(AdminPage);
