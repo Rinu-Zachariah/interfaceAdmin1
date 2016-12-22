@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as eventsActions from '../../actions/eventsActions';
-import $ from 'jquery';
+import  $ from 'jquery';
 import _ from 'underscore';
-import env from '../../environment';
-import init from '../../../tools/init';
+import * as env from '../../environment';
+import * as init from '../../../tools/init';
+import EventDrop from './EventDrop.js';
+
+
 let singleFieldEdit = true;
 
 class EventPage extends Component{
@@ -39,11 +42,16 @@ class EventPage extends Component{
     };
   }
 
+  componentDidMount() {
+    const propObject = this.props;
+    $.get(env[init.env()].allevents, function(data){
+      propObject.getEvents(data);
+    });
+  }
+
   componentWillUpdate(nextProps, nextState) {
     nextState.invalidData = !(nextState.events.startDate && nextState.events.endDate && nextState.events.type && nextState.events.eventText);
   }
-
-
 
   onStartDateChange(event){
     const events = this.state.events;
@@ -81,7 +89,6 @@ class EventPage extends Component{
       url: env[init.env()].events,
       data: this.state.events,
       success: function(data){
-        console.log(data);
         propObject.dispatch(eventsActions.createEvents(data));
         clearText.value = "";
         clearStartDate.value = "";
@@ -94,16 +101,14 @@ class EventPage extends Component{
     });
   }
   onDeleteEvent(eventObject){
-    console.log(eventObject);
     $.ajax({
     url: env[init.env()].events,
     type: "DELETE",
     data: eventObject,
     success: function(data){
-      console.log(data);
     }
   });
-    this.props.dispatch(eventsActions.deleteEvents(eventObject));
+    this.props.deleteEvents(eventObject);
   }
 
   onEditEvent(eventObject){
@@ -147,6 +152,7 @@ class EventPage extends Component{
     this.setState({searchString: event.target.value});
   }
 
+
   eventRow(event,index){
     if(event.isEditing)
     {
@@ -189,15 +195,22 @@ class EventPage extends Component{
 
         events = events.filter(function(l){
              return(l.eventText.toLowerCase().match(searchString) || l.type.toLowerCase().match(searchString));
-
+              // || l.startDate.toLowerCase().match(searchString) || l.endDate.toLowerCase().match(searchString)
         });
 
     }
     return (
         <div>
-          <h2>EVENTS</h2>
-          <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" />
-          <table className="table table-striped table-responsive">
+          <div className="row">
+            <div className="col-md-5"><h2>EVENTS</h2></div>
+            <div className="col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
+          </div>
+          <div className="row">
+            <div className="dropHead"><EventDrop /></div>
+            <a href="../../Template/MainTemplate.csv" download="MainTemplate.csv">Download link</a>
+          </div>
+          <div className="table-responsive">
+          <table className="table table-striped">
             <thead>
               <tr className="table-row">
                 <th>Start Date</th>
@@ -225,6 +238,7 @@ class EventPage extends Component{
               {events.map(this.eventRow)}
             </tbody>
           </table>
+          </div>
         </div>
     );
   }
@@ -236,4 +250,4 @@ function mapStateToProps(state,ownProps){
   };
 }
 
-export default connect(mapStateToProps)(EventPage);
+export default connect(mapStateToProps, eventsActions)(EventPage);

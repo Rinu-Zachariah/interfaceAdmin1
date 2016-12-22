@@ -187,7 +187,22 @@ class InductionPage extends Component{
 
   render(){
     let quicklinks = this.props.quicklinks;
-    console.log(this.state);
+    console.log(this.props.downloads);
+    let odcCount = 0;
+    let agileCount = 0;
+    let domainCount = 0;
+    for (var i = 0; i < this.props.downloads.length; i++) {
+      let category = this.props.downloads[i].category;
+      if(category === 'ODC INDUCTION'){
+        odcCount++;
+      }
+      else if (category === 'AGILE INDUCTION') {
+        agileCount++;
+      }
+      else if (category === 'DOMAIN COE') {
+        domainCount++;
+      }
+    }
 
     if(this.state.searchString.length > 0){
 
@@ -202,8 +217,44 @@ class InductionPage extends Component{
     }
     return (
       <div>
-      <h2>INDUCTION</h2>
-      <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" />
+      <div className="row">
+        <div className="col-md-12"><h2>INDUCTION</h2></div>
+        <div className="row">
+           <div className="col-md-4 col-sm-6 col-xs-12">
+              <div className="info-box">
+                <span className="info-box-icon bg-aqua"><i className="fa fa-2x fa-user-circle"></i></span>
+                <div className="info-box-content">
+                  <span className="info-box-text">ODC INDUCTION</span>
+                  <span className="info-box-number">{odcCount}</span>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-4 col-sm-6 col-xs-12">
+              <div className="info-box">
+                <span className="info-box-icon bg-yellow"><i className="fa fa-2x fa-tasks"></i></span>
+
+                <div className="info-box-content">
+                  <span className="info-box-text">AGILE INDUCTION</span>
+                  <span className="info-box-number">{agileCount}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="clearfix visible-sm-block"></div>
+
+            <div className="col-md-4 col-sm-6 col-xs-12">
+              <div className="info-box">
+                <span className="info-box-icon bg-green"><i className="fa fa-2x fa-book"></i></span>
+
+                <div className="info-box-content">
+                  <span className="info-box-text">DOMAIN COE</span>
+                  <span className="info-box-number">{domainCount}</span>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div className="col-md-offset-5 col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
+      </div>
       <div className="table-responsive">
       <table className="table table-responsive table-sm">
         <thead>
@@ -226,7 +277,8 @@ class InductionPage extends Component{
 
 function mapStateToProps(state,ownProps){
   return {
-    quicklinks: state.quicklinks
+    quicklinks: state.quicklinks,
+    downloads: state.downloads
   };
 }
 

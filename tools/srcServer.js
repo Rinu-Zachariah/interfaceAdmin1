@@ -6,19 +6,21 @@ import open from 'open';
 import mongoose from 'mongoose';
 import configure from '../config';
 import init from './init';
+import $ from 'jquery';
 
 /* eslint-disable no-console */
 let port;
 process.env.NODE_ENV = init.env();
 if(init.env().toString() == 'production'){
   port = 3030;
-
 }
 else {
  port = 6002;
 }
 const app = express();
 const compiler = webpack(config);
+
+
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
@@ -27,9 +29,13 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('*', function(req, res) {
-  res.sendFile(path.join( __dirname, '../src/index.html'));
-});
+
+  app.get('*', function(req, res) {
+    res.sendFile(path.join( __dirname, '../src/index.html'));
+  });
+
+
+
 
 mongoose.connect(configure.database);
 mongoose.connection.on('error', function() {
