@@ -10,6 +10,7 @@ import InductionPage from './components/views/InductionPage';
 import GalleryPage from './components/views/GalleryPage';
 import TrainingsPage from './components/views/TrainingsPage';
 import ContributorsPage from './components/views/ContributorsPage';
+import SuccessStories from './components/views/SuccessStories';
 
 export default(
   <Route path="/" component={App}>
@@ -21,5 +22,6 @@ export default(
     <Route path="gallery" component={GalleryPage} />
     <Route path="trainings" component={TrainingsPage} />
     <Route path="contributors" component={ContributorsPage} />
+    <Route path="successstories" component={SuccessStories}/>
   </Route>
 );

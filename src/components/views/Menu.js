@@ -76,6 +76,14 @@ class ComponentName extends Component{
                             </span>
                         </Link>
                     </li>
+                    <li>
+                       <Link to="/successstories">
+                            <i className="fa fa-hand-peace-o fa-2x"></i>
+                            <span className="nav-text">
+                                Success Stories
+                            </span>
+                        </Link>
+                    </li>
                 </ul>
               </nav>
               </div>
