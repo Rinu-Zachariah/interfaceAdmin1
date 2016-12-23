@@ -1,5 +1,9 @@
 export default function pollReducer(state =[], action){
   switch(action.type){
+    case 'GET_POLLS':{
+      const newState = Object.assign([], state, action.poll);
+      return newState.reverse();
+    }
     case 'CREATE_POLLS':{
         const newState = Object.assign([], state.reverse());
         newState.push(action.poll);

@@ -43,6 +43,13 @@ class PollPage extends Component{
     nextState.invalidData = !(nextState.poll.question && nextState.poll.choice1 && nextState.poll.choice2 && nextState.poll.choice3 && nextState.poll.choice4 && nextState.poll.isActive);
   }
 
+  componentDidMount() {
+    const propObject = this.props;
+    $.get(env[init.env()].polls, function(data){
+      propObject.getPolls(data);
+    });
+  }
+
   onQuestionChange(event){
       const poll = this.state.poll;
       poll.question = event.target.value;
@@ -117,7 +124,7 @@ class PollPage extends Component{
       url: env[init.env()].polls,
       data: polls,
       success: function(data){
-        propObject.dispatch(PollActions.createPolls(data));
+        propObject.createPolls(data);
         clearQues.value = "";
         clearC1.value = "";
         clearC2.value = "";
@@ -192,4 +199,4 @@ function mapStateToProps(state,ownProps){
   };
 }
 
-export default connect(mapStateToProps)(PollPage);
+export default connect(mapStateToProps, PollActions)(PollPage);

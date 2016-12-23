@@ -89,7 +89,7 @@ class EventPage extends Component{
       url: env[init.env()].events,
       data: this.state.events,
       success: function(data){
-        propObject.dispatch(eventsActions.createEvents(data));
+        propObject.createEvents(data);
         clearText.value = "";
         clearStartDate.value = "";
         clearEndDate.value = "";
@@ -121,7 +121,7 @@ class EventPage extends Component{
 
       this.setState({events: events});
       singleFieldEdit = false;
-      this.props.dispatch(eventsActions.isEditingEvents(eventObject));
+      this.props.isEditingEvents(eventObject);
     }
     else {
       alert('Please Finish Editing One Module');
@@ -139,7 +139,7 @@ class EventPage extends Component{
       url: env[init.env()].events,
       data: event,
       success: function(data){
-        propObject.dispatch(eventsActions.editEvents(data));
+        propObject.editEvents(data);
 
       },
       error: function(data){

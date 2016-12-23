@@ -10,3 +10,6 @@ export function isEditingMandatoryTrainings(mandatorytrainings){
 export function editMandatoryTrainings(mandatorytrainings){
   return {type: 'EDIT_MANDATORYTRAININGS',mandatorytrainings};
 }
+export function getTrainings(mandatorytrainings){
+  return {type: 'GET_MANDATORYTRAININGS',mandatorytrainings};
+}

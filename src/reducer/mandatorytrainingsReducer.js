@@ -1,5 +1,10 @@
 export default function mandatorytrainingsReducer(state =[], action){
   switch(action.type){
+    case 'GET_MANDATORYTRAININGS':{
+      const newState = Object.assign([], state, action.mandatorytrainings);
+      return newState.reverse();
+    }
+
     case 'CREATE_MANDATORYTRAININGS':{
         const newState = Object.assign([], state.reverse());
         newState.push(action.mandatorytrainings);

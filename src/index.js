@@ -45,42 +45,26 @@ $.when(
           }
       }),
 
-  // Get polls
-
-  $.get(env[init.env()].polls, function(poll) {
-    interfaceObjects.poll = poll;
-  }),
-
-	// Get inductionmaterial
+  // Get inductionmaterial
 
   $.get(env[init.env()].quicklinks, function(quicklinks) {
     interfaceObjects.inductionMaterial = quicklinks;
   }),
 
-	// Get mandatory trainings
-  $.get(env[init.env()].mandatorytrainings, function(mandatorytrainings) {
-    interfaceObjects.mandatoryTrainings = mandatorytrainings;
-  }),
-
-	// Get gallery images
-  $.get(env[init.env()].gallery, function(gallery) {
-    interfaceObjects.gallery = gallery;
-  }),
-  // Get logs
+	// Get logs
   $.get(env[init.env()].logs, function(logs) {
     interfaceObjects.logs = logs;
   }),
 
-
   // Get SuccessStories
-  $.get(env[init.env()].successstories, function(successstories) {
-    interfaceObjects.successstories = successstories;
-  }),
+ $.get(env[init.env()].successstories, function(successstories) {
+   interfaceObjects.successstories = successstories;
+ }),
 
   // Get DownloadsList
   $.get(env[init.env()].downloads, function(downloads) {
     interfaceObjects.downloads = downloads;
-  }),
+  })
 
 )
 .then(function() {
@@ -89,10 +73,10 @@ $.when(
 	const initialState = {
 		histories: [],
 		events: [],
-    poll: interfaceObjects.poll.reverse(),
-    quicklinks: interfaceObjects.inductionMaterial.reverse(),
-    mandatorytrainings: interfaceObjects.mandatoryTrainings.reverse(),
-    gallery: interfaceObjects.gallery.reverse(),
+    poll: [],
+    quicklinks: [],
+    mandatorytrainings: [],
+    gallery: [],
     logs: interfaceObjects.logs.reverse(),
     successstories: interfaceObjects.successstories.reverse(),
     downloads: interfaceObjects.downloads,
