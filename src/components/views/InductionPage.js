@@ -153,7 +153,8 @@ class InductionPage extends Component{
       obj.src=zip;
     }
 
-    const filename = event.docpath.substring(event.docpath.lastIndexOf('/')+1);
+    const filename = event.docpath.substring(event.docpath.lastIndexOf('\\')+1) ;
+
 
     if(event.isEditing)
     {

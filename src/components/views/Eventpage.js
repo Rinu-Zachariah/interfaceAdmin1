@@ -205,10 +205,12 @@ class EventPage extends Component{
             <div className="col-md-5"><h2>EVENTS</h2></div>
             <div className="col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
           </div>
-          <div className="row">
-            <div className="dropHead"><EventDrop /></div>
-            <a href="../../Template/MainTemplate.csv" download="MainTemplate.csv">Download link</a>
-          </div>
+          <table className="table">
+          <tr className="table-row">
+            <td className="dropHead"><EventDrop /></td>
+            <td className="table-cell"><a href="../../Template/MainTemplate.csv" download="MainTemplate.csv">Download link</a></td>
+          </tr>
+          </table>
           <div className="table-responsive">
           <table className="table table-striped">
             <thead>
