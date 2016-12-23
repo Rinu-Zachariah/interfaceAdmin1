@@ -25,6 +25,7 @@ class SuccessAccordion extends React.Component {
   this.changeDateFormat = this.changeDateFormat.bind(this);
   }
 
+
 changeDateFormat(date){
   var d = new Date(date);
   //alert(d);

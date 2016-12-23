@@ -1,8 +1,6 @@
-import env from '../environment';
-import init from '../../tools/init';
-import $ from 'jquery';
 
 export default function adminReducer(state =[], action){
+  console.log("adminReducer");
   switch(action.type){
 
     case 'GET_ADMIN':{
@@ -10,7 +8,7 @@ export default function adminReducer(state =[], action){
       return newState;
 
     }
-    
+
     case 'CREATE_ADMIN':{
         const newState = Object.assign([], state.reverse());
         newState.push(action.admin);

@@ -1,4 +1,5 @@
 export default function eventsReducer(state =[], action){
+  console.log("eventssReducer");
   switch(action.type){
     case 'GET_EVENTS':{
       const newState = Object.assign([], state, action.event);

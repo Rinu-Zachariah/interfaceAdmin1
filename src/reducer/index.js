@@ -2,16 +2,15 @@ import {combineReducers} from 'redux';
 import histories from './historyReducer';
 import events from './eventsReducer';
 import poll from './pollReducer';
-import quicklinks from './quicklinksReducer';
-import gallery from './galleryReducer';
+import induction from './quicklinksReducer';
 import mandatorytrainings from './mandatorytrainingsReducer';
-import admins from './adminReducer';
+import gallery from './galleryReducer';
 import logs from './logsReducer';
-import download from './downloadReducer';
+import admins from './adminReducer';
 import successstories from './successReducer';
 
 const rootReducer = combineReducers({
-    histories ,events, poll, quicklinks, gallery, mandatorytrainings,successstories, admins
+    histories ,events, poll, induction, mandatorytrainings, gallery,successstories, admins
   });
 
 export default rootReducer;

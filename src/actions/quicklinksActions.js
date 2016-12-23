@@ -10,3 +10,6 @@ export function isEditingQuicklinks(quicklinks){
 export function editQuicklinks(quicklinks){
   return {type: 'EDIT_QUICKLINKS',quicklinks};
 }
+export function getInduction(induction){
+  return {type: 'GET_INDUCTION',induction};
+}

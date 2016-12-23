@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import DatePicker from './DatePicker.js';
+import * as logsActions from '../../actions/logActions';
+import env from '../../environment';
+import init from '../../../tools/init';
 import moment from 'moment';
 import momentRange from 'moment-range';
 import FusionCharts from 'fusioncharts';
@@ -32,7 +35,13 @@ class HomePage extends Component{
   }
 
   componentDidMount(){
-    this.getGraph();
+    const propObject = this.props;
+    $.when($.get(env[init.env()].logs, function(data){
+      propObject.getLogs(data);
+    })
+  ).then(function(){
+      this.getGraph();
+    })
   }
 
   getRange(range){
@@ -215,4 +224,4 @@ function mapStateToProps(state,ownProps){
   };
 }
 
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps, logsActions)(HomePage);

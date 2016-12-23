@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as galleryActions from '../../actions/galleryActions';
+import * as successActions from '../../actions/successActions';
 import SuccessAccordion from './SuccessAccordion.js';
 import env from '../../environment';
 import init from '../../../tools/init';
@@ -17,6 +17,16 @@ class SuccessStories extends Component{
 
     //};
   }
+  
+  componentDidMount() {
+    const propObject = this.props;
+    $.get(env[init.env()].successstories, function(data){
+      console.log("Inside ss");
+      console.log(data);
+      propObject.getStory(data);
+    });
+  }
+
   successRow(successstory,index){
     return (
       <div key={index}>
@@ -47,4 +57,4 @@ class SuccessStories extends Component{
   }
 
 
-export default connect(mapStateToProps)(SuccessStories);
+export default connect(mapStateToProps, successActions)(SuccessStories);

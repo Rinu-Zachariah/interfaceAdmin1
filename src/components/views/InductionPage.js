@@ -41,6 +41,24 @@ class InductionPage extends Component{
     };
   }
 
+  componentDidMount() {
+    console.log("Initial State");
+    const propObject = this.props;
+    const inductionObject = {};
+    $.when(
+      $.get(env[init.env()].quicklinks, function(data){
+        inductionObject.quicklinks = data;
+      }),
+
+      $.get(env[init.env()].downloads, function(data){
+        inductionObject.downloads = data;
+      })
+    ).then(function(){
+      console.log(inductionObject);
+      propObject.getInduction(inductionObject);
+    });
+  }
+
   onDocPath(event){
     const quicklinks = this.state.quicklinks;
     quicklinks.docpath = event.target.value;
@@ -67,7 +85,7 @@ class InductionPage extends Component{
       data: this.state.quicklinks,
       success: function(data){
         console.log(data);
-        propObject.dispatch(quicklinksActions.createQuicklinks(data));
+        propObject.createQuicklinks(data);
       },
       error: function(data){
         console.log(data);
@@ -87,7 +105,7 @@ class InductionPage extends Component{
         console.log(data);
       }
     });
-    this.props.dispatch(quicklinksActions.deleteQuicklinks(quicklinks))
+    this.props.deleteQuicklinks(quicklinks);
   }
 
   onEditEvent(eventObject){
@@ -99,7 +117,7 @@ class InductionPage extends Component{
 
       this.setState({quicklinks: quicklinks});
       singleFieldEdit = false;
-      this.props.dispatch(quicklinksActions.isEditingQuicklinks(eventObject));
+      this.props.isEditingQuicklinks(eventObject);
     }
     else {
       alert('Please Finish Editing One Module');
@@ -143,22 +161,22 @@ class InductionPage extends Component{
     let month = date.getMonth()+1;
     let year = date.getFullYear();
     console.log(year);
-    for ( var i = 0; i < this.props.quicklinks.length; i++) {
+    for ( var i = 0; i < this.props.induction.quicklinks.length; i++) {
       let count = 0;
-      let selectedCategory = this.props.quicklinks[i].section_header;
+      let selectedCategory = this.props.induction.quicklinks[i].section_header;
       if (category === selectedCategory ) {
-        for (var j = 0; j < this.props.downloads.length; j++) {
-          let label = this.props.quicklinks[i].label;
-          let monthDownloads = moment(this.props.downloads[j].downloaded_at);
+        for (var j = 0; j < this.props.induction.downloads.length; j++) {
+          let label = this.props.induction.quicklinks[i].label;
+          let monthDownloads = moment(this.props.induction.downloads[j].downloaded_at);
           let nmonth = monthDownloads.month()+1;
           let nyear = monthDownloads.year();
           console.log(nyear);
-          if ((label === this.props.downloads[j].name) && (month === nmonth) && (year === nyear)) {
+          if ((label === this.props.induction.downloads[j].name) && (month === nmonth) && (year === nyear)) {
             count++;
           }
         }
         downloadDocs.push({
-          "label":this.props.quicklinks[i].label,
+          "label":this.props.induction.quicklinks[i].label,
           "value":count
         })
       }
@@ -240,12 +258,13 @@ class InductionPage extends Component{
   }
 
   render(){
-    let quicklinks = this.props.quicklinks;
+    console.log(this.props.induction);
+    let quicklinks = this.props.induction.quicklinks;
     let odcCount = 0;
     let agileCount = 0;
     let domainCount = 0;
-    for (var i = 0; i < this.props.downloads.length; i++) {
-      let category = this.props.downloads[i].category;
+    for (var i = 0; i < this.props.induction.downloads.length; i++) {
+      let category = this.props.induction.downloads[i].category;
       if(category === 'ODC INDUCTION'){
         odcCount++;
       }
@@ -332,9 +351,8 @@ class InductionPage extends Component{
 
 function mapStateToProps(state,ownProps){
   return {
-    quicklinks: state.quicklinks,
-    downloads: state.downloads
+    induction: state.induction
   };
 }
 
-export default connect(mapStateToProps)(InductionPage);
+export default connect(mapStateToProps, quicklinksActions)(InductionPage);

@@ -25,6 +25,6 @@ export default(
     <Route path="trainings" component={TrainingsPage} />
     <Route path="contributors" component={ContributorsPage} />
     <Route path="successstories" component={SuccessStories}/>
-    <Route path="admins" component={AdminPage} />    
+    <Route path="admins" component={AdminPage} />
   </Route>
 );
