@@ -292,7 +292,7 @@ input[type=text] {
   float: right; }
 
 .fa-2x {
-  padding: 8%;
+  padding: 5%;
   font-size: 1em !important;
   color: white; }
 
@@ -304,7 +304,7 @@ input[type=text] {
   text-align: center;
   vertical-align: middle;
   font-size: 1.5em;
-  padding: 8%; }
+  padding: 5%; }
 
 .main-menu:hover, nav.main-menu.expanded {
   width: 250px;
@@ -393,5 +393,12 @@ nav ul, nav li {
   font-style: normal;
   font-weight: 300;
   src: local("Titillium WebLight"), local("TitilliumWeb-Light"), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format("woff"); }
+.spanLeft {
+  float: left;
+  font-weight: bold; }
+
+.spanRight {
+  float: right;
+  font-weight: bold; }
 
 /*# sourceMappingURL=main.css.map */

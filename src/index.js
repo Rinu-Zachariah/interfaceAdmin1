@@ -8,6 +8,7 @@ import histories from './reducer/historyReducer';
 import events from './reducer/eventsReducer';
 import gallery from './reducer/galleryReducer';
 import poll from './reducer/pollReducer';
+import successstories from './reducer/successReducer';
 import quicklinks from './reducer/quicklinksReducer';
 import mandatorytrainings from './reducer/mandatorytrainingsReducer';
 import env from './environment';
@@ -69,11 +70,17 @@ $.when(
   $.get(env[init.env()].logs, function(logs) {
     interfaceObjects.logs = logs;
   }),
+
+
+  // Get SuccessStories
+  $.get(env[init.env()].successstories, function(successstories) {
+    interfaceObjects.successstories = successstories;
+  }),
+
   // Get DownloadsList
   $.get(env[init.env()].downloads, function(downloads) {
     interfaceObjects.downloads = downloads;
   }),
-
 
 )
 .then(function() {
@@ -87,8 +94,10 @@ $.when(
     mandatorytrainings: interfaceObjects.mandatoryTrainings.reverse(),
     gallery: interfaceObjects.gallery.reverse(),
     logs: interfaceObjects.logs.reverse(),
+    successstories: interfaceObjects.successstories.reverse(),
     downloads: interfaceObjects.downloads,
     admins: []
+
 	};
 
 	const store=configureStore(initialState);
