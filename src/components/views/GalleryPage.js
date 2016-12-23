@@ -20,6 +20,13 @@ class GalleryPage extends Component{
     };
   }
 
+  componentDidMount() {
+    const propObject = this.props;
+    $.get(env[init.env()].gallery, function(data){
+      propObject.getGallery(data);
+    });
+  }
+
   galleryRow(event,index){
     return(
       <tr key={index}>
@@ -61,4 +68,4 @@ function mapStateToProps(state,ownProps){
   };
 }
 
-export default connect(mapStateToProps)(GalleryPage);
+export default connect(mapStateToProps, galleryActions)(GalleryPage);

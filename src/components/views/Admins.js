@@ -116,7 +116,7 @@ class AdminPage extends Component{
             <tr className="table-row">
               <td className="table-cell"><input className="form-control eventHead" ref="clearName" id="clearName" onChange={this.onNameChange} /></td>
               <td className="table-cell"><input type="number" className="form-control" ref="clearFmno" id="clearFmno" onChange={this.onFmnoChange} /></td>
-              <td className="table-cell"><button className="btn btn-primary" onClick={this.onClickSave} id="save" value="save" disabled={this.state.invalidData}>Add Event</button></td>
+              <td className="table-cell"><button className="btn btn-primary" onClick={this.onClickSave} id="save" value="save" disabled={this.state.invalidData}>Add Admin</button></td>
             </tr>
             {admins.map(this.AdminRow)}
           </tbody>

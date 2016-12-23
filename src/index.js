@@ -38,22 +38,17 @@ $.when(
           }
       }),
 
-  // Get polls
 
-  $.get(env[init.env()].polls, function(poll) {
-    interfaceObjects.poll = poll;
+	// Get logs
+  $.get(env[init.env()].logs, function(logs) {
+    interfaceObjects.logs = logs;
   }),
 
-	// Get mandatory trainings
-  $.get(env[init.env()].mandatorytrainings, function(mandatorytrainings) {
-    interfaceObjects.mandatoryTrainings = mandatorytrainings;
-  }),
 
-	// Get gallery images
-  $.get(env[init.env()].gallery, function(gallery) {
-    interfaceObjects.gallery = gallery;
-  }),
-
+  // Get DownloadsList
+  $.get(env[init.env()].downloads, function(downloads) {
+    interfaceObjects.downloads = downloads;
+  })
 
 )
 .then(function() {
@@ -62,12 +57,13 @@ $.when(
 	const initialState = {
 		histories: [],
 		events: [],
-    poll: interfaceObjects.poll.reverse(),
     induction: {quicklinks:[],downloads:[]},
-    mandatorytrainings: interfaceObjects.mandatoryTrainings.reverse(),
-    gallery: interfaceObjects.gallery.reverse(),
     logs: [],
     successstories: [],
+    poll: [],
+    mandatorytrainings: [],
+    gallery: [],
+    downloads: interfaceObjects.downloads,
     admins: []
 	};
 

@@ -39,7 +39,7 @@ import dropZoneStyles from '../../css/dropzone.css';
 
         // Simple callbacks work too, of course
         this.callback = (data) => {
-          let url = "modules/main/dlc/Induction_Material/"+data.name;
+          let url = "modules\\main\\dlc\\Induction_Material\\"+data.name;
           const quicklinks = this.state.quicklinks;
           quicklinks.docpath = url;
           this.setState({quicklinks: quicklinks});

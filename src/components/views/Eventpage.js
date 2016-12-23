@@ -89,7 +89,7 @@ class EventPage extends Component{
       url: env[init.env()].events,
       data: this.state.events,
       success: function(data){
-        propObject.dispatch(eventsActions.createEvents(data));
+        propObject.createEvents(data);
         clearText.value = "";
         clearStartDate.value = "";
         clearEndDate.value = "";
@@ -121,7 +121,7 @@ class EventPage extends Component{
 
       this.setState({events: events});
       singleFieldEdit = false;
-      this.props.dispatch(eventsActions.isEditingEvents(eventObject));
+      this.props.isEditingEvents(eventObject);
     }
     else {
       alert('Please Finish Editing One Module');
@@ -139,7 +139,7 @@ class EventPage extends Component{
       url: env[init.env()].events,
       data: event,
       success: function(data){
-        propObject.dispatch(eventsActions.editEvents(data));
+        propObject.editEvents(data);
 
       },
       error: function(data){
@@ -205,10 +205,12 @@ class EventPage extends Component{
             <div className="col-md-5"><h2>EVENTS</h2></div>
             <div className="col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
           </div>
-          <div className="row">
-            <div className="dropHead"><EventDrop /></div>
-            <a href="../../Template/MainTemplate.csv" download="MainTemplate.csv">Download link</a>
-          </div>
+          <table className="table">
+          <tr className="table-row">
+            <td className="dropHead"><EventDrop /></td>
+            <td className="table-cell"><a href="../../Template/MainTemplate.csv" download="MainTemplate.csv">Download link</a></td>
+          </tr>
+          </table>
           <div className="table-responsive">
           <table className="table table-striped">
             <thead>

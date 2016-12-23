@@ -13,7 +13,8 @@ module.exports.development = {
       logs:"http://dev-sandbox-lx61.amdc.mckinsey.com:4000/logs",
       successstories:"http://dev-sandbox-lx61.amdc.mckinsey.com:4000/successstories",
       admins: "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/admins",
-      downloads: "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/downloads"
+      downloads: "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/downloads",
+      uploadEvent: "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/uploadEvent"
 };
 
 module.exports.production = {
@@ -28,7 +29,8 @@ module.exports.production = {
       logs:"http://dev-sandbox-lx61.amdc.mckinsey.com:3000/logs",
       successstories:"http://dev-sandbox-lx61.amdc.mckinsey.com:3000/successstories",
       admins: "http://dev-sandbox-lx61.amdc.mckinsey.com:3000/admins",
-      downloads: "http://dev-sandbox-lx61.amdc.mckinsey.com:3000/downloads"
+      downloads: "http://dev-sandbox-lx61.amdc.mckinsey.com:3000/downloads",
+      uploadEvent: "http://dev-sandbox-lx61.amdc.mckinsey.com:3000/uploadEvent"
 };
 
   module.exports.localhost = {
@@ -43,5 +45,6 @@ module.exports.production = {
         logs:"http://localhost:4000/logs",
         successstories:"http://localhost:4000/successstories",
         admins: "http://localhost:4000/admins",
-        downloads: "http://localhost:4000/downloads"
+        downloads: "http://localhost:4000/downloads",
+        uploadEvent: "http://localhost:4000/uploadEvent"
   };

@@ -42,6 +42,13 @@ class TrainingsPage extends Component{
     nextState.invalidData = !(nextState.mandatorytrainings.created_at && nextState.mandatorytrainings.link && nextState.mandatorytrainings.name && nextState.mandatorytrainings.priority);
   }
 
+  componentDidMount() {
+    const propObject = this.props;
+    $.get(env[init.env()].mandatorytrainings, function(data){
+      propObject.getTrainings(data);
+    });
+  }
+
   createdAtDate(event){
     const mandatorytrainings = this.state.mandatorytrainings;
     mandatorytrainings.created_at = event.target.value;
@@ -77,7 +84,7 @@ class TrainingsPage extends Component{
       url: env[init.env()].mandatorytrainings,
       data: this.state.mandatorytrainings,
       success: function(data){
-        propObject.dispatch(mandatorytrainingActions.createMandatoryTrainings(data));
+        propObject.createMandatoryTrainings(data);
         clearText.value = "";
         clearStartDate.value = "";
         clearText1.value = "";
@@ -98,7 +105,7 @@ class TrainingsPage extends Component{
       success: function(data){
       }
     });
-    this.props.dispatch(mandatorytrainingActions.deleteMandatoryTrainings(mandatorytrainings));
+    this.props.deleteMandatoryTrainings(mandatorytrainings);
   }
 
   onEditEvent(eventObject){
@@ -111,7 +118,7 @@ class TrainingsPage extends Component{
 
       this.setState({mandatorytrainings: mandatorytrainings});
       singleFieldEdit = false;
-      this.props.dispatch(mandatorytrainingActions.isEditingMandatoryTrainings(eventObject));
+      this.props.isEditingMandatoryTrainings(eventObject);
     }
     else {
       alert('Please Finish Editing One Module');
@@ -129,7 +136,7 @@ class TrainingsPage extends Component{
       url: env[init.env()].mandatorytrainings,
       data: mandatorytraining,
       success: function(data){
-        propObject.dispatch(mandatorytrainingActions.editMandatoryTrainings(data));
+        propObject.editMandatoryTrainings(data);
       },
       error: function(data){
         alert('error');
@@ -236,4 +243,4 @@ function mapStateToProps(state,ownProps){
   };
 }
 
-export default connect(mapStateToProps)(TrainingsPage);
+export default connect(mapStateToProps, mandatorytrainingActions)(TrainingsPage);

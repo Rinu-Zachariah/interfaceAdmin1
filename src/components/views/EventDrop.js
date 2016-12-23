@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import DropzoneComponent from 'react-dropzone-component';
 import {connect} from 'react-redux';
 import dropZoneStyles from '../../css/dropzone.css';
+import * as env from '../../environment';
+import * as init from '../../../tools/init';
 
  export default class EventDrop extends Component{
     constructor(props) {
@@ -22,7 +24,7 @@ import dropZoneStyles from '../../css/dropzone.css';
         this.componentConfig = {
             iconFiletypes: ['.csv'],
             showFiletypeIcon: true,
-            postUrl: 'http://localhost:4000/uploadEvent'
+            postUrl: env[init.env()].uploadEvent
         };
 
         // If you want to attach multiple callbacks, simply
