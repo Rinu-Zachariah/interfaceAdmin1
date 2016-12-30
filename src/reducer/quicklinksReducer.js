@@ -30,6 +30,13 @@ export default function quicklinksReducer(state =[], action){
       return newState;
     }
 
+    case 'GET_INDUCTION':{
+      console.log("inside GetInduction");
+      const newState = Object.assign({}, state, action.induction);
+      console.log(newState);
+      return newState;
+
+    }
 
     default: return state;
   }

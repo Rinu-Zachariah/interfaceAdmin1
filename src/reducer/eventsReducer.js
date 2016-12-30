@@ -1,12 +1,15 @@
 export default function eventsReducer(state =[], action){
   switch(action.type){
+    case 'GET_EVENTS':{
+      const newState = Object.assign([], state, action.event);
+      return newState.reverse();
+    }
     case 'CREATE_EVENTS':{
         const newState = Object.assign([], state.reverse());
         newState.push(action.event);
         return newState.reverse();
     }
     case 'DELETE_EVENTS': {
-
       const newState = Object.assign([], state);
       const indexOfEventToDelete = state.findIndex(event => {return event._id == action.event._id;});
       newState.splice(indexOfEventToDelete, 1);
