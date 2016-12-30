@@ -58,7 +58,7 @@ $.when(
 		histories: [],
 		events: [],
     induction: {quicklinks:[],downloads:[]},
-    logs: [],
+    logs: interfaceObjects.logs,
     successstories: [],
     poll: [],
     mandatorytrainings: [],

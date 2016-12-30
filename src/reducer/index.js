@@ -10,7 +10,8 @@ import admins from './adminReducer';
 import successstories from './successReducer';
 
 const rootReducer = combineReducers({
-    histories ,events, poll, induction, mandatorytrainings, gallery,successstories, admins
+    histories ,events, poll, induction, mandatorytrainings, gallery,successstories, admins, logs: (state = {}) => state
+
   });
 
 export default rootReducer;

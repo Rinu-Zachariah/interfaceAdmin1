@@ -1,6 +1,5 @@
 
 export default function adminReducer(state =[], action){
-  console.log("adminReducer");
   switch(action.type){
 
     case 'GET_ADMIN':{

@@ -23,7 +23,7 @@ class TrainingsPage extends Component{
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       mandatorytrainings: {
-        created_at: {},
+        created_at: '',
         link: '',
         name: '',
         priority: ''
@@ -226,7 +226,7 @@ class TrainingsPage extends Component{
               <option>low</option>
             </select>
             </td>
-            <td className="col-md-2"><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add Event</button></td>
+            <td className="col-md-2"><button className="btn btn-primary" onClick={this.onClickSave} value="save" disabled={this.state.invalidData}>Add Training</button></td>
           </tr>
           {mandatorytrainings.map(this.mandatorytrainingsRow)}
         </tbody>

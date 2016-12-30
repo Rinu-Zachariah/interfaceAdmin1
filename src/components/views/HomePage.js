@@ -35,13 +35,8 @@ class HomePage extends Component{
   }
 
   componentDidMount(){
-    const propObject = this.props;
-    $.when($.get(env[init.env()].logs, function(data){
-      propObject.getLogs(data);
-    })
-  ).then(function(){
-      this.getGraph();
-    })
+    this.getGraph();
+
   }
 
   getRange(range){
@@ -197,7 +192,7 @@ class HomePage extends Component{
     return (
       <div>
         <h1>Home</h1>
-        <p>Total Number of users: <strong>{this.props.logs.length}</strong></p>
+        <p>Total Number of visits: <strong>{this.props.logs.length}</strong></p>
         <button className="btn btn-primary" onClick={this.onClick}>Show Calendar</button>
         { this.state.showDatePicker ? <DatePicker getRange={this.getRange} minimumDate = {this.props.logs[this.props.logs.length-1]} /> : null }
         <div id="chart-container">FusionCharts XT will load here!</div>
@@ -224,4 +219,4 @@ function mapStateToProps(state,ownProps){
   };
 }
 
-export default connect(mapStateToProps, logsActions)(HomePage);
+export default connect(mapStateToProps)(HomePage);

@@ -1,5 +1,4 @@
 export default function successReducer(state =[], action){
-  console.log("successReducer");
   switch(action.type){
     case 'GET_STORIES':{
       const newState = Object.assign([], state, action.successstory);
