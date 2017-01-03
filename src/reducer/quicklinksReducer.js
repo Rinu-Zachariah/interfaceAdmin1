@@ -2,7 +2,7 @@ export default function quicklinksReducer(state =[], action){
   switch(action.type){
 
     case 'CREATE_QUICKLINKS':{
-        const newState = Object.assign([], state.reverse());
+        const newState = Object.assign([], state.quicklinks.reverse());
         newState.push(action.quicklinks);
         return newState.reverse();
     }
@@ -10,7 +10,7 @@ export default function quicklinksReducer(state =[], action){
     case 'DELETE_QUICKLINKS': {
 
       const newState = Object.assign([], state);
-      const indexOfEventToDelete = state.findIndex(quicklinks => {return quicklinks._id == action.quicklinks._id;});
+      const indexOfEventToDelete = state.quicklinks.findIndex(quicklinks => {return quicklinks._id == action.quicklinks._id;});
       newState.splice(indexOfEventToDelete, 1);
       //browserHistory.push('/cats');
       return newState;
@@ -18,14 +18,14 @@ export default function quicklinksReducer(state =[], action){
 
     case 'IS_EDITING_QUICKLINKS': {
       const newState = Object.assign([], state);
-      const indexOfEventToDelete = state.findIndex(quicklinks => {return quicklinks._id == action.quicklinks._id;});
+      const indexOfEventToDelete = state.quicklinks.findIndex(quicklinks => {return quicklinks._id == action.quicklinks._id;});
       newState[indexOfEventToDelete].isEditing = true;
       return newState;
     }
 
     case 'EDIT_QUICKLINKS': {
       const newState = Object.assign([], state);
-      const indexOfEventToEdit = state.findIndex(quicklinks => {return quicklinks._id == action.quicklinks._id;});
+      const indexOfEventToEdit = state.quicklinks.findIndex(quicklinks => {return quicklinks._id == action.quicklinks._id;});
       newState[indexOfEventToEdit] = action.quicklinks;
       return newState;
     }

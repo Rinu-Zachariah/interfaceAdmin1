@@ -17,6 +17,7 @@ class EventPage extends Component{
     this.onStartDateChange = this.onStartDateChange.bind(this);
     this.onEndDateChange = this.onEndDateChange.bind(this);
     this.onTypeChange = this.onTypeChange.bind(this);
+    this.onPriorityChange = this.onPriorityChange.bind(this);
     this.onEventTextChange = this.onEventTextChange.bind(this);
     this.onClickSave = this.onClickSave.bind(this);
     this.onDeleteEvent = this.onDeleteEvent.bind(this);
@@ -30,7 +31,8 @@ class EventPage extends Component{
         eventText: '',
         startDate: '' ,
         endDate: '',
-        type: ''
+        type: '',
+        priority:''
       },
       searchString: ''
     };
@@ -50,7 +52,7 @@ class EventPage extends Component{
   }
 
   componentWillUpdate(nextProps, nextState) {
-    nextState.invalidData = !(nextState.events.startDate && nextState.events.endDate && nextState.events.type && nextState.events.eventText);
+    nextState.invalidData = !(nextState.events.startDate && nextState.events.endDate && nextState.events.type && nextState.events.eventText && nextState.events.priority);
   }
 
   onStartDateChange(event){
@@ -71,6 +73,13 @@ class EventPage extends Component{
     this.setState({events: events});
   }
 
+  onPriorityChange(event){
+    const events = this.state.events;
+    events.priority = event.target.value;
+    this.setState({events: events});
+    console.log(events);
+  }
+
   onEventTextChange(event){
     const events = this.state.events;
     events.eventText = event.target.value;
@@ -79,11 +88,13 @@ class EventPage extends Component{
 
 
   onClickSave(){
+    console.log(this.props);
     const propObject = this.props;
     const clearText = this.refs.clearText;
     const clearStartDate = this.refs.clearStartDate;
     const clearEndDate = this.refs.clearEndDate;
     const clearSelect = this.refs.clearSelect;
+    const clearSelect1 = this.refs.clearSelect1;
     $.ajax({
       type: "POST",
       url: env[init.env()].events,
@@ -94,6 +105,8 @@ class EventPage extends Component{
         clearStartDate.value = "";
         clearEndDate.value = "";
         clearSelect.value = "";
+        clearSelect1.value = "";
+        console.log(data);
       },
       error: function(data){
         alert('error');
@@ -169,6 +182,14 @@ class EventPage extends Component{
             <option>Others</option>
           </select>
           </td>
+          <td className="table-cell">
+          <select className="form-control" onChange={this.onPriorityChange} value={this.state.events.priority}>
+            <option hidden>Please select</option>
+            <option>High</option>
+            <option>Medium</option>
+            <option>Low</option>
+          </select>
+          </td>
           <td className="table-cell"><input className="form-control eventHead" onChange={this.onEventTextChange} value={this.state.events.eventText}/></td>
           <td><button className="btn btn-primary" onClick={()=>{this.onClickEditSave(event._id)}} id="save" value="save" disabled={this.state.invalidData}>Done</button></td>
         </tr>
@@ -179,6 +200,7 @@ class EventPage extends Component{
         <td className="table-cell">{event.startDate.split("T")[0]}</td>
         <td className="table-cell">{event.endDate.split("T")[0]}</td>
         <td className="table-cell">{event.type}</td>
+        <td className="table-cell">{event.priority}</td>
         <td className="table-cell">{event.eventText}</td>
         <td><button className="btn btn-danger" onClick={()=>{this.onDeleteEvent(event)}} value="delete">Remove</button></td>
         <td><button className="btn btn-warning" onClick={()=>{this.onEditEvent(event)}} >Edit</button></td>
@@ -215,6 +237,7 @@ class EventPage extends Component{
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Type</th>
+                <th>Priority</th>
                 <th>Event</th>
               </tr>
             </thead>
@@ -223,12 +246,20 @@ class EventPage extends Component{
                 <td className="table-cell"><input type="date" className="form-control" ref="clearStartDate" id="clearStartDate" onChange={this.onStartDateChange} /></td>
                 <td className="table-cell"><input type="date" className="form-control" ref="clearEndDate" id="clearEndDate" onChange={this.onEndDateChange} /></td>
                 <td className="table-cell">
-                <select className="form-control" ref="clearSelect" id="clearSelect" onChange={this.onTypeChange}>
+                <select className="form-control" ref="clearSelect1" id="clearSelect1" onChange={this.onTypeChange}>
                   <option hidden>Please select</option>
                   <option>Birthday</option>
                   <option>Certification</option>
                   <option>Event</option>
-                  <option>Others</option>
+                  <option>Other</option>
+                </select>
+                </td>
+                <td className="table-cell">
+                <select className="form-control" ref="clearSelect" id="clearSelect" onChange={this.onPriorityChange}>
+                  <option hidden>Please select</option>
+                  <option>High</option>
+                  <option>Medium</option>
+                  <option>Low</option>
                 </select>
                 </td>
                 <td className="table-cell"><input className="form-control eventHead" ref="clearText" id="clearText" onChange={this.onEventTextChange}/></td>
