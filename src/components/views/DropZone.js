@@ -49,15 +49,9 @@ import dropZoneStyles from '../../css/dropzone.css';
           quicklinks: {docpath: '',
           label: '' ,
           section_header: ''
-          }
+          },
+          invalidData: true
         };
-    }
-
-
-    getInitialState() {
-      return {
-        invalidData: true,
-      };
     }
 
     componentWillUpdate(nextProps, nextState) {

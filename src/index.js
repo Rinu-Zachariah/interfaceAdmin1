@@ -45,10 +45,10 @@ $.when(
   }),
 
 
-  // Get DownloadsList
-  $.get(env[init.env()].downloads, function(downloads) {
-    interfaceObjects.downloads = downloads;
-  })
+  // // Get DownloadsList
+  // $.get(env[init.env()].downloads, function(downloads) {
+  //   interfaceObjects.downloads = downloads;
+  // })
 
 )
 .then(function() {
@@ -63,12 +63,12 @@ $.when(
     poll: [],
     mandatorytrainings: [],
     gallery: [],
-    downloads: interfaceObjects.downloads,
+    downloads: [],
     admins: []
 	};
 
 	const store=configureStore(initialState);
-  console.log(store.getState());
+  // console.log(store.getState());
 
 
   ReactDOM.render(

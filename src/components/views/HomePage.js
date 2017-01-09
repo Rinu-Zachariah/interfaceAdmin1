@@ -6,14 +6,11 @@ import env from '../../environment';
 import init from '../../../tools/init';
 import moment from 'moment';
 import momentRange from 'moment-range';
-import FusionCharts from 'fusioncharts';
-import carbon from 'fusioncharts/themes/fusioncharts.theme.carbon.js';
-import fint from 'fusioncharts/themes/fusioncharts.theme.fint.js';
-import ocean from 'fusioncharts/themes/fusioncharts.theme.ocean.js';
-import zune from 'fusioncharts/themes/fusioncharts.theme.zune.js';
-require("fusioncharts/fusioncharts.charts")(FusionCharts);
+import Chart from 'chart.js';
+import {Line} from 'react-chartjs-2';
 
 let logData = [];
+let logLabel = [];
 
 class HomePage extends Component{
   constructor(props, context){
@@ -30,7 +27,8 @@ class HomePage extends Component{
         startDate: '',
         endDate: '',
       },
-        showDatePicker:false
+        showDatePicker:false,
+        data:{}
     };
   }
 
@@ -60,38 +58,35 @@ class HomePage extends Component{
 
   getGraph(){
     logData.length = 0;
+    logLabel.length = 0;
     let week = moment().subtract(7,'days').format('L');
     let count = 1;
     let dcount = 0;
-    for ( var i = 0; i < this.props.logs.length; i++) {
+    for ( let i = this.props.logs.length-1; i > 0; i--) {
       const created_at = moment(this.props.logs[i].created_at).format('L');
       if(!this.state.log.startDate){
         if(i>0){
           let prevdate = moment(this.props.logs[i-1].created_at).format('L');
-          if(created_at >= week){
-            let newdate = created_at;
-            if(prevdate === newdate){
+          if(moment(created_at).isAfter(week,'day')){
+            let newdate = moment(created_at);
+            if(moment(prevdate).isSame(newdate)){
               count++;
             }
             else{
-              logData.push({
-                "label":created_at,
-                "value":count
-              })
+              logData.push(count);
+              logLabel.push(created_at);
               count = 1;
             }
           }
         }
         else{
           let nextdate = moment(this.props.logs[1].created_at).format('L');
-          if(created_at === nextdate){
+          if(moment(created_at).isSame(nextdate)){
             count++;
           }
           else{
-            logData.push({
-              "label":created_at,
-              "value":count
-            })
+            logData.push(count);
+            logLabel.push(created_at);
             count = 1;
           }
         }
@@ -101,65 +96,68 @@ class HomePage extends Component{
         const startDate = moment(this.state.log.startDate).format('L');
         const endDate = moment(this.state.log.endDate).format('L');
         let elsedate = moment(startDate).subtract(1,'days').format('L');
-        if(created_at >= startDate && created_at <= endDate){
+        if(moment(created_at).isAfter(startDate) && moment(created_at).isBefore(endDate)){
           if(i>0){
             let prevdate = moment(this.props.logs[i-1].created_at).format('L');
-            if(prevdate === created_at){
+            if(moment(created_at).isSame(prevdate)){
               count++;
             }
             else {
-              logData.push({
-                "label":prevdate,
-                "value":count
-              })
+              logData.push(count);
+              logLabel.push(prevdate);
               count = 1;
             }
           }
         }
         else if(elsedate && dcount === 0){
-          logData.push({
-            "label":moment(this.props.logs[i-1].created_at).format('L'),
-            "value":count
-          })
+          const value = moment(this.props.logs[i-1].created_at).format('L');
+          logData.push(count);
+          logLabel.push(value);
           dcount++;
         }
       }
     }
-    FusionCharts.ready(function() {
-    let fusioncharts = new FusionCharts({
-        type: 'line',
-        renderAt: 'chart-container',
-        width: '500',
-        height: '300',
-        dataFormat: "json",
-        dataSource:{
-          "chart":{
-            caption: "Logged User Analysis",
-            subCaption: "Rangewise",
-            xAxisName: "Date",
-            yAxisName: "Number of logged users",
-            palette: "5",
-            theme: "zune",
-            bgColor: "#eeeeee",
-            canvasbgColor: "#1790e1",
-            canvasbgAlpha: "10",
-            showCanvasBorder: "1",
-            canvasBorderColor: "#666666",
-            canvasBorderThickness: "4",
-            canvasBorderAlpha: "80",
-          },
-          "data":logData
-        }
-    });
-    fusioncharts.render();
-  });
+
+    const data = {
+    labels: logLabel,
+    datasets: [
+      {
+        label: 'My First dataset',
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: 'rgba(75,192,192,1)',
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: logData
+      }
+    ]
+  };
+    console.log(logData);
+    let ctx = document.getElementById("myChart");
+    let myChart = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: Chart.defaults.global.elements.line
+});
   }
 
   logRow(log,index){
     const yesterday = moment().subtract(7,'days').format('L');
     const created_at = moment(log.created_at).format('L');
     if(!this.state.log.startDate){
-      if(created_at >= yesterday){
+      if(moment(created_at).isAfter(yesterday)){
         while(index>=0){
           return(
             <tr key={index}>
@@ -175,7 +173,7 @@ class HomePage extends Component{
     else {
       const startDate = moment(this.state.log.startDate).format('L');
       const endDate = moment(this.state.log.endDate).format('L');
-      if(created_at >= startDate && created_at <= endDate){
+      if(moment(created_at).isAfter(startDate) && moment(created_at).isBefore(endDate)){
         return(
           <tr key={index}>
             <td>{log.username}</td>
@@ -195,7 +193,7 @@ class HomePage extends Component{
         <p>Total Number of visits: <strong>{this.props.logs.length}</strong></p>
         <button className="btn btn-primary" onClick={this.onClick}>Show Calendar</button>
         { this.state.showDatePicker ? <DatePicker getRange={this.getRange} minimumDate = {this.props.logs[this.props.logs.length-1]} /> : null }
-        <div id="chart-container">FusionCharts XT will load here!</div>
+        <canvas id="myChart" width="60%" height="20%"></canvas>
         <table style={{textAlign:"left"}} className="table table-striped">
           <thead>
             <tr>
