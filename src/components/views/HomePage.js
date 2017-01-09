@@ -4,6 +4,7 @@ import DatePicker from './DatePicker.js';
 import * as logsActions from '../../actions/logActions';
 import env from '../../environment';
 import init from '../../../tools/init';
+import _ from 'underscore';
 import moment from 'moment';
 import momentRange from 'moment-range';
 import Chart from 'chart.js';
@@ -44,8 +45,6 @@ class HomePage extends Component{
     this.setState({log : log});
     this.getGraph();
   }
-
-
 
   onClick(){
     if(this.state.showDatePicker === false){
@@ -187,10 +186,12 @@ class HomePage extends Component{
   }
 
   render(){
+    let unique = [...new Set(this.props.logs.map(item => item.fmno))];
     return (
       <div>
         <h1>Home</h1>
         <p>Total Number of visits: <strong>{this.props.logs.length}</strong></p>
+        <p>Total Number of unique visits: <strong>{unique.length}</strong></p>
         <button className="btn btn-primary" onClick={this.onClick}>Show Calendar</button>
         { this.state.showDatePicker ? <DatePicker getRange={this.getRange} minimumDate = {this.props.logs[this.props.logs.length-1]} /> : null }
         <canvas id="myChart" width="60%" height="20%"></canvas>
