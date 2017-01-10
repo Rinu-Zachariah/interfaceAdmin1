@@ -5,7 +5,6 @@ import poll from './pollReducer';
 import induction from './quicklinksReducer';
 import mandatorytrainings from './mandatorytrainingsReducer';
 import gallery from './galleryReducer';
-import logs from './logsReducer';
 import admins from './adminReducer';
 import successstories from './successReducer';
 
