@@ -8,9 +8,10 @@ import gallery from './galleryReducer';
 import logs from './logsReducer';
 import admins from './adminReducer';
 import successstories from './successReducer';
+import contributors from './contributorReducer';
 
 const rootReducer = combineReducers({
-    histories ,events, poll, induction, mandatorytrainings, gallery,successstories, admins, logs: (state = {}) => state
+    histories ,events, poll, induction, mandatorytrainings, gallery,successstories,contributors, admins, logs: (state = {}) => state
 
   });
 
