@@ -16,6 +16,7 @@ import _ from 'lodash';
 const interfaceObjects = {};
 let isAdmin = false;
 let admins = [];
+let currentUser = "";
 
 $.when(
   $.ajax({
@@ -31,19 +32,15 @@ $.when(
           method: 'GET',
           dataType: 'JSONP',
           success: function(response) {
-            if(_.includes(admins,(_.find(admins, {"fmno" : response.fmno}))))
-            {
-                isAdmin = true;
-            }
+              currentUser = response.fmno;
           }
       }),
-
 
 	// Get logs
   $.get(env[init.env()].logs, function(logs) {
     interfaceObjects.logs = logs;
-  }),
 
+  }),
 
   // Get DownloadsList
   $.get(env[init.env()].downloads, function(downloads) {
@@ -56,24 +53,28 @@ $.when(
 
 )
 .then(function() {
+  if(_.includes(admins,(_.find(admins, {"fmno" : currentUser}))))
+  {
+    console.log("isAdmin is true");
+      isAdmin = true;
+  }
   if(isAdmin)
   {
-	const initialState = {
-		histories: [],
-		events: [],
-    induction: {quicklinks:[],downloads:[]},
-    logs: interfaceObjects.logs,
-    successstories: [],
-    poll: [],
-    mandatorytrainings: [],
-    gallery: [],
-    downloads: interfaceObjects.downloads,
-    contributors: interfaceObjects.contributors,
-    admins: []
-	};
+  	const initialState = {
+  		histories: [],
+  		events: [],
+      induction: {quicklinks:[],downloads:[]},
+      logs: interfaceObjects.logs,
+      successstories: [],
+      poll: [],
+      mandatorytrainings: [],
+      gallery: [],
+      downloads: [],
+      contributors: interfaceObjects.contributors,
+      admins: []
+  	};
 
-	const store=configureStore(initialState);
-  console.log(store.getState());
+  	const store=configureStore(initialState);
 
 
   ReactDOM.render(

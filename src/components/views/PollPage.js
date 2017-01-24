@@ -29,13 +29,8 @@ class PollPage extends Component{
         choice4:'',
         isActive: false,
         question: ''
-      }
-    };
-  }
-
-  getInitialState() {
-    return {
-      invalidData: true,
+      },
+      invalidData: true
     };
   }
 

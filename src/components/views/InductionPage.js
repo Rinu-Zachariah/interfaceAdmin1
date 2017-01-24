@@ -13,10 +13,11 @@ import png from '../../images/png.png';
 import xls from '../../images/xls.png';
 import doc from '../../images/doc.png';
 import moment from 'moment';
-import FusionCharts from 'fusioncharts';
-require("fusioncharts/fusioncharts.charts")(FusionCharts);
+import Chart from 'chart.js';
+import {Line} from 'react-chartjs-2';
 
-let downloadDocs = [];
+let downloadDocsData = [];
+let downloadDocsLabel = [];
 
 class InductionPage extends Component{
   constructor(props, context) {
@@ -31,18 +32,21 @@ class InductionPage extends Component{
     this.onClickEditSave = this.onClickEditSave.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getGraph = this.getGraph.bind(this);
+    this.downloadsRow = this.downloadsRow.bind(this);
     this.state = {
       quicklinks: {
         docpath: '',
         label: '' ,
         section_header: ''
       },
-      searchString: ''
+      searchString: '',
+      showGraph:false,
+      category:''
     };
   }
 
   componentDidMount() {
-    console.log("Initial State");
+    // console.log("Initial State");
     const propObject = this.props;
     const inductionObject = {};
     $.when(
@@ -54,7 +58,7 @@ class InductionPage extends Component{
         inductionObject.downloads = data;
       })
     ).then(function(){
-      console.log(inductionObject);
+      // console.log(inductionObject);
       propObject.getInduction(inductionObject);
     });
   }
@@ -96,19 +100,20 @@ class InductionPage extends Component{
   }
 
   onDeleteEvent(quicklinks){
-    console.log(quicklinks);
+    // console.log(quicklinks);
     $.ajax({
       url: env[init.env()].quicklinks,
       type: "DELETE",
       data: quicklinks,
       success: function(data){
-        console.log(data);
+        // console.log(data);
       }
     });
     this.props.deleteQuicklinks(quicklinks);
   }
 
   onEditEvent(eventObject){
+    // console.log(eventObject);
     if (singleFieldEdit){
       const quicklinks = this.state.quicklinks;
       quicklinks.docpath = eventObject.docpath;
@@ -141,7 +146,7 @@ class InductionPage extends Component{
       url: env[init.env()].quicklinks,
       data: quicklink,
       success: function(data){
-        propObject.dispatch(quicklinksActions.editQuicklinks(data));
+        propObject.editQuicklinks(data);
       },
       error: function(data){
         alert('error');
@@ -151,16 +156,17 @@ class InductionPage extends Component{
   }
 
   handleChange(event){
-    console.log(event.target.value);
    this.setState({searchString: event.target.value});
   }
 
+
   getGraph(category){
-    downloadDocs.length = 0;
-    let date = new Date();
-    let month = date.getMonth()+1;
-    let year = date.getFullYear();
-    console.log(year);
+    this.setState({category : category});
+    downloadDocsData.length = 0;
+    downloadDocsLabel.length = 0;
+    let today = moment();
+    let month = today.month()+1;
+    let year = today.year();
     for ( var i = 0; i < this.props.induction.quicklinks.length; i++) {
       let count = 0;
       let selectedCategory = this.props.induction.quicklinks[i].section_header;
@@ -170,37 +176,64 @@ class InductionPage extends Component{
           let monthDownloads = moment(this.props.induction.downloads[j].downloaded_at);
           let nmonth = monthDownloads.month()+1;
           let nyear = monthDownloads.year();
-          console.log(nyear);
-          if ((label === this.props.induction.downloads[j].name) && (month === nmonth) && (year === nyear)) {
+          if ((label === this.props.induction.downloads[j].name)) {
             count++;
           }
         }
-        downloadDocs.push({
-          "label":this.props.induction.quicklinks[i].label,
-          "value":count
-        })
+        downloadDocsLabel.push(this.props.induction.quicklinks[i].label);
+        downloadDocsData.push(count);
       }
     }
-      FusionCharts.ready(function() {
-      let fusioncharts = new FusionCharts({
-          type: 'line',
-          renderAt: 'chart-container',
-          width: '500',
-          height: '300',
-          dataFormat: "json",
-          dataSource:{
-            "chart":{
-              caption: "Categorywise Document Distribution",
-              subCaption: "Monthly downloads",
-              xAxisName: "Name of Documents",
-              yAxisName: "Number of Downloads",
-              theme: "ocean"
-            },
-            "data":downloadDocs
-          }
-      });
-      fusioncharts.render();
-    });
+    const data = {
+    labels: downloadDocsLabel,
+    datasets: [
+      {
+        label: 'My First dataset',
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: 'rgba(75,192,192,1)',
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: downloadDocsData
+      }
+    ]
+  };
+    let ctx = document.getElementById("myChart");
+    let myChart = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: Chart.defaults.global.elements.line
+  });
+  console.log(category);
+  this.downloadsRow(category);
+  }
+
+  downloadsRow(event,index,category){
+    console.log("Inside downloads"+category);
+      const downloadCategory = event.category;
+      if(downloadCategory === category){
+        const downloadUser = event.username;
+        const downloadDoc = event.name;
+        console.log(downloadDoc+" "+downloadUser);
+        return(
+          <tr key={index}>
+            <td>{downloadDoc}</td>
+            <td>{downloadUser}</td>
+          </tr>
+        );
+      }
   }
 
   inductionRow(event,index){
@@ -261,6 +294,7 @@ class InductionPage extends Component{
   render(){
     console.log(this.props.induction);
     let quicklinks = this.props.induction.quicklinks;
+    let downloads = this.props.induction.downloads;
     let odcCount = 0;
     let agileCount = 0;
     let domainCount = 0;
@@ -327,7 +361,24 @@ class InductionPage extends Component{
               </div>
             </div>
         </div>
-        <div id="chart-container">FusionCharts XT will load here!</div>
+        <div className="row">
+          <canvas className="col-md-6" id="myChart" width="600" height="250"></canvas>
+          <table className="col-md-6">
+            <thead>
+              <tr>
+                <th>Document Name</th>
+                <th>User Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {downloads.map(this.downloadsRow)}
+              <tr>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <div className="col-md-offset-5 col-md-7"><input type="text" className="form-control" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" /></div>
       </div>
       <div className="table-responsive">

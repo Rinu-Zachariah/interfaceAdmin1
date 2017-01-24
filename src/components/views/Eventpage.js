@@ -34,13 +34,8 @@ class EventPage extends Component{
         type: '',
         priority:''
       },
-      searchString: ''
-    };
-  }
-
-  getInitialState() {
-    return {
-      invalidData: true,
+      searchString: '',
+      invalidData: true
     };
   }
 

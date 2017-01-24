@@ -19,12 +19,8 @@ class ODCHistory extends Component{
       history: {
         contenthtml: '',
         contentyear: ''
-      }
-    };
-  }
-  getInitialState() {
-    return {
-      invalidData: true,
+      },
+      invalidData: true
     };
   }
 
