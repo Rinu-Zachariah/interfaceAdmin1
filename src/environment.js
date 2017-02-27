@@ -15,7 +15,9 @@ module.exports.development = {
       admins: "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/admins",
       downloads: "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/downloads",
       uploadEvent: "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/uploadEvent",
-      uploadGalleryImages: "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/uploadGalleryImages"
+      uploadGalleryImages: "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/uploadGalleryImages",
+      contributors: "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/contributors",
+      contriupload: "http://dev-sandbox-lx61.amdc.mckinsey.com:4000/contriupload"
 };
 
 module.exports.production = {
@@ -32,7 +34,9 @@ module.exports.production = {
       admins: "http://dev-sandbox-lx61.amdc.mckinsey.com:3000/admins",
       downloads: "http://dev-sandbox-lx61.amdc.mckinsey.com:3000/downloads",
       uploadEvent: "http://dev-sandbox-lx61.amdc.mckinsey.com:3000/uploadEvent",
-      uploadGalleryImages: "http://dev-sandbox-lx61.amdc.mckinsey.com:3000/uploadGalleryImages"
+      uploadGalleryImages: "http://dev-sandbox-lx61.amdc.mckinsey.com:3000/uploadGalleryImages",
+      contributors:"http://dev-sandbox-lx61.amdc.mckinsey.com:3000/contributors",
+      contriupload:"http://dev-sandbox-lx61.amdc.mckinsey.com:3000/contriupload"
 };
 
   module.exports.localhost = {
@@ -49,5 +53,7 @@ module.exports.production = {
         admins: "http://localhost:4000/admins",
         downloads: "http://localhost:4000/downloads",
         uploadEvent: "http://localhost:4000/uploadEvent",
-        uploadGalleryImages: "http://localhost:4000/uploadGalleryImages"
+        uploadGalleryImages: "http://localhost:4000/uploadGalleryImages",
+        contributors: "http://localhost:4000/contributors",
+        contriupload: "http://localhost:4000/contriupload"
   };

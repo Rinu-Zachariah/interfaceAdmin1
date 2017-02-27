@@ -6,7 +6,7 @@ import routes from './routes';
 import configureStore from './store/configureStore';
 import env from './environment';
 import init from '../tools/init';
-
+import contributors from './reducer/contributorReducer';
 import {Provider} from 'react-redux';
 import $ from 'jquery';
 import App from './components/app';
@@ -39,6 +39,16 @@ $.when(
 	// Get logs
   $.get(env[init.env()].logs, function(logs) {
     interfaceObjects.logs = logs;
+
+  }),
+
+  // Get DownloadsList
+  $.get(env[init.env()].downloads, function(downloads) {
+    interfaceObjects.downloads = downloads;
+  }),
+
+  $.get(env[init.env()].contributors, function(contributors) {
+    interfaceObjects.contributors = contributors;
   })
 
 )
@@ -60,6 +70,7 @@ $.when(
       mandatorytrainings: [],
       gallery: [],
       downloads: [],
+      contributors: interfaceObjects.contributors,
       admins: []
   	};
 

@@ -194,7 +194,7 @@ class HomePage extends Component{
         <p>Total Number of unique visits: <strong>{unique.length}</strong></p>
         <button className="btn btn-primary" onClick={this.onClick}>Show Calendar</button>
         { this.state.showDatePicker ? <DatePicker getRange={this.getRange} minimumDate = {this.props.logs[this.props.logs.length-1]} /> : null }
-        <canvas id="myChart" width="60%" height="20%"></canvas>
+        <canvas id="myChart" width="100%" height="20%"></canvas>
         <table style={{textAlign:"left"}} className="table table-striped">
           <thead>
             <tr>
