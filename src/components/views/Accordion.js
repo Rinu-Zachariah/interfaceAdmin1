@@ -51,8 +51,7 @@ class Accordion extends React.Component {
             </a>
           </div>
           <div style={stateStyle} className="mainContent">
-            <p dangerouslySetInnerHTML={{__html: this.props.summary}} />
-            <ul>{this.props.data}</ul>
+            
             <button className="btn btn-danger pull-right" onClick={()=>{this.onDelete(this.props.event1);}} value="delete">Remove</button>
             <button className="btn btn-warning pull-right">Edit</button>
           </div>

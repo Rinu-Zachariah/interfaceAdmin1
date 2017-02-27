@@ -15,7 +15,6 @@ class App extends Component{
             <span className="head head-four">E</span>
             &nbsp; ADMIN
         </header>
-
         <Menu  />
         <div className = "col-md-offset-1 col-md-11 col-sm-offset-1 col-xs-offset-1 mainContainer">
             {this.props.children}

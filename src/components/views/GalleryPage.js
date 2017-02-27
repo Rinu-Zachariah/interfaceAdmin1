@@ -4,6 +4,8 @@ import * as galleryActions from '../../actions/galleryActions';
 import env from '../../environment';
 import init from '../../../tools/init';
 import ComingSoonImg from '../../images/wip.png';
+import GalleryDropZone from './GalleryDropZone';
+import GalleryAccordion from './GalleryAccordion';
 
 class GalleryPage extends Component{
   constructor(props, context) {
@@ -12,12 +14,24 @@ class GalleryPage extends Component{
       gallery: {album_description: '',
       album_name: '',
       created_at: '',
-      photos:{
-        imagePath:'',
-        photo_description:'',
-      }
+      photos:[]
       }
     };
+    this.onDeleteAlbum = this.onDeleteAlbum.bind(this);
+    this.galleryRow = this.galleryRow.bind(this);
+  }
+
+  onDeleteAlbum(gallery){
+    const propObject = this.props;
+    $.ajax({
+    url: env[init.env()].gallery,
+    type: "DELETE",
+    data: gallery,
+    success: function(data){
+      propObject.deleteGallery(data);
+    }
+  });
+
   }
 
   componentDidMount() {
@@ -27,21 +41,12 @@ class GalleryPage extends Component{
     });
   }
 
-  galleryRow(event,index){
+  galleryRow(gallery,index){
     return(
-      <tr key={index}>
-        <td>{event.album_description}</td>
-        <td>{event.album_name}</td>
-        <td>{event.created_at.split("T")[0]}</td>
-        <td>
-        <ul>
-        <li>{event.photos.imagePath}</li>
-        <li>{event.photos.photo_description}</li>
-        </ul>
-        </td>
-        <td><button className="btn btn-danger">Remove</button></td>
-        <td><button className="btn btn-warning">Edit</button></td>
-      </tr>
+      <div key={index}>
+      <GalleryAccordion title={gallery.album_name} photos={gallery.photos} index={index}/>
+      <button className="btn btn-danger" onClick={()=>{this.onDeleteAlbum(gallery)}} value="delete">Remove</button>
+      </div>
     );
   }
 
@@ -49,20 +54,29 @@ class GalleryPage extends Component{
     return (
       <div>
       <h2>GALLERY</h2>
-      <center>
-        <img src={ComingSoonImg} />
-        <div className="row">
-          <span className="sub-heading-small">Page coming soon! Stay Tuned!</span>
-        </div>
-      </center>
+      <div className="table-responsive">
+      <table className="table table-responsive table-sm">
+        <thead>
+          <tr>
+            <th>Photos</th>
+            <th>Album Name</th>
+            <th>Album Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <GalleryDropZone/>
+        </tbody>
+      </table>
+      </div>
+      <div>
+        {this.props.gallery.map(this.galleryRow)}
+      </div>
       </div>
     );
   }
 }
 
 function mapStateToProps(state,ownProps){
-  console.log("Inside gallery");
-
   return {
     gallery: state.gallery
   };
